@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marathon Homes — Operations Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#" onclick="showTab('home')">
+    <svg class="logo-mark" viewBox="0 0 44 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Roofline -->
+      <polyline points="2,20 22,4 42,20" stroke="#8DC63F" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <!-- Star -->
+      <polygon points="22,9 23.2,12.6 27,12.6 24,14.8 25.2,18.4 22,16.2 18.8,18.4 20,14.8 17,12.6 20.8,12.6" fill="#FFFFFF"/>
+    </svg>
+    <div class="logo-text">
+      <span class="logo-marathon">Marathon</span>
+      <span class="logo-homes">Homes</span>
+    </div>
+  </a>
+  <div class="header-right">
+    <span class="portal-label">Operations Portal</span>
+    <span class="date-display" id="dateDisplay"></span>
+    <button class="hamburger" onclick="toggleNav()">☰</button>
+  </div>
+</header>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR NAV -->
+  <nav id="sideNav">
+    <div class="nav-section-label">Overview</div>
+    <div class="nav-item active" onclick="showTab('home')" data-tab="home">
+      <span class="nav-icon">🏠</span> Dashboard
+    </div>
+
+    <div class="nav-section-label">Finance & Admin</div>
+    <div class="nav-item" onclick="showTab('finance')" data-tab="finance">
+      <span class="nav-icon">💳</span> Finance Contacts
+    </div>
+    <div class="nav-item" onclick="showTab('dealer')" data-tab="dealer">
+      <span class="nav-icon">📋</span> Dealer Licenses
+    </div>
+    <div class="nav-item" onclick="showTab('accounting')" data-tab="accounting">
+      <span class="nav-icon">🧾</span> Accounting
+    </div>
+
+    <div class="nav-section-label">Production</div>
+    <div class="nav-item" onclick="showTab('seriallog')" data-tab="seriallog">
+      <span class="nav-icon">🔢</span> Serial Number Log
+    </div>
+    <div class="nav-item" onclick="showTab('orders')" data-tab="orders">
+      <span class="nav-icon">✅</span> Confirmed Orders
+    </div>
+    <div class="nav-item has-badge" onclick="showTab('schedule')" data-tab="schedule">
+      <span class="nav-icon">📅</span> Production Schedule
+      <span class="nav-num">2026</span>
+    </div>
+
+    <div class="nav-section-label">Inventory & Logistics</div>
+    <div class="nav-item" onclick="showTab('rework')" data-tab="rework">
+      <span class="nav-icon">🔧</span> Rework Homes
+    </div>
+    <div class="nav-item" onclick="showTab('yard')" data-tab="yard">
+      <span class="nav-icon">🏗️</span> Yard Homes
+    </div>
+    <div class="nav-item" onclick="showTab('shipping')" data-tab="shipping">
+      <span class="nav-icon">🚛</span> Shipping
+    </div>
+
+    <div class="nav-section-label">Catalog</div>
+    <div class="nav-item" onclick="showTab('models')" data-tab="models">
+      <span class="nav-icon">📐</span> Models / Floorplans
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- ══ DASHBOARD ══ -->
+    <div class="tab-panel active" id="tab-home">
+      <div class="welcome-banner">
+        <div class="wb-icon">🏡</div>
+        <div>
+          <h2>Welcome to the Marathon Homes Operations Portal</h2>
+          <p>Your central hub for production, finance, shipping, and dealer management. Select a section from the sidebar to get started.</p>
+        </div>
+      </div>
+
+      <div style="margin-bottom:16px">
+        <div class="page-title" style="font-size:15px;margin-bottom:12px;color:var(--subtext);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;">Quick Access</div>
+      </div>
+      <div class="quick-nav-grid">
+        <div class="quick-nav-card" onclick="showTab('finance')">
+          <div class="qnc-icon">💳</div>
+          <div><div class="qnc-label">Finance Contacts</div><div class="qnc-sub">Lender & finance info</div></div>
+        </div>
+        <div class="quick-nav-card" onclick="showTab('dealer')">
+          <div class="qnc-icon">📋</div>
+          <div><div class="qnc-label">Dealer Licenses</div><div class="qnc-sub">License status & expiry</div></div>
+        </div>
+        <div class="quick-nav-card" onclick="showTab('seriallog')">
+          <div class="qnc-icon">🔢</div>
+          <div><div class="qnc-label">Serial Number Log</div><div class="qnc-sub">HUD & serial records</div></div>
+        </div>
+        <div class="quick-nav-card" onclick="showTab('orders')">
+          <div class="qnc-icon">✅</div>
+          <div><div class="qnc-label">Confirmed Orders</div><div class="qnc-sub">Active order pipeline</div></div>
+        </div>
+        <div class="quick-nav-card" onclick="showTab('schedule')">
+          <div class="qnc-icon">📅</div>
+          <div><div class="qnc-label">Production Schedule</div><div class="qnc-sub">2026 build schedule</div></div>
+        </div>
+        <div class="quick-nav-card" onclick="showTab('rework')">
+          <div class="qnc-icon">🔧</div>
+          <div><div class="qnc-label">Rework Homes</div><div class="qnc-sub">Units flagged for rework</div></div>
+        </div>
+        <div class="quick-nav-card" onclick="showTab('yard')">
+          <div class="qnc-icon">🏗️</div>
+          <div><div class="qnc-label">Yard Homes</div><div class="qnc-sub">On-site inventory</div></div>
+        </div>
+        <div class="quick-nav-card" onclick="showTab('shipping')">
+          <div class="qnc-icon">🚛</div>
+          <div><div class="qnc-label">Shipping</div><div class="qnc-sub">Transport & delivery log</div></div>
+        </div>
+        <div class="quick-nav-card" onclick="showTab('accounting')">
+          <div class="qnc-icon">🧾</div>
+          <div><div class="qnc-label">Accounting</div><div class="qnc-sub">Invoices & MCO records</div></div>
+        </div>
+        <div class="quick-nav-card" onclick="showTab('models')">
+          <div class="qnc-icon">📐</div>
+          <div><div class="qnc-label">Models / Floorplans</div><div class="qnc-sub">Model catalog & specs</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 1. FINANCE CONTACTS ══ -->
+    <div class="tab-panel" id="tab-finance">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Finance <span>Contacts</span></div>
+          <div class="page-subtitle">Flooring sources, lenders, and finance representatives</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" id="fc-toggle-btn" onclick="toggleFinanceAdd()">+ Add Flooring Source</button>
+        </div>
+      </div>
+
+      <!-- ── ADD / EDIT PANEL ── -->
+      <div class="add-panel" id="finance-add">
+        <div class="add-panel-title">
+          <span id="fc-panel-title">Add Flooring Source</span>
+          <button class="close-panel" onclick="closeFinancePanel()">✕</button>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Flooring Source</label>
+            <input type="text" id="fc-source" placeholder="e.g. 21st, Triad, First Bank">
+          </div>
+          <div class="form-group">
+            <label>Contact Name</label>
+            <input type="text" id="fc-contact" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="fc-email" placeholder="name@company.com">
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" id="fc-phone" placeholder="000-000-0000">
+          </div>
+          <div class="form-group">
+            <label>Website</label>
+            <input type="text" id="fc-website" placeholder="www.example.com">
+          </div>
+          <div class="form-group">
+            <label>Notes</label>
+            <input type="text" id="fc-notes" placeholder="Ext., territory, etc.">
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button class="btn btn-primary" id="fc-save-btn" onclick="saveFinanceContact()">Save Contact</button>
+          <button class="btn btn-ghost" onclick="closeFinancePanel()">Cancel</button>
+          <span id="fc-edit-index" style="display:none;"></span>
+        </div>
+      </div>
+
+      <!-- ── SEARCH BAR ── -->
+      <div style="margin-bottom:16px;">
+        <input class="search-input" style="width:260px;" placeholder="🔍  Search contacts..." oninput="filterFinanceTable(this.value)">
+      </div>
+
+      <!-- ── FINANCE TABLE ── -->
+      <div class="table-wrap">
+        <div class="table-toolbar">
+          <span class="table-toolbar-title">Flooring Sources</span>
+          <span style="font-size:11px;color:var(--subtext);" id="fc-count"></span>
+        </div>
+        <div class="table-scroll">
+          <table id="fc-table">
+            <thead>
+              <tr>
+                <th>Flooring Source</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Website</th>
+                <th>Notes</th>
+                <th style="text-align:center;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="fc-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 2. DEALER LICENSES ══ -->
+    <div class="tab-panel" id="tab-dealer">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Dealer <span>License Information</span></div>
+          <div class="page-subtitle">Active dealers, retailer contacts, and flooring assignments</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" id="dl-toggle-btn" onclick="toggleDealerAdd()">+ Add Dealer</button>
+        </div>
+      </div>
+
+      <!-- ── ADD / EDIT PANEL ── -->
+      <div class="add-panel" id="dealer-add">
+        <div class="add-panel-title">
+          <span id="dl-panel-title">Add Dealer</span>
+          <button class="close-panel" onclick="closeDealerPanel()">✕</button>
+        </div>
+        <div class="form-grid">
+          <div class="form-group"><label>RBI #</label><input type="text" id="dl-rbi" placeholder="e.g. 37882, MH36501"></div>
+          <div class="form-group"><label>Flooring Source</label><input type="text" id="dl-flooring" placeholder="e.g. 21st, Triad, CASH"></div>
+          <div class="form-group"><label>Retailer Name</label><input type="text" id="dl-retailer" placeholder="Legal business name"></div>
+          <div class="form-group"><label>DBA</label><input type="text" id="dl-dba" placeholder="Doing business as (if different)"></div>
+          <div class="form-group"><label>City</label><input type="text" id="dl-city" placeholder="City"></div>
+          <div class="form-group"><label>State</label><select id="dl-state"><option value="">—</option><option>TX</option><option>OK</option><option>NM</option><option>LA</option><option>AR</option></select></div>
+          <div class="form-group"><label>GM / Owner</label><input type="text" id="dl-gm" placeholder="Owner or GM name"></div>
+          <div class="form-group"><label>GM Email</label><input type="email" id="dl-gm-email" placeholder="gm@dealer.com"></div>
+          <div class="form-group"><label>Office Mgr / Sales Mgr</label><input type="text" id="dl-mgr" placeholder="Manager name"></div>
+          <div class="form-group"><label>Manager Phone</label><input type="tel" id="dl-phone" placeholder="000-000-0000"></div>
+          <div class="form-group"><label>Manager Email</label><input type="email" id="dl-mgr-email" placeholder="manager@dealer.com"></div>
+          <div class="form-group"><label>License Lookup</label><select id="dl-license-type"><option value="Manufactured Housing - License Detail">Manufactured Housing</option><option value="Park Model Buyer">Park Model Buyer</option><option value="">N/A</option></select></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button class="btn btn-primary" id="dl-save-btn" onclick="saveDealerRecord()">Save Dealer</button>
+          <button class="btn btn-ghost" onclick="closeDealerPanel()">Cancel</button>
+          <span id="dl-edit-index" style="display:none;"></span>
+        </div>
+      </div>
+
+      <!-- ── SEARCH + FILTER ── -->
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap;">
+        <input class="search-input" style="width:280px;" placeholder="🔍  Search dealers, city, contact..." oninput="filterDealerTable(this.value)">
+        <select class="search-input" style="width:130px;" onchange="filterDealerByState(this.value)">
+          <option value="">All States</option>
+          <option>TX</option><option>OK</option><option>NM</option>
+        </select>
+        <span id="dl-count" style="font-size:11px;color:var(--subtext);margin-left:4px;"></span>
+      </div>
+
+      <!-- ── TABLE ── -->
+      <div class="table-wrap">
+        <div class="table-toolbar">
+          <span class="table-toolbar-title">Dealer License Records</span>
+        </div>
+        <div class="table-scroll">
+          <table id="dl-table">
+            <thead>
+              <tr>
+                <th>RBI #</th>
+                <th>Flooring Source</th>
+                <th>Retailer Name</th>
+                <th>DBA</th>
+                <th>City</th>
+                <th>State</th>
+                <th>License</th>
+                <th>GM / Owner</th>
+                <th>GM Email</th>
+                <th>Office / Sales Mgr</th>
+                <th>Phone</th>
+                <th>Mgr Email</th>
+                <th style="text-align:center;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="dl-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 3. SERIAL NUMBER LOG ══ -->
+    <div class="tab-panel" id="tab-seriallog">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Serial <span>Number Log</span></div>
+          <div class="page-subtitle">All unit serial numbers — continuous sequence. MY26 ends at BRK0416, MY27 starts at BRK0417.</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" id="sn-toggle-btn" onclick="toggleSerialAdd()">+ Add Entry</button>
+        </div>
+      </div>
+
+      <!-- ── ADD / EDIT PANEL ── -->
+      <div class="add-panel" id="serial-add">
+        <div class="add-panel-title">
+          <span id="sn-panel-title">Add Serial Entry</span>
+          <button class="close-panel" onclick="closeSerialPanel()">✕</button>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Serial #</label>
+            <input type="text" id="sn-serial" placeholder="e.g. 01-BRK0418A-27" readonly style="background:var(--darker);opacity:0.7;cursor:not-allowed;">
+            <div style="font-size:10px;color:var(--green);margin-top:4px;" id="sn-next-hint"></div>
+          </div>
+          <div class="form-group"><label>SOID #</label><input type="text" id="sn-soid" placeholder="SOID number"></div>
+          <div class="form-group"><label>Model</label><input type="text" id="sn-model" placeholder="e.g. Swisher, Pearland"></div>
+          <div class="form-group"><label>Box Size</label><input type="text" id="sn-boxsize" placeholder="e.g. 16x76"></div>
+          <div class="form-group"><label>Date Serialized</label><input type="date" id="sn-serialized-form"></div>
+          <div class="form-group">
+            <label>Section Type</label>
+            <select id="sn-section">
+              <option value="single">Single (no suffix)</option>
+              <option value="A">Double — A section</option>
+              <option value="B">Double — B section</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Dealer</label><input type="text" id="sn-dealer" placeholder="Dealer name"></div>
+          <div class="form-group"><label>Customer</label><input type="text" id="sn-customer" placeholder="Customer name"></div>
+          <div class="form-group"><label>Notes</label><input type="text" id="sn-notes" placeholder="Notes / RSO / Stock"></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button class="btn btn-primary" id="sn-save-btn" onclick="saveSerialEntry()">Save Entry</button>
+          <button class="btn btn-ghost" onclick="closeSerialPanel()">Cancel</button>
+          <span id="sn-edit-index" style="display:none;"></span>
+        </div>
+      </div>
+
+      <!-- ── SEARCH + FILTERS ── -->
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap;">
+        <input class="search-input" style="width:260px;" placeholder="🔍  Search serial, model, dealer..." oninput="filterSerialTable(this.value)">
+        <select class="search-input" style="width:130px;" onchange="filterSerialByYear(this.value)">
+          <option value="">All Years</option>
+          <option value="26">MY 2026</option>
+          <option value="27">MY 2027</option>
+        </select>
+        <select class="search-input" style="width:140px;" onchange="filterSerialBySection(this.value)">
+          <option value="">All Sections</option>
+          <option value="single">Single</option>
+          <option value="double">Double (A/B)</option>
+        </select>
+        <span id="sn-count" style="font-size:11px;color:var(--subtext);margin-left:4px;"></span>
+      </div>
+
+      <!-- ── TABLE ── -->
+      <div class="table-wrap">
+        <div class="table-toolbar">
+          <span class="table-toolbar-title">Serial Number Records</span>
+        </div>
+        <div class="table-scroll">
+          <table id="sn-table">
+            <thead>
+              <tr>
+                <th>Serial #</th>
+                <th>MY</th>
+                <th>Section</th>
+                <th>SOID #</th>
+                <th>Model</th>
+                <th>Box Size</th>
+                <th>Date Serialized</th>
+                <th>Dealer</th>
+                <th>Customer</th>
+                <th>Notes</th>
+                <th style="text-align:center;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="sn-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 4. CONFIRMED ORDERS ══ -->
+    <div class="tab-panel" id="tab-orders">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Confirmed <span>Orders</span></div>
+          <div class="page-subtitle">All confirmed purchase orders — model, dealer, and finance pulled from live data</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" id="co-toggle-btn" onclick="toggleOrderAdd()">+ Add Order</button>
+        </div>
+      </div>
+
+      <!-- ── ADD ORDER PANEL ── -->
+      <div class="add-panel" id="orders-add">
+        <div class="add-panel-title">
+          <span id="co-panel-title">New Confirmed Order</span>
+          <button class="close-panel" onclick="closeOrderPanel()">✕</button>
+        </div>
+        <div class="form-grid">
+          <!-- A: Date -->
+          <div class="form-group">
+            <label>A — Date (Order Submitted)</label>
+            <input type="date" id="co-date">
+          </div>
+          <!-- B: Build Type -->
+          <div class="form-group">
+            <label>B — Build Type</label>
+            <select id="co-buildtype">
+              <option value="">— Select —</option>
+              <option>Park Model</option>
+              <option>HUD</option>
+              <option>Workforce</option>
+            </select>
+          </div>
+          <!-- C: ID -->
+          <div class="form-group">
+            <label>C — ID / SOID</label>
+            <input type="text" id="co-id" placeholder="SOID or order ID">
+          </div>
+          <!-- D: Model (from modelData) -->
+          <div class="form-group">
+            <label>D — Model</label>
+            <select id="co-model" onchange="coModelChanged()">
+              <option value="">— Select Model —</option>
+            </select>
+          </div>
+          <!-- E: Width (auto-filled) -->
+          <div class="form-group">
+            <label>E — Box Width</label>
+            <input type="text" id="co-width" placeholder="Auto-filled from model" readonly style="opacity:0.7;cursor:not-allowed;">
+          </div>
+          <!-- F: Length (auto-filled) -->
+          <div class="form-group">
+            <label>F — Box Length</label>
+            <input type="text" id="co-length" placeholder="Auto-filled from model" readonly style="opacity:0.7;cursor:not-allowed;">
+          </div>
+          <!-- G: Sections (auto-filled) -->
+          <div class="form-group">
+            <label>G — Sections</label>
+            <input type="text" id="co-sections" placeholder="Auto-filled from model" readonly style="opacity:0.7;cursor:not-allowed;">
+          </div>
+          <!-- H: Dealer (from dealerData) -->
+          <div class="form-group">
+            <label>H — Dealer</label>
+            <select id="co-dealer">
+              <option value="">— Select Dealer —</option>
+            </select>
+          </div>
+          <!-- I: Stock / RSO -->
+          <div class="form-group">
+            <label>I — Stock / RSO</label>
+            <select id="co-stockrso" onchange="coStockRsoChanged()">
+              <option value="">— Select —</option>
+              <option value="Stock">Stock</option>
+              <option value="RSO">RSO</option>
+            </select>
+          </div>
+          <!-- I: Customer name (shown for RSO) -->
+          <div class="form-group" id="co-customer-group" style="display:none;">
+            <label>I — Customer Name (RSO)</label>
+            <input type="text" id="co-customer" placeholder="Customer last name">
+          </div>
+          <!-- J: Flooring / Finance -->
+          <div class="form-group">
+            <label>J — Flooring / Finance</label>
+            <select id="co-flooring">
+              <option value="">— Select —</option>
+              <option value="Cash Buyer">💵 Cash Buyer</option>
+              <option value="Marathon Homes Financing">🏠 Marathon Homes Financing</option>
+              <option disabled>──────────────</option>
+            </select>
+          </div>
+          <!-- Notes -->
+          <div class="form-group">
+            <label>Notes</label>
+            <input type="text" id="co-notes" placeholder="Any additional notes">
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button class="btn btn-primary" id="co-save-btn" onclick="saveOrder()">Save Order</button>
+          <button class="btn btn-ghost" onclick="closeOrderPanel()">Cancel</button>
+          <span id="co-edit-index" style="display:none;"></span>
+        </div>
+      </div>
+
+      <!-- ── STATS ── -->
+      <div class="stats-row" id="co-stats-row">
+        <div class="stat-card accent"><div class="stat-label">Total Orders</div><div class="stat-value green" id="co-stat-total">0</div><div class="stat-meta" id="co-stat-period">All time</div></div>
+        <div class="stat-card accent"><div class="stat-label">Total Floors</div><div class="stat-value green" id="co-stat-floors">0</div><div class="stat-meta">Sum of sections (Col G)</div></div>
+        <div class="stat-card"><div class="stat-label">HUD</div><div class="stat-value" id="co-stat-hud">0</div><div class="stat-meta">HUD units</div></div>
+        <div class="stat-card"><div class="stat-label">Park Model</div><div class="stat-value" id="co-stat-pm">0</div><div class="stat-meta">Park model units</div></div>
+        <div class="stat-card"><div class="stat-label">Workforce</div><div class="stat-value" id="co-stat-wf">0</div><div class="stat-meta">Workforce units</div></div>
+        <div class="stat-card"><div class="stat-label">RSO</div><div class="stat-value" id="co-stat-rso">0</div><div class="stat-meta">Retail sale orders</div></div>
+        <div class="stat-card"><div class="stat-label">Stock</div><div class="stat-value" id="co-stat-stock">0</div><div class="stat-meta">Stock orders</div></div>
+      </div>
+
+      <!-- ── DATE PERIOD + FILTERS ── -->
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;flex-wrap:wrap;">
+
+        <!-- Period quick-select -->
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="co-period-btn active" data-period="" onclick="setOrderPeriod(this,'')">All</button>
+          <button class="co-period-btn" data-period="cw"  onclick="setOrderPeriod(this,'cw')">This Week</button>
+          <button class="co-period-btn" data-period="lw"  onclick="setOrderPeriod(this,'lw')">Last Week</button>
+          <button class="co-period-btn" data-period="cm"  onclick="setOrderPeriod(this,'cm')">This Month</button>
+          <button class="co-period-btn" data-period="lm"  onclick="setOrderPeriod(this,'lm')">Last Month</button>
+          <button class="co-period-btn" data-period="ytd" onclick="setOrderPeriod(this,'ytd')">YTD</button>
+        </div>
+
+        <!-- Custom date range -->
+        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+          <span style="font-size:11px;color:var(--subtext);">Custom:</span>
+          <input type="date" id="co-date-from" class="search-input" style="width:130px;" onchange="applyCustomDateRange()">
+          <span style="font-size:11px;color:var(--subtext);">→</span>
+          <input type="date" id="co-date-to"   class="search-input" style="width:130px;" onchange="applyCustomDateRange()">
+          <button class="btn btn-ghost" style="padding:6px 10px;font-size:11px;" onclick="clearCustomDateRange()">✕</button>
+        </div>
+      </div>
+
+      <!-- ── SEARCH + TYPE FILTERS ── -->
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap;">
+        <input class="search-input" style="width:240px;" placeholder="🔍  Search model, dealer, customer..." oninput="filterOrderTable(this.value)">
+        <select class="search-input" style="width:140px;" onchange="filterOrderByType(this.value)">
+          <option value="">All Types</option>
+          <option value="Park Model">Park Model</option>
+          <option value="HUD">HUD</option>
+          <option value="Workforce">Workforce</option>
+          <option value="Workforce">Workforce</option>
+        </select>
+        <select class="search-input" style="width:130px;" onchange="filterOrderByStockRso(this.value)">
+          <option value="">Stock + RSO</option>
+          <option value="Stock">Stock</option>
+          <option value="RSO">RSO</option>
+        </select>
+        <span id="co-count" style="font-size:11px;color:var(--subtext);margin-left:4px;"></span>
+
+        <!-- Report actions -->
+        <div style="margin-left:auto;display:flex;gap:8px;flex-shrink:0;">
+          <button class="btn btn-ghost" onclick="printOrderReport()" style="font-size:12px;">🖨️ Print Report</button>
+          <button class="btn btn-primary" onclick="exportOrdersExcel()" style="font-size:12px;">📊 Export Excel</button>
+        </div>
+      </div>
+
+      <!-- ── REPORT PERIOD BANNER (shown when a period is active) ── -->
+      <div id="co-report-banner" style="display:none;background:rgba(141,198,63,0.1);border:1px solid rgba(141,198,63,0.3);border-radius:8px;padding:10px 16px;margin-bottom:14px;display:none;align-items:center;justify-content:space-between;">
+        <span id="co-report-label" style="font-size:12px;font-weight:600;color:var(--green);"></span>
+        <span id="co-report-range" style="font-size:11px;color:var(--subtext);"></span>
+      </div>
+
+      <!-- ── TABLE ── -->
+      <div class="table-wrap" id="co-table-wrap">
+        <div class="table-toolbar">
+          <span class="table-toolbar-title" id="co-table-title">Confirmed Orders</span>
+        </div>
+        <div class="table-scroll">
+          <table id="co-table">
+            <thead>
+              <tr>
+                <th>A — Date</th>
+                <th>B — Type</th>
+                <th>C — ID</th>
+                <th>D — Model</th>
+                <th>E — Width</th>
+                <th>F — Length</th>
+                <th>G — Sec.</th>
+                <th>H — Dealer</th>
+                <th>I — Stock/RSO</th>
+                <th>J — Flooring</th>
+                <th>Notes</th>
+                <th style="text-align:center;" class="no-print">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="co-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 5. PRODUCTION SCHEDULE ══ -->
+    <div class="tab-panel" id="tab-schedule">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Production <span>Schedule</span></div>
+          <div class="page-subtitle">2026 production — Pro #s sequential, floors tracked, double-section homes split into A/B rows</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" id="ps-toggle-btn" onclick="toggleProdAdd()">+ Add Unit</button>
+        </div>
+      </div>
+
+      <!-- ── ADD PANEL ── -->
+      <div class="add-panel" id="ps-add">
+        <div class="add-panel-title">
+          <span id="ps-panel-title">Add Production Unit</span>
+          <button class="close-panel" onclick="closeProdPanel()">✕</button>
+        </div>
+        <div class="form-grid">
+          <div class="form-group"><label>Pro #</label><input type="number" id="ps-pro" placeholder="Auto-sequential"></div>
+          <div class="form-group"><label>SOID #</label><input type="text" id="ps-soid" placeholder="Sales order ID"></div>
+          <div class="form-group"><label>Serial #</label><input type="text" id="ps-serial" placeholder="e.g. 01-BRK0418A-27"></div>
+          <div class="form-group">
+            <label>Model</label>
+            <select id="ps-model" onchange="psSyncModel()">
+              <option value="">— Select Model —</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Width</label><input type="text" id="ps-width" placeholder="Auto from model" readonly style="opacity:.7;cursor:not-allowed;"></div>
+          <div class="form-group"><label>Length</label><input type="text" id="ps-length" placeholder="Auto from model" readonly style="opacity:.7;cursor:not-allowed;"></div>
+          <div class="form-group">
+            <label>Dealer</label>
+            <select id="ps-dealer"><option value="">— Select Dealer —</option></select>
+          </div>
+          <div class="form-group"><label>Customer</label><input type="text" id="ps-customer" placeholder="Customer / stock"></div>
+          <div class="form-group">
+            <label>T&T or VOG</label>
+            <select id="ps-tt"><option value="T & T">T &amp; T</option><option value="VOG">VOG</option></select>
+          </div>
+          <div class="form-group"><label>Offline Date</label><input type="date" id="ps-offline"></div>
+          <div class="form-group"><label>Build Month</label><input type="text" id="ps-buildmonth" placeholder="e.g. JANUARY"></div>
+          <div class="form-group"><label>Tag Date</label><input type="date" id="ps-tagdate"></div>
+          <div class="form-group"><label>Ship Date</label><input type="date" id="ps-shipdate"></div>
+          <div class="form-group"><label>MCO Sent Date</label><input type="date" id="ps-mcodate"></div>
+          <div class="form-group">
+            <label>Status (Col Q)</label>
+            <select id="ps-status">
+              <option value="">— Select —</option>
+              <option>Rework</option>
+              <option>Yard</option>
+              <option>Schedule Shipment</option>
+              <option>Shipment Scheduled</option>
+              <option>Complete</option>
+              <option>Send MCO</option>
+              <option>Hold MCO</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Financed / Cash (Col R)</label>
+            <select id="ps-finance"><option value="">— Select —</option></select>
+          </div>
+          <div class="form-group" style="grid-column:1/-1;"><label>Notes</label><input type="text" id="ps-notes" placeholder="Any notes"></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button class="btn btn-primary" id="ps-save-btn" onclick="saveProdUnit()">Save Unit</button>
+          <button class="btn btn-ghost" onclick="closeProdPanel()">Cancel</button>
+          <span id="ps-edit-index" style="display:none;"></span>
+        </div>
+      </div>
+
+      <!-- ── STATS ── -->
+      <div class="stats-row">
+        <div class="stat-card accent"><div class="stat-label">Total Homes</div><div class="stat-value green" id="ps-stat-total">0</div><div class="stat-meta">Production units</div></div>
+        <div class="stat-card accent"><div class="stat-label">Total Floors</div><div class="stat-value green" id="ps-stat-floors">0</div><div class="stat-meta">All sections</div></div>
+        <div class="stat-card accent"><div class="stat-label">Double-Section</div><div class="stat-value green" id="ps-stat-double">0</div><div class="stat-meta" id="ps-stat-double-pct">0% of floors</div></div>
+        <div class="stat-card accent"><div class="stat-label">Single-Section</div><div class="stat-value green" id="ps-stat-single">0</div><div class="stat-meta" id="ps-stat-single-pct">0% of floors</div></div>
+        <div class="stat-card"><div class="stat-label">Rework</div><div class="stat-value" id="ps-stat-rework">0</div><div class="stat-meta">Floors in rework</div></div>
+        <div class="stat-card"><div class="stat-label">Yard</div><div class="stat-value" id="ps-stat-yard">0</div><div class="stat-meta">Floors on yard</div></div>
+        <div class="stat-card"><div class="stat-label">Scheduled</div><div class="stat-value" id="ps-stat-scheduled">0</div><div class="stat-meta">Floors scheduled</div></div>
+        <div class="stat-card"><div class="stat-label">Unreleased</div><div class="stat-value" id="ps-stat-unreleased">0</div><div class="stat-meta">Floors unreleased</div></div>
+        <div class="stat-card accent"><div class="stat-label">Shipped Floors</div><div class="stat-value green" id="ps-stat-shipped">0</div><div class="stat-meta">With ship date</div></div>
+      </div>
+
+      <!-- ── FILTERS ── -->
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap;">
+        <input class="search-input" style="width:240px;" placeholder="🔍  Search pro#, serial, model, dealer..." oninput="filterProdTable(this.value)">
+        <select class="search-input" style="width:140px;" onchange="filterProdByMonth(this.value)">
+          <option value="">All Months</option>
+          <option>JANUARY</option><option>FEBRUARY</option><option>MARCH</option>
+          <option>APRIL</option><option>MAY</option><option>JUNE</option>
+          <option>JULY</option><option>AUGUST</option><option>SEPTEMBER</option>
+          <option>OCTOBER</option><option>NOVEMBER</option><option>DECEMBER</option>
+        </select>
+        <select class="search-input" style="width:180px;" onchange="filterProdByStatus(this.value)">
+          <option value="">All Statuses</option>
+          <option value="Unreleased">Unreleased</option>
+          <option value="Scheduled to Production">Scheduled to Production</option>
+          <option value="Rework">Rework</option>
+          <option value="Yard">Yard</option>
+          <option value="Schedule Shipment">Schedule Shipment</option>
+          <option value="Shipment Scheduled">Shipment Scheduled</option>
+          <option value="Send MCO">Send MCO</option>
+          <option value="Complete">Complete</option>
+        </select>
+        <span id="ps-count" style="font-size:11px;color:var(--subtext);"></span>
+      </div>
+
+      <!-- ── TABLE ── -->
+      <div class="table-wrap">
+        <div class="table-toolbar"><span class="table-toolbar-title">Production Schedule</span></div>
+        <div class="table-scroll">
+          <table id="ps-table">
+            <thead>
+              <tr>
+                <th>Pro #</th>
+                <th>ID #</th>
+                <th>Dealer</th>
+                <th>Customer</th>
+                <th>Serial #</th>
+                <th>Model</th>
+                <th style="text-align:center;">Width</th>
+                <th style="text-align:center;">Length</th>
+                <th style="text-align:right;">SF</th>
+                <th style="text-align:center;">Flrs</th>
+                <th style="text-align:center;">T&amp;T/VOG</th>
+                <th>Offline Date</th>
+                <th>Tag Date</th>
+                <th>Ship Date</th>
+                <th>MCO Sent</th>
+                <th>Status</th>
+                <th style="text-align:center;">O→S Days</th>
+                <th class="no-print" style="text-align:center;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ps-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 6. REWORK HOMES ══ -->
+    <div class="tab-panel" id="tab-rework">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Rework <span>Homes</span></div>
+          <div class="page-subtitle">Units currently flagged for rework — auto-populated from Production Schedule</div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-toolbar">
+          <span class="table-toolbar-title">Rework Log</span>
+          <input class="search-input" placeholder="🔍  Search..." oninput="filterReworkTable(this.value)">
+          <span id="rework-count" style="font-size:11px;color:var(--subtext);margin-left:8px;"></span>
+        </div>
+        <div class="table-scroll">
+          <table id="rework-table">
+            <thead>
+              <tr>
+                <th>Pro #</th>
+                <th>ID #</th>
+                <th>Dealer</th>
+                <th>Serial #</th>
+                <th>Model</th>
+                <th style="text-align:center;">Width</th>
+                <th style="text-align:center;">Length</th>
+                <th style="text-align:right;">SF</th>
+                <th style="text-align:center;">Flrs</th>
+                <th>Offline Date</th>
+              </tr>
+            </thead>
+            <tbody id="rework-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 7. YARD HOMES ══ -->
+    <div class="tab-panel" id="tab-yard">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Yard <span>Homes</span></div>
+          <div class="page-subtitle">On-site completed inventory awaiting shipment — auto-populated from Production Schedule</div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-toolbar">
+          <span class="table-toolbar-title">Yard Inventory</span>
+          <input class="search-input" placeholder="🔍  Search..." oninput="filterYardTable(this.value)">
+          <span id="yard-count" style="font-size:11px;color:var(--subtext);margin-left:8px;"></span>
+        </div>
+        <div class="table-scroll">
+          <table id="yard-table">
+            <thead>
+              <tr>
+                <th>Pro #</th>
+                <th>ID #</th>
+                <th>Dealer</th>
+                <th>Serial #</th>
+                <th>Model</th>
+                <th style="text-align:center;">Width</th>
+                <th style="text-align:center;">Length</th>
+                <th style="text-align:right;">SF</th>
+                <th style="text-align:center;">Flrs</th>
+                <th>Offline Date</th>
+                <th style="text-align:center;">Days in Yard</th>
+              </tr>
+            </thead>
+            <tbody id="yard-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 8. SHIPPING ══ -->
+    <div class="tab-panel" id="tab-shipping">
+      <div class="page-header">
+        <div>
+          <div class="page-title"><span>Shipping</span></div>
+          <div class="page-subtitle">All homes with a ship date — auto-populated from Production Schedule</div>
+        </div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card accent"><div class="stat-label">Total Shipped</div><div class="stat-value green" id="ship-stat-total">0</div><div class="stat-meta">Units with ship date</div></div>
+        <div class="stat-card accent"><div class="stat-label">Shipped Floors</div><div class="stat-value green" id="ship-stat-floors">0</div><div class="stat-meta">Total floors</div></div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-toolbar">
+          <span class="table-toolbar-title">Shipment Log</span>
+          <input class="search-input" placeholder="🔍  Search..." oninput="filterShipTable(this.value)">
+          <span id="ship-count" style="font-size:11px;color:var(--subtext);margin-left:8px;"></span>
+        </div>
+        <div class="table-scroll">
+          <table id="ship-table">
+            <thead>
+              <tr>
+                <th>Pro #</th>
+                <th>ID #</th>
+                <th>Dealer</th>
+                <th>Serial #</th>
+                <th>Model</th>
+                <th style="text-align:center;">Width</th>
+                <th style="text-align:center;">Length</th>
+                <th style="text-align:right;">SF</th>
+                <th style="text-align:center;">Flrs</th>
+                <th>Offline Date</th>
+                <th>Ship Date</th>
+                <th style="text-align:center;">O→S Days</th>
+              </tr>
+            </thead>
+            <tbody id="ship-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+                <td>02/10/2026</td>
+                <td>RSO-001</td>
+                <td><span class="pill pill-green">Delivered</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 9. ACCOUNTING ══ -->
+    <div class="tab-panel" id="tab-accounting">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Production <span>Accounting</span></div>
+          <div class="page-subtitle">Revenue, invoicing, and payment tracking for all units produced</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" id="acct-toggle-btn" onclick="toggleAcctPanel()">+ Add Home to Production</button>
+        </div>
+      </div>
+
+      <!-- ── ADD PANEL ── -->
+      <div class="add-panel" id="acct-add">
+        <div class="add-panel-title">
+          <span id="acct-panel-title">Add Home to Production</span>
+          <button class="close-panel" onclick="closeAcctPanel()">✕</button>
+        </div>
+        <div class="form-grid">
+          <div class="form-group"><label>Pro #</label><input type="text" id="ac-pro" placeholder="e.g. 289"></div>
+          <div class="form-group"><label>ID # (SOID)</label><input type="text" id="ac-id" placeholder="Sales Order ID"></div>
+          <div class="form-group"><label>Dealer Name</label><select id="ac-dealer"><option value="">— Select Dealer —</option></select></div>
+          <div class="form-group"><label>Serial #</label><input type="text" id="ac-serial" placeholder="01-BRK0####-26"></div>
+          <div class="form-group"><label>Model</label><select id="ac-model" onchange="acModelChanged()"><option value="">— Select Model —</option></select></div>
+          <div class="form-group"><label>Width</label><input type="text" id="ac-width" placeholder="Auto from model" readonly style="opacity:.7;cursor:not-allowed;"></div>
+          <div class="form-group"><label>Length</label><input type="text" id="ac-length" placeholder="Auto from model" readonly style="opacity:.7;cursor:not-allowed;"></div>
+          <div class="form-group"><label>SF</label><input type="text" id="ac-sf" placeholder="Auto from model" readonly style="opacity:.7;cursor:not-allowed;"></div>
+          <div class="form-group"><label>Floors</label><input type="text" id="ac-floors" placeholder="Auto from model" readonly style="opacity:.7;cursor:not-allowed;"></div>
+          <div class="form-group"><label>Base</label><input type="number" id="ac-base" placeholder="0.00" oninput="acCalcTotals()"></div>
+          <div class="form-group"><label>VEP</label><input type="number" id="ac-vep" placeholder="0.00" oninput="acCalcTotals()"></div>
+          <div class="form-group"><label>Options</label><input type="number" id="ac-options" placeholder="0.00" oninput="acCalcTotals()"></div>
+          <div class="form-group"><label>Freight</label><input type="number" id="ac-freight" placeholder="0.00" oninput="acCalcTotals()"></div>
+          <div class="form-group"><label>Fees</label><input type="number" id="ac-fees" placeholder="0.00" oninput="acCalcTotals()"></div>
+          <div class="form-group"><label>Taxes</label><input type="number" id="ac-taxes" placeholder="0.00" oninput="acCalcTotals()"></div>
+          <div class="form-group"><label>Total Rev.</label><input type="text" id="ac-totalrev" readonly style="opacity:.7;cursor:not-allowed;font-weight:700;color:var(--green);"></div>
+          <div class="form-group"><label>Total Invoice</label><input type="text" id="ac-totalinv" readonly style="opacity:.7;cursor:not-allowed;font-weight:700;color:var(--green);"></div>
+          <div class="form-group"><label>Offline Date</label><input type="date" id="ac-offline"></div>
+          <div class="form-group"><label>Tagged</label><select id="ac-tagged"><option value="">—</option><option value="Yes">Yes</option><option value="No">No</option></select></div>
+          <div class="form-group"><label>Ship Date</label><input type="text" id="ac-ship" placeholder="Date or YARD/RW"></div>
+          <div class="form-group"><label>Inv. Paid Date</label><input type="date" id="ac-paiddate"></div>
+          <div class="form-group"><label>Cash or Finance</label><select id="ac-finance"><option value="">— Select —</option><option value="Cash">Cash</option><option value="Cash in Full">Cash in Full</option><option value="Cash Deposits">Cash Deposits</option><option value="Consignment">Consignment</option><option value="Marathon Homes">Marathon Homes</option></select></div>
+          <div class="form-group"><label>Deposit Amount</label><input type="number" id="ac-deposit" placeholder="0.00"></div>
+          <div class="form-group"><label>Final Balance</label><input type="number" id="ac-balance" placeholder="0.00"></div>
+          <div class="form-group"><label>Approval #</label><input type="text" id="ac-approval" placeholder="Approval / lender #"></div>
+          <div class="form-group"><label>Invoiced Date</label><input type="date" id="ac-invoiced"></div>
+          <div class="form-group"><label>Scheduled Pay Date</label><input type="date" id="ac-schedpay"></div>
+          <div class="form-group"><label>Build Month</label><input type="text" id="ac-buildmonth" placeholder="e.g. January"></div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <button class="btn btn-primary" id="acct-save-btn" onclick="saveAcctRecord()">Save</button>
+          <button class="btn btn-ghost" onclick="closeAcctPanel()">Cancel</button>
+          <span id="acct-edit-idx" style="display:none;"></span>
+        </div>
+      </div>
+
+      <!-- ── STATS ── -->
+      <div class="stats-row">
+        <div class="stat-card accent"><div class="stat-label">Total Units</div><div class="stat-value green" id="ac-stat-units">0</div><div class="stat-meta" id="ac-stat-period">All time</div></div>
+        <div class="stat-card"><div class="stat-label">Total Revenue</div><div class="stat-value" id="ac-stat-rev" style="font-size:16px;">$0</div><div class="stat-meta">Total Rev. column</div></div>
+        <div class="stat-card"><div class="stat-label">Total Invoice</div><div class="stat-value" id="ac-stat-inv" style="font-size:16px;">$0</div><div class="stat-meta">With fees & taxes</div></div>
+        <div class="stat-card"><div class="stat-label">Paid</div><div class="stat-value green" id="ac-stat-paid">0</div><div class="stat-meta">Inv. paid</div></div>
+        <div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="ac-stat-pending">0</div><div class="stat-meta">Not yet paid</div></div>
+      </div>
+
+      <!-- ── FILTERS ── -->
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap;">
+        <input class="search-input" style="width:240px;" placeholder="🔍  Search dealer, model, serial, pro#..." oninput="filterAcctTable(this.value)">
+        <select class="search-input" style="width:130px;" onchange="filterAcctByMonth(this.value)">
+          <option value="">All Months</option>
+          <option>January</option><option>February</option><option>March</option><option>April</option>
+          <option>May</option><option>June</option><option>July</option><option>August</option>
+          <option>September</option><option>October</option><option>November</option><option>December</option>
+        </select>
+        <select class="search-input" style="width:130px;" onchange="filterAcctByFinance(this.value)">
+          <option value="">All Finance</option>
+          <option>Cash</option><option>Cash in Full</option><option>Cash Deposits</option>
+          <option>Consignment</option><option>Marathon Homes</option><option>21st</option>
+          <option>Triad</option><option>Northpoint</option><option>Affiliates</option>
+          <option>First Bank</option><option>First State Bank</option><option>First United Bank</option>
+        </select>
+        <span id="ac-count" style="font-size:11px;color:var(--subtext);"></span>
+        <div style="margin-left:auto;display:flex;gap:8px;">
+          <button class="btn btn-ghost" onclick="printAcctReport()" style="font-size:12px;">🖨️ Print</button>
+          <button class="btn btn-primary" onclick="exportAcctExcel()" style="font-size:12px;">📊 Export</button>
+        </div>
+      </div>
+
+      <!-- ── TABLE ── -->
+      <div class="table-wrap">
+        <div class="table-toolbar">
+          <span class="table-toolbar-title">Production Accounting</span>
+        </div>
+        <div class="table-scroll">
+          <table id="acct-table">
+            <thead>
+              <tr>
+                <th>Pro #</th>
+                <th>ID #</th>
+                <th>Dealer</th>
+                <th>Serial #</th>
+                <th>Model</th>
+                <th>Width</th>
+                <th>Length</th>
+                <th style="text-align:right;">SF</th>
+                <th style="text-align:center;">Fl.</th>
+                <th style="text-align:right;">Base</th>
+                <th style="text-align:right;">VEP</th>
+                <th style="text-align:right;">Options</th>
+                <th style="text-align:right;">Freight</th>
+                <th style="text-align:right;">Fees</th>
+                <th style="text-align:right;">Taxes</th>
+                <th style="text-align:right;">Total Rev.</th>
+                <th style="text-align:right;">Total Invoice</th>
+                <th>Offline</th>
+                <th style="text-align:center;">Tagged</th>
+                <th>Ship Date</th>
+                <th style="text-align:center;">O→S</th>
+                <th>Paid Date</th>
+                <th style="text-align:center;">S→P</th>
+                <th>Finance</th>
+                <th style="text-align:right;">Deposit</th>
+                <th style="text-align:right;">Balance</th>
+                <th>Approval #</th>
+                <th>Invoiced</th>
+                <th>Sched. Pay</th>
+                <th>Month</th>
+                <th class="no-print">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="acct-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 10. MODEL LIST / FLOORPLANS ══ -->
+    <div class="tab-panel" id="tab-models">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Model List <span>/ Floorplans</span></div>
+          <div class="page-subtitle">All current floorplans — display widths shown (14'→13'8", 16'→15', 18'→17', 28'→13'8", 32'→30')</div>
+        </div>
+      </div>
+
+      <!-- ── FILTERS ── -->
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap;">
+        <input class="search-input" style="width:220px;" placeholder="🔍  Search model name..." oninput="filterModelTable(this.value)">
+        <select class="search-input" style="width:150px;" onchange="filterModelBySection(this.value)">
+          <option value="">All Sections</option>
+          <option value="Single">Single Section</option>
+          <option value="Double">Double Section</option>
+        </select>
+        <select class="search-input" style="width:150px;" onchange="filterModelByWidth(this.value)">
+          <option value="">All Widths</option>
+          <option value="13'8&quot;">13'8" (14' box)</option>
+          <option value="15'">15' (16' box)</option>
+          <option value="17'">17' (18' box)</option>
+          <option value="27'4&quot;">13'8" (28' box)</option>
+          <option value="30'">30' (32' box)</option>
+        </select>
+        <span id="model-count" style="font-size:11px;color:var(--subtext);margin-left:4px;"></span>
+      </div>
+
+      <!-- ── TABLE ── -->
+      <div class="table-wrap">
+        <div class="table-toolbar">
+          <span class="table-toolbar-title">Floorplan Catalog</span>
+          <span style="font-size:11px;color:var(--subtext);">* Display width shown — nominal box size in parentheses</span>
+        </div>
+        <div class="table-scroll">
+          <table id="model-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Type</th>
+                <th>Floorplan Code</th>
+                <th>Section</th>
+                <th>Living Box Size</th>
+                <th>Total Box Size</th>
+                <th>Bed / Bath</th>
+                <th>Sq Ft</th>
+                <th>Notes</th>
+                <th style="text-align:center;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="model-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ── PDF VIEWER MODAL ── -->
+<div id="pdf-modal" style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.92);">
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;">
+    <div style="background:var(--darker);border:1px solid var(--border);border-radius:12px;width:100%;max-width:1400px;height:calc(100vh - 32px);display:flex;flex-direction:column;overflow:hidden;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);flex-shrink:0;">
+        <span id="pdf-modal-title" style="font-weight:700;font-size:14px;color:var(--white);"></span>
+        <div style="display:flex;gap:10px;">
+          <button onclick="printSalesPDF()" style="background:var(--green);color:var(--darker);border:none;padding:7px 18px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;">🖨️ Print</button>
+          <button onclick="closePdfModal()" style="background:var(--border);color:var(--text);border:none;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">✕ Close</button>
+        </div>
+      </div>
+      <iframe id="pdf-frame" style="flex:1;width:100%;border:none;background:#fff;" src="" allow="fullscreen"></iframe>
+    </div>
+  </div>
+</div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
