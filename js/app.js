@@ -1131,8 +1131,10 @@
       }
 
       visible++;
-      // A/B split homes count as 0.5 each so two halves = 1 home
-      const isHalf = /[AB]-\d{2}$/.test(row.serial);
+      // A/B split homes count as 0.5 each — only when both A and B exist in psData
+      const base = row.serial.replace(/-?(A|B)(-\d{2})$/, '$2');
+      const hasPartner = base !== row.serial && psData.some(r => r !== row && r.serial.replace(/-?(A|B)(-\d{2})$/, '$2') === base);
+      const isHalf = hasPartner;
       homes += isHalf ? 0.5 : 1;
       if(isHalf){
         doubleHomes+=0.5;
