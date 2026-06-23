@@ -1131,26 +1131,29 @@
       }
 
       visible++;
-      // A/B split homes count as 0.5 each — only when both A and B exist in psData
+      const sl=(row.status||'').toLowerCase();
+      const isUnreleased = sl==='unreleased';
+
+      // A/B partner detection — only paired serials count as half
       const base = row.serial.replace(/-?(A|B)(-\d{2})$/, '$2');
       const hasPartner = base !== row.serial && psData.some(r => r !== row && r.serial.replace(/-?(A|B)(-\d{2})$/, '$2') === base);
       const isHalf = hasPartner;
+
+      // Total homes and floors — all statuses
       homes += isHalf ? 0.5 : 1;
-      if(isHalf){
-        doubleHomes+=0.5;
-        doubleFloors+=1; // each half = 1 floor, so A+B together = 2
-      } else {
-        singleHomes+=1;
-        singleFloors+=row.floors;
+      totalFloors += row.floors;
+
+      // Double/single — exclude Unreleased
+      if(!isUnreleased){
+        if(isHalf){ doubleHomes+=0.5; doubleFloors+=1; }
+        else      { singleHomes+=1;   singleFloors+=row.floors; }
       }
-      totalFloors+=row.floors;
-      const sl=(row.status||'').toLowerCase();
-      if(sl==='complete') complete++;
-      if(sl==='yard') yard+=row.floors;
-      else if(sl==='rework') rework+=row.floors;
-      else if(sl==='unreleased') unreleased+=row.floors;
-      else if(sl==='' || sl==='scheduled to production' || sl==='schedule shipment' || sl==='shipment scheduled') scheduled+=row.floors;
-      if(row.ship && row.ship.match(/^\d{4}-\d{2}-\d{2}$/)) shippedFloors+=row.floors;
+
+      if(sl==='yard')                    yard+=row.floors;
+      if(sl==='rework')                  rework+=row.floors;
+      if(sl==='unreleased')              unreleased+=row.floors;
+      if(sl==='scheduled to production') scheduled+=row.floors;
+      if(row.ship && /^\d{4}-\d{2}-\d{2}$/.test(row.ship)) shippedFloors+=row.floors;
 
       // Month divider
       if(mo && mo!==lastMonth){
@@ -1229,7 +1232,8 @@
       }
     });
 
-    const pct = n => totalFloors > 0 ? (n/totalFloors*100).toFixed(1)+'%' : '0%';
+    const nonUnrelFloors = doubleFloors + singleFloors;
+    const pct = n => nonUnrelFloors > 0 ? (n/nonUnrelFloors*100).toFixed(1)+'%' : '0%';
     document.getElementById('ps-stat-total').textContent      = homes % 1 === 0 ? homes : homes.toFixed(1);
     document.getElementById('ps-stat-floors').textContent     = totalFloors;
     document.getElementById('ps-stat-shipped').textContent    = shippedFloors;
