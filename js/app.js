@@ -1071,6 +1071,7 @@
   function psStatusColor(s) {
     const sl=(s||'').toLowerCase();
     if(sl==='complete')                return 'pill-green';
+    if(sl==='hold mco')                return 'pill-yellow';
     if(sl==='send mco')                return 'pill-blue';
     if(sl==='yard')                    return 'pill-yellow';
     if(sl==='rework')                  return 'pill-orange';
@@ -1087,6 +1088,7 @@
       'Scheduled to Production',
       'Rework',
       'Yard',
+      'Hold MCO',
       'Schedule Shipment',
       'Shipment Scheduled',
       'Send MCO',
