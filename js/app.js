@@ -588,9 +588,10 @@
     modelSel.innerHTML = '<option value="">— Select Model —</option>';
     modelData.forEach(m => {
       const opt = document.createElement('option');
-      opt.value = m.model;
-      opt.textContent = m.model;
-      opt.dataset.box = m.box;
+      opt.value = m.name;
+      opt.textContent = m.name;
+      opt.dataset.width  = m.width;
+      opt.dataset.length = m.length;
       modelSel.appendChild(opt);
     });
 
@@ -623,19 +624,16 @@
   function coModelChanged() {
     const sel = document.getElementById('co-model');
     const opt = sel.options[sel.selectedIndex];
-    if (!opt || !opt.dataset.box) { 
+    if (!opt || !opt.dataset.width) {
       document.getElementById('co-width').value = '';
       document.getElementById('co-length').value = '';
       document.getElementById('co-sections').value = '';
       return;
     }
-    const box = opt.dataset.box; // e.g. "32 X 76"
-    const parts = box.split(/\s*[Xx]\s*/);
-    const w = parts[0] || '';
-    const l = parts[1] || '';
-    const secs = parseInt(w) >= 28 ? '2' : '1';
-    document.getElementById('co-width').value   = w;
-    document.getElementById('co-length').value  = l;
+    const m = modelData.find(r => r.name === opt.value);
+    const secs = (m && m.type === 'Double-Section') ? '2' : '1';
+    document.getElementById('co-width').value    = opt.dataset.width;
+    document.getElementById('co-length').value   = opt.dataset.length;
     document.getElementById('co-sections').value = secs;
   }
 
@@ -1311,11 +1309,9 @@
   function psSyncModel() {
     const sel=document.getElementById('ps-model');
     const opt=sel.options[sel.selectedIndex];
-    if(!opt||!opt.dataset.box) return;
-    const parts=opt.dataset.box.split(/\s*[Xx]\s*/);
-    const wMap={'14':"13'8\"", '16':"15'", '18':"17'", '11.8':"11'8\"", '15':"15'", '17':"17'", '28':"13'8\"", '32':"15'"};
-    document.getElementById('ps-width').value  = wMap[parts[0]]||(parts[0]+"'");
-    document.getElementById('ps-length').value = parts[1]?parts[1]+"'":'';
+    if(!opt||!opt.dataset.width) return;
+    document.getElementById('ps-width').value  = opt.dataset.width;
+    document.getElementById('ps-length').value = opt.dataset.length||'';
   }
 
   function populatePsDropdowns() {
@@ -1324,7 +1320,7 @@
       ms.innerHTML='<option value="">— Select Model —</option>';
       modelData.forEach(m=>{
         const o=document.createElement('option');
-        o.value=m.model; o.textContent=m.model; o.dataset.box=m.box;
+        o.value=m.name; o.textContent=m.name; o.dataset.width=m.width; o.dataset.length=m.length;
         ms.appendChild(o);
       });
     }
@@ -1496,121 +1492,82 @@
     const tbody = document.getElementById('model-tbody');
     tbody.innerHTML = '';
     let visible = 0;
-    let lastGroup = '';
+    let lastType = '';
 
-    // Sort: HUD singles → HUD doubles → Park Models → Workforce, each by sqft
-    const typeOrder = {'HUD-Single':0,'HUD-Double':1,'Park Model':2,'Workforce':3};
-    const sorted = modelData.map((row, i) => {
-      const sec = getSection(row.box);
-      const grp = (row.type === 'HUD' || !row.type) ? ('HUD-' + sec) : (row.type);
-      return {...row, _i: i, _grp: grp, _sqft: parseInt(row.sqft)||0};
-    }).sort((a,b) => {
-      const og = (typeOrder[a._grp]??99) - (typeOrder[b._grp]??99);
-      return og !== 0 ? og : a._sqft - b._sqft;
+    const sorted = modelData.map((row,i) => ({...row, _i:i})).sort((a,b) => {
+      if(a.type !== b.type) return a.type === 'Single-Section' ? -1 : 1;
+      return (a.sf||0) - (b.sf||0);
     });
 
-    sorted.forEach(({_i: i, _grp: grp, ...row}) => {
-      row = modelData[i]; // use original reference for edits to work correctly
-      const section = getSection(row.box);
-      const displaySize = getDisplaySize(row.box);
-      const boxW = row.box.split(/\s*[Xx]\s*/)[0];
-      const displayW = displayWidthMap[boxW] || (boxW + "'");
-      const grpKey = (row.type === 'HUD' || !row.type) ? ('HUD-' + section) : (row.type);
+    sorted.forEach(item => {
+      const i = item._i;
+      const row = modelData[i];
 
-      if (modelSearchFilter && !row.model.toLowerCase().includes(modelSearchFilter)) return;
-      if (modelSectionFilter && section !== modelSectionFilter) return;
-      if (modelWidthFilter && displayW !== modelWidthFilter) return;
+      if(modelSearchFilter && !(row.name||'').toLowerCase().includes(modelSearchFilter)) return;
+      if(modelSectionFilter && row.type !== modelSectionFilter) return;
+      if(modelWidthFilter && row.width !== modelWidthFilter) return;
 
       visible++;
 
-      // Group divider
-      if (grpKey !== lastGroup) {
-        lastGroup = grpKey;
-        const groupLabels = {
-          'HUD-Single':  '🏠 HUD — Single Section',
-          'HUD-Double':  '🏡 HUD — Double Section',
-          'Park Model':  '🌲 Park Models',
-          'Workforce':   '🔧 Workforce',
-        };
-        const groupColors = {
-          'HUD-Single':  'var(--green)',
-          'HUD-Double':  '#60A5FA',
-          'Park Model':  '#F97316',
-          'Workforce':   '#A3E635',
-        };
+      if(row.type !== lastType) {
+        lastType = row.type;
+        const color = row.type === 'Single-Section' ? 'var(--green)' : '#60A5FA';
+        const label = row.type === 'Single-Section' ? '🏠 Single-Section' : '🏡 Double-Section';
         tbody.insertAdjacentHTML('beforeend', `
           <tr style="background:var(--darker);pointer-events:none;">
-            <td colspan="10" style="padding:10px 16px 6px;font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:${groupColors[grpKey]||'var(--green)'};border-bottom:1px solid var(--border);">
-              ${groupLabels[grpKey]||grpKey}
+            <td colspan="9" style="padding:10px 16px 6px;font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:${color};border-bottom:1px solid var(--border);">
+              ${label}
             </td>
           </tr>`);
       }
 
-      const bedNum = parseInt(row.bed);
+      const bedNum = row.beds || 0;
       const bedColor = bedNum <= 2 ? 'pill-gray' : bedNum === 3 ? 'pill-blue' : 'pill-green';
       const maxSqft = 2280;
-      const pct = Math.round((parseInt(row.sqft) / maxSqft) * 100);
+      const pct = Math.round(((row.sf||0) / maxSqft) * 100);
+      const typeColor = row.type === 'Single-Section' ? 'pill-green' : 'pill-blue';
 
-      if (modelEditingIndex === i) {
-        // ── INLINE EDIT ROW ──
+      if(modelEditingIndex === i) {
         tbody.insertAdjacentHTML('beforeend', `
           <tr id="ml-row-${i}" class="sn-editing">
-            <td><input class="sn-inline-input" id="mle-model"   value="${esc(row.model)}"  placeholder="Model" style="font-weight:700;min-width:100px;"></td>
-            <td>
-              <select class="sn-inline-input" id="mle-type" style="width:100px;">
-                <option value="HUD"        ${(row.type||'HUD')==='HUD'        ?'selected':''}>HUD</option>
-                <option value="Park Model" ${(row.type||'')==='Park Model'?'selected':''}>Park Model</option>
-                <option value="Workforce"  ${(row.type||'')==='Workforce' ?'selected':''}>Workforce</option>
-              </select>
-            </td>
-            <td><input class="sn-inline-input" id="mle-code"    value="${esc(row.code)}"   placeholder="Code"  style="font-family:monospace;width:80px;"></td>
-            <td><span class="pill ${section === 'Single' ? 'pill-gray' : 'pill-blue'}" style="font-size:9px;">${section}</span></td>
-            <td>
-              <input class="sn-inline-input" id="mle-box" value="${esc(row.box)}" placeholder="e.g. 32 X 76" style="width:100px;"
-                oninput="document.getElementById('mle-disp').textContent=getDisplaySize(this.value);">
-              <div style="font-size:10px;color:var(--green);margin-top:3px;" id="mle-disp">${displaySize}</div>
-            </td>
-            <td style="font-size:11px;color:var(--subtext);white-space:nowrap;">${getDisplaySize(row.totalBox || row.box)}</td>
+            <td><input class="sn-inline-input" id="mle-name"  value="${esc(row.name||'')}"  placeholder="Model" style="font-weight:700;min-width:100px;"></td>
+            <td style="font-size:11px;color:var(--subtext);font-family:monospace;">${row.box}</td>
+            <td style="font-size:11px;">${row.width}</td>
+            <td style="font-size:11px;">${row.length}</td>
             <td style="white-space:nowrap;">
-              <input class="sn-inline-input" id="mle-bed"  value="${esc(row.bed)}"  placeholder="Bed"  style="width:36px;display:inline-block;">
+              <input class="sn-inline-input" id="mle-beds"  value="${esc(row.beds)}"  placeholder="Bed"  style="width:36px;display:inline-block;">
               <span style="color:var(--subtext);margin:0 2px;font-size:11px;">bd /</span>
-              <input class="sn-inline-input" id="mle-bath" value="${esc(row.bath)}" placeholder="Ba"   style="width:36px;display:inline-block;">
+              <input class="sn-inline-input" id="mle-baths" value="${esc(row.baths)}" placeholder="Ba"   style="width:36px;display:inline-block;">
               <span style="color:var(--subtext);margin-left:2px;font-size:11px;">ba</span>
             </td>
-            <td><input class="sn-inline-input" id="mle-sqft"  value="${esc(row.sqft)}"  placeholder="Sq Ft" style="width:70px;"></td>
-            <td><input class="sn-inline-input" id="mle-notes" value="${esc(row.notes)}" placeholder="Notes" style="min-width:150px;"></td>
+            <td><input class="sn-inline-input" id="mle-sf"    value="${esc(row.sf)}"    placeholder="Sq Ft" style="width:70px;"></td>
+            <td><span class="pill ${typeColor}" style="font-size:9px;">${row.type}</span></td>
+            <td><input class="sn-inline-input" id="mle-notes" value="${esc(row.notes||'')}" placeholder="Notes" style="min-width:150px;"></td>
             <td class="fc-action-cell" style="white-space:nowrap;">
               <button class="btn-save-inline" onclick="saveInlineModel(${i})">✓ Save</button>
               <button class="btn-cancel-inline" onclick="cancelInlineModel()">✕</button>
             </td>
           </tr>`);
       } else {
-        // ── READ ROW ──
         tbody.insertAdjacentHTML('beforeend', `
           <tr id="ml-row-${i}">
-            <td><span style="font-weight:800;font-size:13px;color:var(--white);letter-spacing:0.02em;">${row.model}</span></td>
-            <td><span class="pill ${(row.type||'HUD')==='HUD'?'pill-blue':(row.type)==='Park Model'?'pill-orange':'pill-green'}" style="font-size:9px;">${row.type||'HUD'}</span></td>
-            <td style="font-size:11px;color:var(--subtext);font-family:monospace;">${row.code}</td>
-            <td><span class="pill ${section === 'Single' ? 'pill-gray' : 'pill-blue'}" style="font-size:9px;">${section}</span></td>
-            <td style="font-weight:600;color:var(--text);white-space:nowrap;">${displaySize}</td>
-            <td style="font-size:11px;color:var(--subtext);white-space:nowrap;">${getDisplaySize(row.totalBox || row.box)}</td>
-            <td><span class="pill ${bedColor}" style="font-size:10px;">${row.bed} bd / ${row.bath} ba</span></td>
+            <td><span style="font-weight:800;font-size:13px;color:var(--white);letter-spacing:0.02em;">${row.name}</span></td>
+            <td style="font-size:11px;color:var(--subtext);font-family:monospace;">${row.box}</td>
+            <td style="font-weight:600;color:var(--text);white-space:nowrap;">${row.width}</td>
+            <td style="font-size:11px;color:var(--text);white-space:nowrap;">${row.length}</td>
+            <td><span class="pill ${bedColor}" style="font-size:10px;">${row.beds} bd / ${row.baths} ba</span></td>
             <td>
               <div style="display:flex;align-items:center;gap:8px;">
-                <span style="font-size:12px;font-weight:600;color:var(--white);min-width:42px;">${parseInt(row.sqft).toLocaleString()}</span>
+                <span style="font-size:12px;font-weight:600;color:var(--white);min-width:42px;">${(row.sf||0).toLocaleString()}</span>
                 <div style="flex:1;min-width:60px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;">
                   <div style="width:${pct}%;height:100%;background:var(--green);border-radius:2px;"></div>
                 </div>
               </div>
             </td>
+            <td><span class="pill ${typeColor}" style="font-size:9px;">${row.type}</span></td>
             <td style="font-size:11px;color:var(--subtext);font-style:${row.notes ? 'normal' : 'italic'};">${row.notes || '—'}</td>
             <td class="fc-action-cell" style="white-space:nowrap;">
-              <button class="btn-edit" onclick="editModelRow(${i})" style="margin-bottom:4px;">✏️ Edit</button><br>
-              ${row.salesPrint
-                ? `<button class="btn-sales-print" onclick="openSalesPDF(${i})">📄 Sales Print</button>
-                   <button class="btn-upload-print" onclick="triggerPDFUpload(${i})" style="margin-top:3px;font-size:10px;padding:3px 8px;">↩ Replace</button>`
-                : `<button class="btn-upload-print" onclick="triggerPDFUpload(${i})">⬆ Upload PDF</button>`
-              }
+              <button class="btn-edit" onclick="editModelRow(${i})">✏️ Edit</button>
             </td>
           </tr>`);
       }
@@ -1628,13 +1585,10 @@
   }
 
   function saveInlineModel(i) {
-    modelData[i].model = document.getElementById('mle-model').value.trim();
-    modelData[i].type  = document.getElementById('mle-type').value;
-    modelData[i].code  = document.getElementById('mle-code').value.trim();
-    modelData[i].box   = document.getElementById('mle-box').value.trim();
-    modelData[i].bed   = document.getElementById('mle-bed').value.trim();
-    modelData[i].bath  = document.getElementById('mle-bath').value.trim();
-    modelData[i].sqft  = document.getElementById('mle-sqft').value.trim();
+    modelData[i].name  = document.getElementById('mle-name').value.trim();
+    modelData[i].beds  = parseInt(document.getElementById('mle-beds').value.trim()) || 0;
+    modelData[i].baths = parseFloat(document.getElementById('mle-baths').value.trim()) || 0;
+    modelData[i].sf    = parseInt(document.getElementById('mle-sf').value.trim()) || 0;
     modelData[i].notes = document.getElementById('mle-notes').value.trim();
     modelEditingIndex = -1;
     renderModelTable();
