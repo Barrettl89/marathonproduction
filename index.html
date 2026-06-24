@@ -231,19 +231,20 @@
   .tab-btn {
     background: none;
     border: none;
+    border-bottom: 2px solid transparent;
     color: var(--white-60);
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 500;
-    padding: 14px 16px;
+    padding: 14px 12px;
     cursor: pointer;
     white-space: nowrap;
-    border-bottom: 2px solid transparent;
     transition: color 0.15s, border-color 0.15s;
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     font-family: inherit;
     letter-spacing: 0.01em;
+    flex-shrink: 0;
   }
 
   .tab-btn:hover { color: var(--white-90); }
