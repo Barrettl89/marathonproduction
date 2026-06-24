@@ -1052,33 +1052,116 @@
   </div>
 
   <!-- 9. ACCOUNTING -->
+  <!-- 9. ACCOUNTING -->
   <div class="tab-panel" id="tab-accounting">
     <div class="section-header">
       <div>
         <div class="section-title">Accounting</div>
-        <div class="section-sub">Invoices, payments, deposits, and financial records</div>
+        <div class="section-sub">Monthly financial records — invoices, payments, and deposits</div>
       </div>
-      <button class="btn">+ New Entry</button>
     </div>
+
+    <!-- Month sub-tabs -->
+    <div style="display:flex; gap:0; margin-bottom:20px; border-bottom:1px solid rgba(255,255,255,0.08);">
+      <button id="acct-tab-jan" onclick="setAcctMonth('Jan 2026')" style="background:none; border:none; border-bottom:2px solid #8DC63F; color:#8DC63F; font-family:inherit; font-size:13px; font-weight:700; padding:10px 20px; cursor:pointer; letter-spacing:0.04em;">Jan 2026</button>
+      <button id="acct-tab-feb" onclick="setAcctMonth('Feb 2026')" style="background:none; border:none; border-bottom:2px solid transparent; color:rgba(255,255,255,0.5); font-family:inherit; font-size:13px; font-weight:500; padding:10px 20px; cursor:pointer; letter-spacing:0.04em;">Feb 2026</button>
+      <button id="acct-tab-mar" onclick="setAcctMonth('Mar 2026')" style="background:none; border:none; border-bottom:2px solid transparent; color:rgba(255,255,255,0.5); font-family:inherit; font-size:13px; font-weight:500; padding:10px 20px; cursor:pointer; letter-spacing:0.04em;">Mar 2026</button>
+      <button id="acct-tab-apr" onclick="setAcctMonth('Apr 2026')" style="background:none; border:none; border-bottom:2px solid transparent; color:rgba(255,255,255,0.5); font-family:inherit; font-size:13px; font-weight:500; padding:10px 20px; cursor:pointer; letter-spacing:0.04em;">Apr 2026</button>
+      <button id="acct-tab-may" onclick="setAcctMonth('May 2026')" style="background:none; border:none; border-bottom:2px solid transparent; color:rgba(255,255,255,0.5); font-family:inherit; font-size:13px; font-weight:500; padding:10px 20px; cursor:pointer; letter-spacing:0.04em;">May 2026</button>
+      <button id="acct-tab-jun" onclick="setAcctMonth('Jun 2026')" style="background:none; border:none; border-bottom:2px solid transparent; color:rgba(255,255,255,0.5); font-family:inherit; font-size:13px; font-weight:500; padding:10px 20px; cursor:pointer; letter-spacing:0.04em;">Jun 2026</button>
+    </div>
+
     <div class="metric-row">
-      <div class="metric"><div class="metric-val green">$2.4M</div><div class="metric-lbl">Revenue MTD</div></div>
-      <div class="metric"><div class="metric-val" style="color:#EF4444;">$180K</div><div class="metric-lbl">Outstanding AR</div></div>
-      <div class="metric"><div class="metric-val green">$340K</div><div class="metric-lbl">Deposits Received</div></div>
-      <div class="metric"><div class="metric-val" style="color:#FBBF24;">6</div><div class="metric-lbl">Open Invoices</div></div>
+      <div class="metric"><div class="metric-val green" id="acct-m-count">—</div><div class="metric-lbl">Records</div></div>
+      <div class="metric"><div class="metric-val green" id="acct-m-rev">—</div><div class="metric-lbl">Total Revenue</div></div>
+      <div class="metric"><div class="metric-val" id="acct-m-inv">—</div><div class="metric-lbl">Total Invoiced</div></div>
+      <div class="metric"><div class="metric-val" id="acct-m-dep">—</div><div class="metric-lbl">Deposits</div></div>
     </div>
-    <div class="table-wrap">
-      <table>
+
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="search-input" id="acct-search" type="text" placeholder="Search dealer, serial, model…">
+      </div>
+      <select id="acct-paytype-filter" style="width:auto; padding:8px 12px;">
+        <option value="">All Pay Types</option>
+        <option value="Check">Check</option>
+        <option value="Wire">Wire</option>
+        <option value="ACH">ACH</option>
+        <option value="Floor Plan">Floor Plan</option>
+      </select>
+    </div>
+
+    <div class="table-wrap" style="overflow-x:auto;">
+      <table id="acct-table">
         <thead><tr>
-          <th>Invoice #</th><th>Dealer</th><th>Unit</th><th>Amount</th><th>Invoice Date</th><th>Due Date</th><th>Status</th>
+          <th>Pro #</th>
+          <th>Dealer</th>
+          <th>Serial</th>
+          <th>Model</th>
+          <th>Sq Ft</th>
+          <th>Base</th>
+          <th>Options</th>
+          <th>Freight</th>
+          <th>Fees</th>
+          <th>Taxes</th>
+          <th>Total Rev</th>
+          <th>Total Inv</th>
+          <th>Offline Date</th>
+          <th>Ship Date</th>
+          <th>Off→Ship</th>
+          <th>Paid Date</th>
+          <th>Ship→Paid</th>
+          <th>Pay Type</th>
+          <th></th>
         </tr></thead>
-        <tbody>
-          <tr><td>INV-26041</td><td>Lone Star Homes</td><td>01-TRA0081-26</td><td>$94,500</td><td>03/20/26</td><td>04/20/26</td><td><span class="badge badge-green">Paid</span></td></tr>
-          <tr><td>INV-26042</td><td>Heartland Housing</td><td>01-BRK0042-26</td><td>$112,000</td><td>03/22/26</td><td>04/22/26</td><td><span class="badge badge-amber">Partial</span></td></tr>
-          <tr><td>INV-26043</td><td>Southwest Living</td><td>01-AZA0118-26</td><td>$88,750</td><td>03/28/26</td><td>04/28/26</td><td><span class="badge badge-red">Overdue</span></td></tr>
-          <tr><td>INV-26044</td><td>Red River Housing</td><td>01-MAV0156-26</td><td>$97,200</td><td>04/01/26</td><td>05/01/26</td><td><span class="badge badge-gray">Sent</span></td></tr>
-          <tr><td>INV-26045</td><td>Panhandle Homes</td><td>01-GRY0204-26</td><td>$128,500</td><td>04/05/26</td><td>05/05/26</td><td><span class="badge badge-gray">Sent</span></td></tr>
-        </tbody>
+        <tbody id="acct-tbody"></tbody>
       </table>
+    </div>
+    <div style="margin-top:10px; font-size:12px; color:var(--white-30);" id="acct-count-label"></div>
+
+    <!-- Edit Modal -->
+    <div id="acct-modal-backdrop" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center;">
+      <div style="background:#1a2a1a; border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:28px; width:480px; max-width:95vw; position:relative;">
+        <div style="font-size:16px; font-weight:700; margin-bottom:20px; letter-spacing:0.04em;">Edit Record</div>
+        <input type="hidden" id="acct-modal-pro">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+          <div>
+            <label style="font-size:11px; color:var(--white-60); display:block; margin-bottom:5px;">PAID DATE</label>
+            <input id="acct-modal-paidDate" type="text" placeholder="MM/DD/YY" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:4px; padding:8px 10px; color:#fff; font-size:13px;">
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--white-60); display:block; margin-bottom:5px;">PAY TYPE</label>
+            <select id="acct-modal-payType" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:4px; padding:8px 10px; color:#fff; font-size:13px;">
+              <option value="">—</option>
+              <option value="Check">Check</option>
+              <option value="Wire">Wire</option>
+              <option value="ACH">ACH</option>
+              <option value="Floor Plan">Floor Plan</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--white-60); display:block; margin-bottom:5px;">DEPOSIT</label>
+            <input id="acct-modal-deposit" type="text" placeholder="$0" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:4px; padding:8px 10px; color:#fff; font-size:13px;">
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--white-60); display:block; margin-bottom:5px;">FINAL DEPOSIT</label>
+            <input id="acct-modal-finalDeposit" type="text" placeholder="$0" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:4px; padding:8px 10px; color:#fff; font-size:13px;">
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--white-60); display:block; margin-bottom:5px;">SCHEDULED PAY</label>
+            <input id="acct-modal-scheduledPay" type="text" placeholder="MM/DD/YY" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:4px; padding:8px 10px; color:#fff; font-size:13px;">
+          </div>
+          <div>
+            <label style="font-size:11px; color:var(--white-60); display:block; margin-bottom:5px;">NOTES</label>
+            <input id="acct-modal-notes" type="text" placeholder="Optional notes" style="width:100%; box-sizing:border-box; background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.15); border-radius:4px; padding:8px 10px; color:#fff; font-size:13px;">
+          </div>
+        </div>
+        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:22px;">
+          <button onclick="closeAcctModal()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:4px; padding:9px 20px; color:rgba(255,255,255,0.7); font-family:inherit; font-size:13px; cursor:pointer;">Cancel</button>
+          <button onclick="saveAcctRecord()" style="background:#8DC63F; border:none; border-radius:4px; padding:9px 20px; color:#0a140a; font-family:inherit; font-size:13px; font-weight:700; cursor:pointer;">Save</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1974,6 +2057,176 @@
   renderModels(modelData.filter(m => m.active));
   document.getElementById('model-search').addEventListener('input', filterModels);
   document.getElementById('model-section-filter').addEventListener('change', filterModels);
+
+  // ── ACCOUNTING DATA & LOGIC ──
+  const acctData = [
+    {pro:'26-J001', dealer:'Lone Star Homes',          serial:'TX26-0042', model:'STONEWALL',  width:30, length:68, sf:2040, floors:1, base:100900, vep:500, options:4200, freight:2800, fees:650, taxes:0, totalRev:109050, totalInv:108050, offlineDate:'01/03/26', tagged:'01/04/26', shipDate:'01/07/26', offlineToShip:4, paidDate:'01/14/26', shipToPaid:7,  payType:'Floor Plan', deposit:5000, finalDeposit:0, approval:'Approved', invoicedDate:'01/07/26', scheduledPay:'01/14/26', buildMonth:'Jan 2026'},
+    {pro:'26-J002', dealer:'Heartland Housing',        serial:'TX26-0043', model:'GRAYSON',    width:27, length:76, sf:2077, floors:1, base:101100, vep:500, options:6800, freight:3200, fees:650, taxes:0, totalRev:112250, totalInv:111250, offlineDate:'01/03/26', tagged:'01/04/26', shipDate:'01/08/26', offlineToShip:5, paidDate:'01/17/26', shipToPaid:9,  payType:'Wire',       deposit:5000, finalDeposit:0, approval:'Approved', invoicedDate:'01/08/26', scheduledPay:'01/17/26', buildMonth:'Jan 2026'},
+    {pro:'26-J003', dealer:'Southwest Living',         serial:'TX26-0044', model:'SWISHER',    width:30, length:76, sf:2280, floors:1, base:104900, vep:500, options:3500, freight:3200, fees:650, taxes:0, totalRev:112750, totalInv:111750, offlineDate:'01/05/26', tagged:'01/06/26', shipDate:'01/09/26', offlineToShip:4, paidDate:'01/16/26', shipToPaid:7,  payType:'Check',      deposit:5000, finalDeposit:0, approval:'Approved', invoicedDate:'01/09/26', scheduledPay:'01/16/26', buildMonth:'Jan 2026'},
+    {pro:'26-J004', dealer:'Red River Housing',        serial:'TX26-0045', model:'MAVERICK',   width:30, length:56, sf:1680, floors:1, base:89000,  vep:500, options:2200, freight:2400, fees:650, taxes:0, totalRev:94750,  totalInv:93750,  offlineDate:'01/05/26', tagged:'01/06/26', shipDate:'01/10/26', offlineToShip:5, paidDate:'01/19/26', shipToPaid:9,  payType:'ACH',        deposit:3000, finalDeposit:0, approval:'Approved', invoicedDate:'01/10/26', scheduledPay:'01/19/26', buildMonth:'Jan 2026'},
+    {pro:'26-J005', dealer:'Panhandle Homes',          serial:'TX26-0046', model:'STERLING',   width:30, length:64, sf:1920, floors:1, base:97200,  vep:500, options:4800, freight:2800, fees:650, taxes:0, totalRev:105950, totalInv:104950, offlineDate:'01/06/26', tagged:'01/07/26', shipDate:'01/12/26', offlineToShip:6, paidDate:'01/21/26', shipToPaid:9,  payType:'Floor Plan', deposit:5000, finalDeposit:0, approval:'Approved', invoicedDate:'01/12/26', scheduledPay:'01/21/26', buildMonth:'Jan 2026'},
+    {pro:'26-J006', dealer:'Texas Hill Country Homes', serial:'TX26-0047', model:'COLEMAN',    width:27, length:60, sf:1640, floors:1, base:89100,  vep:500, options:3100, freight:2800, fees:650, taxes:0, totalRev:96150,  totalInv:95150,  offlineDate:'01/07/26', tagged:'01/08/26', shipDate:'01/13/26', offlineToShip:6, paidDate:'01/22/26', shipToPaid:9,  payType:'Wire',       deposit:4000, finalDeposit:0, approval:'Approved', invoicedDate:'01/13/26', scheduledPay:'01/22/26', buildMonth:'Jan 2026'},
+    {pro:'26-J007', dealer:'Big Country Housing',      serial:'TX26-0048', model:'LIBERTY',    width:30, length:56, sf:1680, floors:1, base:88000,  vep:500, options:2600, freight:2400, fees:650, taxes:0, totalRev:94150,  totalInv:93150,  offlineDate:'01/08/26', tagged:'01/09/26', shipDate:'01/14/26', offlineToShip:6, paidDate:'01/23/26', shipToPaid:9,  payType:'Check',      deposit:3500, finalDeposit:0, approval:'Approved', invoicedDate:'01/14/26', scheduledPay:'01/23/26', buildMonth:'Jan 2026'},
+    {pro:'26-J008', dealer:'Brazos Valley Homes',      serial:'TX26-0049', model:'DAWSON',     width:27, length:64, sf:1749, floors:1, base:92100,  vep:500, options:3800, freight:2800, fees:650, taxes:0, totalRev:99850,  totalInv:98850,  offlineDate:'01/09/26', tagged:'01/10/26', shipDate:'01/15/26', offlineToShip:6, paidDate:'01/24/26', shipToPaid:9,  payType:'Floor Plan', deposit:4500, finalDeposit:0, approval:'Approved', invoicedDate:'01/15/26', scheduledPay:'01/24/26', buildMonth:'Jan 2026'},
+    {pro:'26-J009', dealer:'Permian Basin Homes',      serial:'TX26-0050', model:'CALDWELL',   width:27, length:56, sf:1531, floors:1, base:86200,  vep:500, options:2900, freight:2400, fees:650, taxes:0, totalRev:92650,  totalInv:91650,  offlineDate:'01/10/26', tagged:'01/11/26', shipDate:'01/16/26', offlineToShip:6, paidDate:'01/25/26', shipToPaid:9,  payType:'ACH',        deposit:3500, finalDeposit:0, approval:'Approved', invoicedDate:'01/16/26', scheduledPay:'01/25/26', buildMonth:'Jan 2026'},
+    {pro:'26-J010', dealer:'Gulf Coast Housing',       serial:'TX26-0051', model:'BREWSTER',   width:27, length:56, sf:1531, floors:1, base:86200,  vep:500, options:4100, freight:2400, fees:650, taxes:0, totalRev:93850,  totalInv:92850,  offlineDate:'01/12/26', tagged:'01/13/26', shipDate:'01/17/26', offlineToShip:5, paidDate:'01/26/26', shipToPaid:9,  payType:'Wire',       deposit:4000, finalDeposit:0, approval:'Approved', invoicedDate:'01/17/26', scheduledPay:'01/26/26', buildMonth:'Jan 2026'},
+    {pro:'26-J011', dealer:'Lone Star Homes',          serial:'TX26-0052', model:'MESQUITE',   width:15, length:76, sf:1140, floors:1, base:61900,  vep:500, options:1800, freight:1800, fees:450, taxes:0, totalRev:66450,  totalInv:65450,  offlineDate:'01/12/26', tagged:'01/13/26', shipDate:'01/18/26', offlineToShip:6, paidDate:'01/27/26', shipToPaid:9,  payType:'Check',      deposit:2000, finalDeposit:0, approval:'Approved', invoicedDate:'01/18/26', scheduledPay:'01/27/26', buildMonth:'Jan 2026'},
+    {pro:'26-J012', dealer:'Heartland Housing',        serial:'TX26-0053', model:'TEMPLE',     width:17, length:76, sf:1156, floors:1, base:67300,  vep:500, options:2100, freight:1800, fees:450, taxes:0, totalRev:72150,  totalInv:71150,  offlineDate:'01/13/26', tagged:'01/14/26', shipDate:'01/19/26', offlineToShip:6, paidDate:'01/28/26', shipToPaid:9,  payType:'Floor Plan', deposit:2500, finalDeposit:0, approval:'Approved', invoicedDate:'01/19/26', scheduledPay:'01/28/26', buildMonth:'Jan 2026'},
+    {pro:'26-J013', dealer:'Southwest Living',         serial:'TX26-0054', model:'KATY',       width:15, length:68, sf:1020, floors:1, base:59000,  vep:500, options:1500, freight:1800, fees:450, taxes:0, totalRev:63250,  totalInv:62250,  offlineDate:'01/14/26', tagged:'01/15/26', shipDate:'01/20/26', offlineToShip:6, paidDate:'01/29/26', shipToPaid:9,  payType:'Check',      deposit:2000, finalDeposit:0, approval:'Approved', invoicedDate:'01/20/26', scheduledPay:'01/29/26', buildMonth:'Jan 2026'},
+    {pro:'26-J014', dealer:'Red River Housing',        serial:'TX26-0055', model:'LONGVIEW',   width:15, length:72, sf:1080, floors:1, base:60200,  vep:500, options:1700, freight:1800, fees:450, taxes:0, totalRev:64650,  totalInv:63650,  offlineDate:'01/15/26', tagged:'01/16/26', shipDate:'01/21/26', offlineToShip:6, paidDate:'01/30/26', shipToPaid:9,  payType:'Wire',       deposit:2000, finalDeposit:0, approval:'Approved', invoicedDate:'01/21/26', scheduledPay:'01/30/26', buildMonth:'Jan 2026'},
+    {pro:'26-J015', dealer:'Panhandle Homes',          serial:'TX26-0056', model:'ARCHER',     width:27, length:44, sf:1203, floors:1, base:77000,  vep:500, options:2400, freight:2400, fees:650, taxes:0, totalRev:82950,  totalInv:81950,  offlineDate:'01/16/26', tagged:'01/17/26', shipDate:'01/22/26', offlineToShip:6, paidDate:'01/31/26', shipToPaid:9,  payType:'ACH',        deposit:3000, finalDeposit:0, approval:'Approved', invoicedDate:'01/22/26', scheduledPay:'01/31/26', buildMonth:'Jan 2026'},
+    {pro:'26-J016', dealer:'Texas Hill Country Homes', serial:'TX26-0057', model:'LOVING',     width:30, length:56, sf:1680, floors:1, base:88500,  vep:500, options:3200, freight:2400, fees:650, taxes:0, totalRev:95250,  totalInv:94250,  offlineDate:'01/17/26', tagged:'01/18/26', shipDate:'01/23/26', offlineToShip:6, paidDate:'02/01/26', shipToPaid:9,  payType:'Floor Plan', deposit:3500, finalDeposit:0, approval:'Approved', invoicedDate:'01/23/26', scheduledPay:'02/01/26', buildMonth:'Jan 2026'},
+    {pro:'26-J017', dealer:'Big Country Housing',      serial:'TX26-0058', model:'RED RIVER',  width:30, length:56, sf:1680, floors:1, base:87900,  vep:500, options:2800, freight:2400, fees:650, taxes:0, totalRev:94250,  totalInv:93250,  offlineDate:'01/19/26', tagged:'01/20/26', shipDate:'01/24/26', offlineToShip:5, paidDate:'02/02/26', shipToPaid:9,  payType:'Check',      deposit:3500, finalDeposit:0, approval:'Approved', invoicedDate:'01/24/26', scheduledPay:'02/02/26', buildMonth:'Jan 2026'},
+    {pro:'26-J018', dealer:'Brazos Valley Homes',      serial:'TX26-0059', model:'PECOS',      width:30, length:76, sf:2280, floors:1, base:96500,  vep:500, options:5200, freight:3200, fees:650, taxes:0, totalRev:106050, totalInv:105050, offlineDate:'01/20/26', tagged:'01/21/26', shipDate:'01/26/26', offlineToShip:6, paidDate:'02/04/26', shipToPaid:9,  payType:'Wire',       deposit:5000, finalDeposit:0, approval:'Approved', invoicedDate:'01/26/26', scheduledPay:'02/04/26', buildMonth:'Jan 2026'},
+    {pro:'26-J019', dealer:'Permian Basin Homes',      serial:'TX26-0060', model:'CONROE',     width:15, length:56, sf:840,  floors:1, base:54000,  vep:500, options:1200, freight:1800, fees:450, taxes:0, totalRev:57950,  totalInv:56950,  offlineDate:'01/21/26', tagged:'01/22/26', shipDate:'01/27/26', offlineToShip:6, paidDate:'02/05/26', shipToPaid:9,  payType:'Check',      deposit:1500, finalDeposit:0, approval:'Approved', invoicedDate:'01/27/26', scheduledPay:'02/05/26', buildMonth:'Jan 2026'},
+    {pro:'26-J020', dealer:'Gulf Coast Housing',       serial:'TX26-0061', model:'PEARLAND',   width:15, length:76, sf:1140, floors:1, base:63500,  vep:500, options:2000, freight:1800, fees:450, taxes:0, totalRev:68250,  totalInv:67250,  offlineDate:'01/22/26', tagged:'01/23/26', shipDate:'01/28/26', offlineToShip:6, paidDate:'02/06/26', shipToPaid:9,  payType:'Floor Plan', deposit:2500, finalDeposit:0, approval:'Approved', invoicedDate:'01/28/26', scheduledPay:'02/06/26', buildMonth:'Jan 2026'},
+    {pro:'26-J021', dealer:'Lone Star Homes',          serial:'TX26-0062', model:'BLUEBONNET', width:15, length:72, sf:1080, floors:1, base:57500,  vep:500, options:1600, freight:1800, fees:450, taxes:0, totalRev:61850,  totalInv:60850,  offlineDate:'01/23/26', tagged:'01/24/26', shipDate:'01/29/26', offlineToShip:6, paidDate:'02/07/26', shipToPaid:9,  payType:'Wire',       deposit:2000, finalDeposit:0, approval:'Approved', invoicedDate:'01/29/26', scheduledPay:'02/07/26', buildMonth:'Jan 2026'},
+    {pro:'26-J022', dealer:'Heartland Housing',        serial:'TX26-0063', model:'AZALEA',     width:15, length:76, sf:1140, floors:1, base:62500,  vep:500, options:1900, freight:1800, fees:450, taxes:0, totalRev:67150,  totalInv:66150,  offlineDate:'01/24/26', tagged:'01/25/26', shipDate:'01/30/26', offlineToShip:6, paidDate:'02/08/26', shipToPaid:9,  payType:'ACH',        deposit:2000, finalDeposit:0, approval:'Approved', invoicedDate:'01/30/26', scheduledPay:'02/08/26', buildMonth:'Jan 2026'},
+    {pro:'26-J023', dealer:'Southwest Living',         serial:'TX26-0064', model:'GRANT',      width:15, length:56, sf:840,  floors:1, base:57000,  vep:500, options:1400, freight:1800, fees:450, taxes:0, totalRev:61150,  totalInv:60150,  offlineDate:'01/26/26', tagged:'01/27/26', shipDate:'01/31/26', offlineToShip:5, paidDate:'02/09/26', shipToPaid:9,  payType:'Check',      deposit:1500, finalDeposit:0, approval:'Approved', invoicedDate:'01/31/26', scheduledPay:'02/09/26', buildMonth:'Jan 2026'},
+    {pro:'26-J024', dealer:'Red River Housing',        serial:'TX26-0065', model:'MIDLAND',    width:15, length:76, sf:1140, floors:1, base:61900,  vep:500, options:2200, freight:1800, fees:450, taxes:0, totalRev:66850,  totalInv:65850,  offlineDate:'01/27/26', tagged:'01/28/26', shipDate:'01/31/26', offlineToShip:4, paidDate:'02/10/26', shipToPaid:10, payType:'Floor Plan', deposit:2000, finalDeposit:0, approval:'Approved', invoicedDate:'01/31/26', scheduledPay:'02/10/26', buildMonth:'Jan 2026'},
+  ];
+
+  let currentAcctMonth = 'Jan 2026';
+
+  function getAcctEdits() {
+    try { return JSON.parse(localStorage.getItem('mh_acct_edits') || '{}'); } catch(e) { return {}; }
+  }
+  function saveAcctEdits(edits) {
+    localStorage.setItem('mh_acct_edits', JSON.stringify(edits));
+  }
+
+  function setAcctMonth(month) {
+    currentAcctMonth = month;
+    const months = ['Jan 2026','Feb 2026','Mar 2026','Apr 2026','May 2026','Jun 2026'];
+    const ids     = ['acct-tab-jan','acct-tab-feb','acct-tab-mar','acct-tab-apr','acct-tab-may','acct-tab-jun'];
+    const on  = 'background:none; border:none; border-bottom:2px solid #8DC63F; color:#8DC63F; font-family:inherit; font-size:13px; font-weight:700; padding:10px 20px; cursor:pointer; letter-spacing:0.04em;';
+    const off = 'background:none; border:none; border-bottom:2px solid transparent; color:rgba(255,255,255,0.5); font-family:inherit; font-size:13px; font-weight:500; padding:10px 20px; cursor:pointer; letter-spacing:0.04em;';
+    months.forEach(function(m, i) {
+      var el = document.getElementById(ids[i]);
+      if (el) el.style.cssText = m === month ? on : off;
+    });
+    filterAcct();
+  }
+
+  function getAcctRow(pro) {
+    var base = acctData.find(function(r) { return r.pro === pro; });
+    if (!base) return null;
+    return Object.assign({}, base, getAcctEdits()[pro] || {});
+  }
+
+  function fmtCurrency(n) {
+    if (n === null || n === undefined || n === '' || n === 0) return n === 0 ? '$0' : '—';
+    return '$' + Number(n).toLocaleString('en-US');
+  }
+
+  function renderAcctMetrics(data) {
+    var edits = getAcctEdits();
+    var rows = data.map(function(r) { return Object.assign({}, r, edits[r.pro] || {}); });
+    var el = function(id) { return document.getElementById(id); };
+    if (el('acct-m-count')) el('acct-m-count').textContent = rows.length;
+    if (el('acct-m-rev'))   el('acct-m-rev').textContent   = fmtCurrency(rows.reduce(function(s,r){ return s + (Number(r.totalRev)||0); }, 0));
+    if (el('acct-m-inv'))   el('acct-m-inv').textContent   = fmtCurrency(rows.reduce(function(s,r){ return s + (Number(r.totalInv)||0); }, 0));
+    if (el('acct-m-dep'))   el('acct-m-dep').textContent   = fmtCurrency(rows.reduce(function(s,r){ return s + (Number(r.deposit)||0);  }, 0));
+  }
+
+  function renderAcct(data) {
+    var tbody = document.getElementById('acct-tbody');
+    if (!tbody) return;
+    if (data.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="19" style="text-align:center;padding:2rem;color:var(--white-30);">No records for this month.</td></tr>';
+      var lbl = document.getElementById('acct-count-label');
+      if (lbl) lbl.textContent = '';
+      renderAcctMetrics([]);
+      return;
+    }
+    var edits = getAcctEdits();
+    var monthTotal = acctData.filter(function(r){ return r.buildMonth === currentAcctMonth; }).length;
+    tbody.innerHTML = data.map(function(r) {
+      var row = Object.assign({}, r, edits[r.pro] || {});
+      var ptBadge = row.payType === 'Floor Plan' ? 'badge-blue' : row.payType === 'Wire' ? 'badge-green' : row.payType === 'ACH' ? 'badge-amber' : 'badge-gray';
+      return '<tr>' +
+        '<td style="font-family:monospace;font-size:12px;color:var(--green);white-space:nowrap;">'+ row.pro +'</td>' +
+        '<td style="font-size:12px;white-space:nowrap;">'+ row.dealer +'</td>' +
+        '<td style="font-family:monospace;font-size:12px;">'+ row.serial +'</td>' +
+        '<td style="font-weight:600;font-size:12px;letter-spacing:0.04em;">'+ row.model +'</td>' +
+        '<td style="font-size:12px;text-align:right;">'+ Number(row.sf).toLocaleString() +'</td>' +
+        '<td style="font-size:12px;text-align:right;">'+ fmtCurrency(row.base) +'</td>' +
+        '<td style="font-size:12px;text-align:right;">'+ (row.options ? fmtCurrency(row.options) : '—') +'</td>' +
+        '<td style="font-size:12px;text-align:right;">'+ fmtCurrency(row.freight) +'</td>' +
+        '<td style="font-size:12px;text-align:right;">'+ (row.fees ? fmtCurrency(row.fees) : '—') +'</td>' +
+        '<td style="font-size:12px;text-align:right;">'+ (row.taxes ? fmtCurrency(row.taxes) : '—') +'</td>' +
+        '<td style="font-size:12px;text-align:right;font-weight:600;color:var(--green);">'+ fmtCurrency(row.totalRev) +'</td>' +
+        '<td style="font-size:12px;text-align:right;">'+ fmtCurrency(row.totalInv) +'</td>' +
+        '<td style="font-size:12px;white-space:nowrap;">'+ (row.offlineDate||'—') +'</td>' +
+        '<td style="font-size:12px;white-space:nowrap;">'+ (row.shipDate||'—') +'</td>' +
+        '<td style="font-size:12px;text-align:center;">'+ (row.offlineToShip !== undefined ? row.offlineToShip : '—') +'</td>' +
+        '<td style="font-size:12px;white-space:nowrap;">'+ (row.paidDate||'—') +'</td>' +
+        '<td style="font-size:12px;text-align:center;">'+ (row.shipToPaid !== undefined ? row.shipToPaid : '—') +'</td>' +
+        '<td style="font-size:12px;"><span class="badge '+ ptBadge +'">'+ (row.payType||'—') +'</span></td>' +
+        '<td><button onclick="openAcctModal(\''+ row.pro +'\')" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:3px;padding:4px 10px;color:rgba(255,255,255,0.7);font-family:inherit;font-size:11px;cursor:pointer;">Edit</button></td>' +
+        '</tr>';
+    }).join('');
+    var countLbl = document.getElementById('acct-count-label');
+    if (countLbl) countLbl.textContent = 'Showing ' + data.length + ' of ' + monthTotal + ' records';
+    renderAcctMetrics(data);
+  }
+
+  function filterAcct() {
+    var searchEl = document.getElementById('acct-search');
+    var ptEl     = document.getElementById('acct-paytype-filter');
+    var search   = searchEl ? searchEl.value.toLowerCase() : '';
+    var paytype  = ptEl ? ptEl.value : '';
+    var edits    = getAcctEdits();
+    var monthData = acctData.filter(function(r){ return r.buildMonth === currentAcctMonth; });
+    var filtered = monthData.filter(function(r) {
+      var row = Object.assign({}, r, edits[r.pro] || {});
+      var matchSearch  = !search  || [row.pro, row.dealer, row.serial, row.model].join(' ').toLowerCase().indexOf(search) !== -1;
+      var matchPayType = !paytype || row.payType === paytype;
+      return matchSearch && matchPayType;
+    });
+    renderAcct(filtered);
+  }
+
+  function openAcctModal(pro) {
+    var row = getAcctRow(pro);
+    if (!row) return;
+    document.getElementById('acct-modal-pro').value          = pro;
+    document.getElementById('acct-modal-paidDate').value     = row.paidDate     || '';
+    document.getElementById('acct-modal-payType').value      = row.payType      || '';
+    document.getElementById('acct-modal-deposit').value      = row.deposit      || '';
+    document.getElementById('acct-modal-finalDeposit').value = row.finalDeposit || '';
+    document.getElementById('acct-modal-scheduledPay').value = row.scheduledPay || '';
+    document.getElementById('acct-modal-notes').value        = row.notes        || '';
+    document.getElementById('acct-modal-backdrop').style.display = 'flex';
+  }
+
+  function closeAcctModal() {
+    document.getElementById('acct-modal-backdrop').style.display = 'none';
+  }
+
+  function saveAcctRecord() {
+    var pro = document.getElementById('acct-modal-pro').value;
+    if (!pro) return;
+    var edits = getAcctEdits();
+    edits[pro] = {
+      paidDate:     document.getElementById('acct-modal-paidDate').value,
+      payType:      document.getElementById('acct-modal-payType').value,
+      deposit:      document.getElementById('acct-modal-deposit').value,
+      finalDeposit: document.getElementById('acct-modal-finalDeposit').value,
+      scheduledPay: document.getElementById('acct-modal-scheduledPay').value,
+      notes:        document.getElementById('acct-modal-notes').value,
+    };
+    saveAcctEdits(edits);
+    closeAcctModal();
+    filterAcct();
+  }
+
+  document.getElementById('acct-modal-backdrop').addEventListener('click', function(e) {
+    if (e.target === this) closeAcctModal();
+  });
+  document.getElementById('acct-search').addEventListener('input', filterAcct);
+  document.getElementById('acct-paytype-filter').addEventListener('change', filterAcct);
+  filterAcct();
 </script>
 </body>
 </html>
