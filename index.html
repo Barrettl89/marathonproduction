@@ -218,11 +218,15 @@
     margin: 0 auto;
     display: flex;
     overflow-x: auto;
-    scrollbar-width: none;
+    scrollbar-width: thin;
+    scrollbar-color: #8DC63F #242424;
     padding: 0 2rem;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-nav::-webkit-scrollbar { height: 3px; }
+  .tab-nav::-webkit-scrollbar-track { background: #242424; }
+  .tab-nav::-webkit-scrollbar-thumb { background: #8DC63F; border-radius: 2px; }
 
   .tab-btn {
     background: none;
