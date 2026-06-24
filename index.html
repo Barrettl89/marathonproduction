@@ -991,10 +991,13 @@
       <!-- ── FILTERS ── -->
       <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap;">
         <input class="search-input" style="width:220px;" placeholder="🔍  Search model name..." oninput="filterModelTable(this.value)">
-        <select class="search-input" style="width:150px;" onchange="filterModelBySection(this.value)">
-          <option value="">All Sections</option>
-          <option value="Single-Section">Single Section</option>
-          <option value="Double-Section">Double Section</option>
+        <select class="search-input" style="width:160px;" onchange="filterModelBySection(this.value)">
+          <option value="">All Series</option>
+          <option value="Residential">Residential</option>
+          <option value="Residential — Single Section">Single-Section</option>
+          <option value="Residential — Double Section">Double-Section</option>
+          <option value="Workforce">Workforce</option>
+          <option value="Park Model">Park Model</option>
         </select>
         <select class="search-input" style="width:150px;" onchange="filterModelByWidth(this.value)">
           <option value="">All Widths</option>

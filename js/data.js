@@ -1768,3 +1768,16 @@
   {name:'Swisher',    box:'32764A', width:"30'",    length:"76'", beds:4, baths:2, sf:2280,  type:'Double-Section', notes:'5th BR & 3rd Bath Option'},
   {name:'Trinity',    box:'32764B', width:"30'",    length:"76'", beds:4, baths:2, sf:2280,  type:'Double-Section', notes:''},
 ];
+
+  const workforceData = [
+  {name:'Glover',  box:'16762A', width:"15'", length:"76'", beds:3, baths:2, sf:1075, notes:''},
+  {name:'Slusher', box:'18762A', width:"17'", length:"76'", beds:3, baths:2, sf:1210, notes:''},
+];
+
+  const parkModelData = [
+  {name:'Terra',   box:'12342A', width:"12'", length:"34'", beds:1, baths:1, sf:374, notes:''},
+  {name:'Jackson', box:'12392A', width:"12'", length:"39'", beds:1, baths:1, sf:432, notes:''},
+  {name:'Daniel',  box:'12392B', width:"12'", length:"39'", beds:1, baths:1, sf:432, notes:''},
+  {name:'Lanny',   box:'12412A', width:"12'", length:"41'", beds:2, baths:1, sf:450, notes:''},
+  {name:'Chapman', box:'15332A', width:"15'", length:"33'", beds:2, baths:1, sf:455, notes:''},
+];
