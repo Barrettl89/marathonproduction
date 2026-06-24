@@ -1876,25 +1876,79 @@
     filterModels();
   }
 
+  // Load saved floorplan links from localStorage
+  function getFloorplans() {
+    try { return JSON.parse(localStorage.getItem('mh_floorplans') || '{}'); } catch(e) { return {}; }
+  }
+  function saveFloorplan(modelName, dataUrl, fileName) {
+    const fp = getFloorplans();
+    fp[modelName] = { dataUrl, fileName };
+    localStorage.setItem('mh_floorplans', JSON.stringify(fp));
+  }
+  function removeFloorplan(modelName) {
+    const fp = getFloorplans();
+    delete fp[modelName];
+    localStorage.setItem('mh_floorplans', JSON.stringify(fp));
+    filterModels();
+  }
+
+  function handleFloorplanUpload(input, modelName) {
+    const file = input.files[0];
+    if (!file) return;
+    if (file.type !== 'application/pdf') {
+      alert('Please select a PDF file.');
+      input.value = '';
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      alert('File is too large. Please use a PDF under 10MB.');
+      input.value = '';
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      saveFloorplan(modelName, e.target.result, file.name);
+      filterModels();
+    };
+    reader.readAsDataURL(file);
+  }
+
   function renderModels(data) {
     const tbody = document.getElementById('model-tbody');
     if (!tbody) return;
     if (data.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--white-30);">No models match your filters.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--white-30);">No models match your filters.</td></tr>';
       document.getElementById('model-count-label').textContent = '';
       return;
     }
-    tbody.innerHTML = data.map(m => `
-      <tr>
+    const floorplans = getFloorplans();
+    tbody.innerHTML = data.map(m => {
+      const fp = floorplans[m.name];
+      const fpCell = fp
+        ? `<div style="display:flex;align-items:center;gap:8px;">
+             <a href="${fp.dataUrl}" target="_blank" style="color:var(--green);font-size:12px;text-decoration:none;display:flex;align-items:center;gap:4px;">
+               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+               ${fp.fileName.length > 18 ? fp.fileName.substring(0,18)+'…' : fp.fileName}
+             </a>
+             <button onclick="removeFloorplan('${m.name}')" title="Remove" style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.3);font-size:14px;padding:0;line-height:1;" onmouseover="this.style.color='#EF4444'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">✕</button>
+           </div>`
+        : `<label style="cursor:pointer;display:inline-flex;align-items:center;gap:5px;font-size:12px;color:rgba(255,255,255,0.35);border:1px dashed rgba(255,255,255,0.15);border-radius:4px;padding:3px 8px;transition:all 0.15s;" onmouseover="this.style.borderColor='#8DC63F';this.style.color='#8DC63F'" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.35)'">
+             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+             Attach PDF
+             <input type="file" accept="application/pdf" style="display:none;" onchange="handleFloorplanUpload(this,'${m.name}')">
+           </label>`;
+      return `<tr>
         <td style="font-weight:600; letter-spacing:0.04em;">${m.name}</td>
-        <td style="font-family:monospace; font-size:12px; color:var(--green);">${m.box}</td>
+        <td style="font-family:monospace; font-size:12px; color:var(--green);">${m.box || '—'}</td>
         <td style="font-size:13px; white-space:nowrap;">${m.size}</td>
         <td><span class="badge ${m.section === 'Single Wide' ? 'badge-blue' : m.section === 'Workforce' ? 'badge-amber' : m.section === 'Park Models' ? 'badge-red' : 'badge-green'}">${m.section}</span></td>
         <td style="font-size:13px;">${m.bb}</td>
         <td style="font-size:13px; font-weight:500;">${m.sf}</td>
         <td style="font-size:12px; color:var(--white-60);">${m.notes || '—'}</td>
+        <td>${fpCell}</td>
         <td><span class="badge ${m.active ? 'badge-green' : 'badge-gray'}">${m.active ? 'Active' : 'Inactive'}</span></td>
-      </tr>`).join('');
+      </tr>`;
+    }).join('');
     document.getElementById('model-count-label').textContent = `Showing ${data.length} of ${modelData.length} models`;
   }
 
