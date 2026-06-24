@@ -1805,50 +1805,64 @@
 
   // ── MODEL LIST DATA ──
   // Box width corrections: 14' -> 13'8", 16' -> 15', 18' -> 17', 28' -> 27'4", 32' -> 30'
+  // active: true = currently offered, false = discontinued
   const modelData = [
-    {name:'ABILENE',      box:'14562A', size:"13'8\" x 56'", section:'Single Wide',  bb:'2/1', sf:'765',   notes:''},
-    {name:'AMARILLO',     box:'14602A', size:"13'8\" x 60'", section:'Single Wide',  bb:'2/2', sf:'820',   notes:''},
-    {name:'BEAUMONT',     box:'14683A', size:"13'8\" x 68'", section:'Single Wide',  bb:'3/2', sf:'929',   notes:''},
-    {name:'BRECKENRIDGE', box:'14723A', size:"13'8\" x 72'", section:'Single Wide',  bb:'3/2', sf:'984',   notes:''},
-    {name:'ALAMO',        box:'16401A', size:"15' x 40'",    section:'Single Wide',  bb:'1/1', sf:'472',   notes:'Wraparound Porch'},
-    {name:'CISCO',        box:'16562A', size:"15' x 56'",    section:'Single Wide',  bb:'2/2', sf:'840',   notes:''},
-    {name:'CONROE',       box:'16562B', size:"15' x 56'",    section:'Single Wide',  bb:'2/2', sf:'840',   notes:''},
-    {name:'GRAPEVINE',    box:'16602A', size:"15' x 60'",    section:'Single Wide',  bb:'2/2', sf:'900',   notes:''},
-    {name:'KATY',         box:'16683A', size:"15' x 68'",    section:'Single Wide',  bb:'3/2', sf:'1,020', notes:''},
-    {name:'LONGVIEW',     box:'16723A', size:"15' x 72'",    section:'Single Wide',  bb:'3/2', sf:'1,080', notes:''},
-    {name:'MESQUITE',     box:'16763A', size:"15' x 76'",    section:'Single Wide',  bb:'3/2', sf:'1,140', notes:''},
-    {name:'MIDLAND',      box:'16763B', size:"15' x 76'",    section:'Single Wide',  bb:'3/2', sf:'1,140', notes:''},
-    {name:'PEARLAND',     box:'16763C', size:"15' x 76'",    section:'Single Wide',  bb:'3/2', sf:'1,140', notes:''},
-    {name:'RANGER',       box:'18502A', size:"17' x 50'",    section:'Single Wide',  bb:'2/2', sf:'850',   notes:'Porch Option'},
-    {name:'TEMPLE',       box:'18763A', size:"17' x 76'",    section:'Single Wide',  bb:'3/2', sf:'1,156', notes:"8' Porch Included"},
-    {name:'ARCHER',       box:'28443A', size:"27'4\" x 44'", section:'Double Wide',  bb:'3/2', sf:'1,203', notes:''},
-    {name:'BAILEY',       box:'28483A', size:"27'4\" x 48'", section:'Double Wide',  bb:'3/2', sf:'1,312', notes:''},
-    {name:'BELL',         box:'28523A', size:"27'4\" x 52'", section:'Double Wide',  bb:'3/2', sf:'1,421', notes:''},
-    {name:'BREWSTER',     box:'28563A', size:"27'4\" x 56'", section:'Double Wide',  bb:'3/2', sf:'1,531', notes:'4th Bedroom Option'},
-    {name:'CALDWELL',     box:'28564A', size:"27'4\" x 56'", section:'Double Wide',  bb:'4/2', sf:'1,531', notes:''},
-    {name:'COLEMAN',      box:'28603A', size:"27'4\" x 60'", section:'Double Wide',  bb:'3/2', sf:'1,531', notes:'4th BR & 3rd Bath Option'},
-    {name:'DAWSON',       box:'28644A', size:"27'4\" x 64'", section:'Double Wide',  bb:'3/2', sf:'1,749', notes:''},
-    {name:'FISHER',       box:'28683A', size:"27'4\" x 68'", section:'Double Wide',  bb:'3/2', sf:'1,859', notes:'4th BR & 3rd Bath Option'},
-    {name:'GRAYSON',      box:'28764A', size:"27'4\" x 76'", section:'Double Wide',  bb:'4/2', sf:'2,077', notes:'5th BR & 3rd Bath Option'},
-    {name:'HAYS',         box:'28764B', size:"27'4\" x 76'", section:'Double Wide',  bb:'4/2', sf:'2,077', notes:'3rd Bathroom Option'},
-    {name:'JASPER',       box:'32483A', size:"30' x 48'",    section:'Double Wide',  bb:'3/2', sf:'1,440', notes:''},
-    {name:'KENDALL',      box:'32523A', size:"30' x 52'",    section:'Double Wide',  bb:'3/2', sf:'1,560', notes:''},
-    {name:'LIBERTY',      box:'32563A', size:"30' x 56'",    section:'Double Wide',  bb:'3/2', sf:'1,680', notes:'4th Bedroom Option'},
-    {name:'LOVING',       box:'32564A', size:"30' x 56'",    section:'Double Wide',  bb:'4/2', sf:'1,680', notes:''},
-    {name:'MAVERICK',     box:'32563B', size:"30' x 56'",    section:'Double Wide',  bb:'3/2', sf:'1,680', notes:''},
-    {name:'RED RIVER',    box:'32563C', size:"30' x 56'",    section:'Double Wide',  bb:'3/2', sf:'1,680', notes:''},
-    {name:'SHELBY',       box:'32604A', size:"30' x 60'",    section:'Double Wide',  bb:'4/2', sf:'1,800', notes:''},
-    {name:'STERLING',     box:'32644A', size:"30' x 64'",    section:'Double Wide',  bb:'4/2', sf:'1,920', notes:''},
-    {name:'STONEWALL',    box:'32684A', size:"30' x 68'",    section:'Double Wide',  bb:'4/2', sf:'2,040', notes:''},
-    {name:'SWISHER',      box:'32764A', size:"30' x 76'",    section:'Double Wide',  bb:'4/2', sf:'2,280', notes:'5th BR & 3rd Bath Option'},
-    {name:'TRINITY',      box:'32764B', size:"30' x 76'",    section:'Double Wide',  bb:'4/2', sf:'2,280', notes:''},
+    {name:'ABILENE',      box:'14562A', size:"13'8\" x 56'", section:'Single Wide',  bb:'2/1', sf:'765',   notes:'',                          active:false},
+    {name:'AMARILLO',     box:'14602A', size:"13'8\" x 60'", section:'Single Wide',  bb:'2/2', sf:'820',   notes:'',                          active:false},
+    {name:'BEAUMONT',     box:'14683A', size:"13'8\" x 68'", section:'Single Wide',  bb:'3/2', sf:'929',   notes:'',                          active:false},
+    {name:'BRECKENRIDGE', box:'14723A', size:"13'8\" x 72'", section:'Single Wide',  bb:'3/2', sf:'984',   notes:'',                          active:false},
+    {name:'ALAMO',        box:'16401A', size:"15' x 40'",    section:'Single Wide',  bb:'1/1', sf:'472',   notes:'Wraparound Porch',           active:true},
+    {name:'CISCO',        box:'16562A', size:"15' x 56'",    section:'Single Wide',  bb:'2/2', sf:'840',   notes:'',                          active:false},
+    {name:'CONROE',       box:'16562B', size:"15' x 56'",    section:'Single Wide',  bb:'2/2', sf:'840',   notes:'',                          active:true},
+    {name:'GRAPEVINE',    box:'16602A', size:"15' x 60'",    section:'Single Wide',  bb:'2/2', sf:'900',   notes:'',                          active:false},
+    {name:'KATY',         box:'16683A', size:"15' x 68'",    section:'Single Wide',  bb:'3/2', sf:'1,020', notes:'',                          active:true},
+    {name:'LONGVIEW',     box:'16723A', size:"15' x 72'",    section:'Single Wide',  bb:'3/2', sf:'1,080', notes:'',                          active:true},
+    {name:'MESQUITE',     box:'16763A', size:"15' x 76'",    section:'Single Wide',  bb:'3/2', sf:'1,140', notes:'',                          active:true},
+    {name:'MIDLAND',      box:'16763B', size:"15' x 76'",    section:'Single Wide',  bb:'3/2', sf:'1,140', notes:'',                          active:true},
+    {name:'PEARLAND',     box:'16763C', size:"15' x 76'",    section:'Single Wide',  bb:'3/2', sf:'1,140', notes:'',                          active:true},
+    {name:'RANGER',       box:'18502A', size:"17' x 50'",    section:'Single Wide',  bb:'2/2', sf:'850',   notes:'Porch Option',               active:true},
+    {name:'TEMPLE',       box:'18763A', size:"17' x 76'",    section:'Single Wide',  bb:'3/2', sf:'1,156', notes:"8' Porch Included",          active:true},
+    {name:'ARCHER',       box:'28443A', size:"27'4\" x 44'", section:'Double Wide',  bb:'3/2', sf:'1,203', notes:'',                          active:true},
+    {name:'BAILEY',       box:'28483A', size:"27'4\" x 48'", section:'Double Wide',  bb:'3/2', sf:'1,312', notes:'',                          active:false},
+    {name:'BELL',         box:'28523A', size:"27'4\" x 52'", section:'Double Wide',  bb:'3/2', sf:'1,421', notes:'',                          active:false},
+    {name:'BREWSTER',     box:'28563A', size:"27'4\" x 56'", section:'Double Wide',  bb:'3/2', sf:'1,531', notes:'4th Bedroom Option',         active:true},
+    {name:'CALDWELL',     box:'28564A', size:"27'4\" x 56'", section:'Double Wide',  bb:'4/2', sf:'1,531', notes:'',                          active:true},
+    {name:'COLEMAN',      box:'28603A', size:"27'4\" x 60'", section:'Double Wide',  bb:'3/2', sf:'1,531', notes:'4th BR & 3rd Bath Option',   active:true},
+    {name:'DAWSON',       box:'28644A', size:"27'4\" x 64'", section:'Double Wide',  bb:'3/2', sf:'1,749', notes:'',                          active:true},
+    {name:'FISHER',       box:'28683A', size:"27'4\" x 68'", section:'Double Wide',  bb:'3/2', sf:'1,859', notes:'4th BR & 3rd Bath Option',   active:false},
+    {name:'GRAYSON',      box:'28764A', size:"27'4\" x 76'", section:'Double Wide',  bb:'4/2', sf:'2,077', notes:'5th BR & 3rd Bath Option',   active:true},
+    {name:'HAYS',         box:'28764B', size:"27'4\" x 76'", section:'Double Wide',  bb:'4/2', sf:'2,077', notes:'3rd Bathroom Option',        active:false},
+    {name:'JASPER',       box:'32483A', size:"30' x 48'",    section:'Double Wide',  bb:'3/2', sf:'1,440', notes:'',                          active:false},
+    {name:'KENDALL',      box:'32523A', size:"30' x 52'",    section:'Double Wide',  bb:'3/2', sf:'1,560', notes:'',                          active:false},
+    {name:'LIBERTY',      box:'32563A', size:"30' x 56'",    section:'Double Wide',  bb:'3/2', sf:'1,680', notes:'4th Bedroom Option',         active:true},
+    {name:'LOVING',       box:'32564A', size:"30' x 56'",    section:'Double Wide',  bb:'4/2', sf:'1,680', notes:'',                          active:true},
+    {name:'MAVERICK',     box:'32563B', size:"30' x 56'",    section:'Double Wide',  bb:'3/2', sf:'1,680', notes:'',                          active:true},
+    {name:'RED RIVER',    box:'32563C', size:"30' x 56'",    section:'Double Wide',  bb:'3/2', sf:'1,680', notes:'',                          active:true},
+    {name:'SHELBY',       box:'32604A', size:"30' x 60'",    section:'Double Wide',  bb:'4/2', sf:'1,800', notes:'',                          active:false},
+    {name:'STERLING',     box:'32644A', size:"30' x 64'",    section:'Double Wide',  bb:'4/2', sf:'1,920', notes:'',                          active:true},
+    {name:'STONEWALL',    box:'32684A', size:"30' x 68'",    section:'Double Wide',  bb:'4/2', sf:'2,040', notes:'',                          active:true},
+    {name:'SWISHER',      box:'32764A', size:"30' x 76'",    section:'Double Wide',  bb:'4/2', sf:'2,280', notes:'5th BR & 3rd Bath Option',   active:true},
+    {name:'TRINITY',      box:'32764B', size:"30' x 76'",    section:'Double Wide',  bb:'4/2', sf:'2,280', notes:'',                          active:false},
   ];
+
+  let currentModelStatus = 'active';
+
+  function setModelStatus(status) {
+    currentModelStatus = status;
+    // Update sub-tab button styles
+    const activeStyle   = 'background:none; border:none; border-bottom:2px solid #8DC63F; color:#8DC63F; font-family:inherit; font-size:13px; font-weight:700; padding:10px 20px; cursor:pointer; letter-spacing:0.04em;';
+    const inactiveStyle = 'background:none; border:none; border-bottom:2px solid transparent; color:rgba(255,255,255,0.5); font-family:inherit; font-size:13px; font-weight:500; padding:10px 20px; cursor:pointer; letter-spacing:0.04em;';
+    document.getElementById('model-tab-active').style.cssText   = status === 'active'   ? activeStyle : inactiveStyle;
+    document.getElementById('model-tab-inactive').style.cssText = status === 'inactive' ? activeStyle : inactiveStyle;
+    document.getElementById('model-tab-all').style.cssText      = status === 'all'      ? activeStyle : inactiveStyle;
+    filterModels();
+  }
 
   function renderModels(data) {
     const tbody = document.getElementById('model-tbody');
     if (!tbody) return;
     if (data.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--white-30);">No models match your filters.</td></tr>';
+      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--white-30);">No models match your filters.</td></tr>';
       document.getElementById('model-count-label').textContent = '';
       return;
     }
@@ -1861,22 +1875,24 @@
         <td style="font-size:13px;">${m.bb}</td>
         <td style="font-size:13px; font-weight:500;">${m.sf}</td>
         <td style="font-size:12px; color:var(--white-60);">${m.notes || '—'}</td>
+        <td><span class="badge ${m.active ? 'badge-green' : 'badge-gray'}">${m.active ? 'Active' : 'Inactive'}</span></td>
       </tr>`).join('');
     document.getElementById('model-count-label').textContent = `Showing ${data.length} of ${modelData.length} models`;
   }
 
   function filterModels() {
-    const search = document.getElementById('model-search').value.toLowerCase();
+    const search  = document.getElementById('model-search').value.toLowerCase();
     const section = document.getElementById('model-section-filter').value;
     const filtered = modelData.filter(m => {
-      const matchSearch = !search || [m.name, m.box, m.size, m.bb, m.sf, m.notes].join(' ').toLowerCase().includes(search);
+      const matchStatus  = currentModelStatus === 'all' || (currentModelStatus === 'active' ? m.active : !m.active);
+      const matchSearch  = !search  || [m.name, m.box, m.size, m.bb, m.sf, m.notes].join(' ').toLowerCase().includes(search);
       const matchSection = !section || m.section === section;
-      return matchSearch && matchSection;
+      return matchStatus && matchSearch && matchSection;
     });
     renderModels(filtered);
   }
 
-  renderModels(modelData);
+  renderModels(modelData.filter(m => m.active));
   document.getElementById('model-search').addEventListener('input', filterModels);
   document.getElementById('model-section-filter').addEventListener('change', filterModels);
 </script>
