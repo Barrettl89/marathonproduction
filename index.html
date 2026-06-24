@@ -754,55 +754,42 @@
     <div class="section-header">
       <div>
         <div class="section-title">Dealer License Information</div>
-        <div class="section-sub">HUD/state dealer licenses, flooring sources, and contact directory</div>
+        <div class="section-sub">HUD/state dealer licenses, renewals, and compliance status</div>
       </div>
       <button class="btn">+ Add Dealer</button>
-    </div>
-    <div class="metric-row">
-      <div class="metric"><div class="metric-val green" id="dealer-total">—</div><div class="metric-lbl">Total Dealers</div></div>
-      <div class="metric"><div class="metric-val" id="dealer-tx">—</div><div class="metric-lbl">Texas</div></div>
-      <div class="metric"><div class="metric-val" id="dealer-ok">—</div><div class="metric-lbl">Oklahoma</div></div>
-      <div class="metric"><div class="metric-val" id="dealer-nm">—</div><div class="metric-lbl">New Mexico</div></div>
     </div>
     <div class="filter-bar">
       <div class="search-wrap">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input class="search-input" id="dealer-search" type="text" placeholder="Search by dealer, city, RBI #, or contact…">
+        <input class="search-input" type="text" placeholder="Search dealers…">
       </div>
-      <select id="dealer-state-filter" style="width:auto; padding: 8px 12px;">
-        <option value="">All States</option>
-        <option value="TX">Texas (TX)</option>
-        <option value="OK">Oklahoma (OK)</option>
-        <option value="NM">New Mexico (NM)</option>
+      <select style="width:auto; padding: 8px 12px;">
+        <option>All States</option>
+        <option>Texas</option>
+        <option>Oklahoma</option>
+        <option>New Mexico</option>
       </select>
-      <select id="dealer-floor-filter" style="width:auto; padding: 8px 12px;">
-        <option value="">All Flooring Sources</option>
-        <option value="21st">21st Mortgage</option>
-        <option value="Triad">Triad</option>
-        <option value="Affiliates">Affiliates</option>
-        <option value="CASH">Cash</option>
-        <option value="Vanderbilt">Vanderbilt</option>
+      <select style="width:auto; padding: 8px 12px;">
+        <option>All Status</option>
+        <option>Active</option>
+        <option>Expiring Soon</option>
+        <option>Expired</option>
       </select>
     </div>
-    <div class="table-wrap" style="overflow-x:auto;">
-      <table id="dealer-table">
+    <div class="table-wrap">
+      <table>
         <thead><tr>
-          <th>RBI #</th>
-          <th>Retailer Name</th>
-          <th>DBA</th>
-          <th>City</th>
-          <th>State</th>
-          <th>Flooring Source</th>
-          <th>GM / Owner</th>
-          <th>GM Email</th>
-          <th>Office / Sales Mgr</th>
-          <th>Phone</th>
-          <th>Office Email</th>
+          <th>Dealer Name</th><th>State</th><th>License #</th><th>Expiration</th><th>Status</th><th>Contact</th>
         </tr></thead>
-        <tbody id="dealer-tbody"></tbody>
+        <tbody>
+          <tr><td>Lone Star Homes</td><td>TX</td><td>TX-MH-00412</td><td>12/31/2025</td><td><span class="badge badge-green">Active</span></td><td>Mike Torres</td></tr>
+          <tr><td>Heartland Housing</td><td>TX</td><td>TX-MH-00589</td><td>03/15/2026</td><td><span class="badge badge-amber">Expiring Soon</span></td><td>Carla Hughes</td></tr>
+          <tr><td>Panhandle Homes</td><td>TX</td><td>TX-MH-00731</td><td>06/01/2025</td><td><span class="badge badge-red">Expired</span></td><td>Roy Simmons</td></tr>
+          <tr><td>Southwest Living</td><td>NM</td><td>NM-MH-00198</td><td>09/30/2026</td><td><span class="badge badge-green">Active</span></td><td>Diana Lopez</td></tr>
+          <tr><td>Red River Housing</td><td>OK</td><td>OK-MH-00341</td><td>11/15/2025</td><td><span class="badge badge-amber">Expiring Soon</span></td><td>Frank Bell</td></tr>
+        </tbody>
       </table>
     </div>
-    <div style="margin-top:10px; font-size:12px; color:var(--white-30);" id="dealer-count-label"></div>
   </div>
 
   <!-- 3. SERIAL NUMBER LOG -->
@@ -810,49 +797,35 @@
     <div class="section-header">
       <div>
         <div class="section-title">Serial Number Log</div>
-        <div class="section-sub">All assigned HUD serials, models, dealers, and customers</div>
+        <div class="section-sub">HUD serials, MCOs, and unit tracking</div>
       </div>
       <button class="btn">+ Log Serial</button>
-    </div>
-    <div class="metric-row">
-      <div class="metric"><div class="metric-val green" id="serial-total">—</div><div class="metric-lbl">Total Serials</div></div>
-      <div class="metric"><div class="metric-val" id="serial-flagged" style="color:#FBBF24;">—</div><div class="metric-lbl">Did Not Use</div></div>
-      <div class="metric"><div class="metric-val" id="serial-2027" style="color:#60A5FA;">—</div><div class="metric-lbl">2027 Model</div></div>
-      <div class="metric"><div class="metric-val" id="serial-rso" style="color:#8DC63F;">—</div><div class="metric-lbl">RSO</div></div>
-      <div class="metric"><div class="metric-val" id="serial-stock">—</div><div class="metric-lbl">Stock</div></div>
     </div>
     <div class="filter-bar">
       <div class="search-wrap">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input class="search-input" id="serial-search" type="text" placeholder="Search by serial, model, dealer, customer, SOID…">
+        <input class="search-input" type="text" placeholder="Search by serial, model, or dealer…">
       </div>
-      <select id="serial-model-filter" style="width:auto; padding: 8px 12px;"><option value="">All Models</option></select>
-      <select id="serial-dealer-filter" style="width:auto; padding: 8px 12px;"><option value="">All Dealers</option></select>
-      <select id="serial-flag-filter" style="width:auto; padding: 8px 12px;">
-        <option value="">All Status</option>
-        <option value="did not use">Did Not Use</option>
-        <option value="rso">RSO</option>
-        <option value="stock">Stock</option>
-        <option value="2027">2027 Model</option>
+      <select style="width:auto; padding: 8px 12px;">
+        <option>All Models</option>
+        <option>Terra</option><option>Azalea</option><option>Grayson</option>
+        <option>Brewster</option><option>Maverick</option><option>Stonewall</option><option>Liberty</option>
       </select>
     </div>
-    <div class="table-wrap" style="overflow-x:auto;">
-      <table id="serial-table">
+    <div class="table-wrap">
+      <table>
         <thead><tr>
-          <th>SOID #</th>
-          <th>Serial Number</th>
-          <th>Model</th>
-          <th>Width</th>
-          <th>Length</th>
-          <th>SF</th>
-          <th>Dealer</th>
-          <th>Customer / Notes</th>
-          <th>Flag</th>
+          <th>Serial Number</th><th>Model</th><th>Section</th><th>MCO Status</th><th>VOG</th><th>T&T</th><th>Dealer</th>
         </tr></thead>
-        <tbody id="serial-tbody"></tbody>
+        <tbody>
+          <tr><td style="font-family:monospace; font-size:12px;">01-BRK0041-26</td><td>Brewster</td><td>A</td><td><span class="badge badge-green">Issued</span></td><td><span class="badge badge-green">✓</span></td><td><span class="badge badge-amber">Pending</span></td><td>Lone Star Homes</td></tr>
+          <tr><td style="font-family:monospace; font-size:12px;">01-TRA0082-26</td><td>Terra</td><td>A/B</td><td><span class="badge badge-amber">Pending</span></td><td><span class="badge badge-gray">—</span></td><td><span class="badge badge-gray">—</span></td><td>Heartland Housing</td></tr>
+          <tr><td style="font-family:monospace; font-size:12px;">01-AZA0117-26</td><td>Azalea</td><td>A</td><td><span class="badge badge-green">Issued</span></td><td><span class="badge badge-green">✓</span></td><td><span class="badge badge-green">✓</span></td><td>Southwest Living</td></tr>
+          <tr><td style="font-family:monospace; font-size:12px;">01-GRY0204-26</td><td>Grayson</td><td>A/B</td><td><span class="badge badge-red">Hold</span></td><td><span class="badge badge-gray">—</span></td><td><span class="badge badge-gray">—</span></td><td>Panhandle Homes</td></tr>
+          <tr><td style="font-family:monospace; font-size:12px;">01-MAV0155-26</td><td>Maverick</td><td>A</td><td><span class="badge badge-green">Issued</span></td><td><span class="badge badge-green">✓</span></td><td><span class="badge badge-amber">Pending</span></td><td>Red River Housing</td></tr>
+        </tbody>
       </table>
     </div>
-    <div style="margin-top:10px; font-size:12px; color:var(--white-30);" id="serial-count-label"></div>
   </div>
 
   <!-- 4. CONFIRMED ORDERS -->
@@ -1196,8 +1169,8 @@
     countUp(document.getElementById('yard-count'), 11);
   }, 200);
 
-  // Basic search filtering for non-dealer tables
-  document.querySelectorAll('.search-input:not(#dealer-search)').forEach(input => {
+  // Basic search filtering for tables
+  document.querySelectorAll('.search-input').forEach(input => {
     input.addEventListener('input', function() {
       const val = this.value.toLowerCase();
       const panel = this.closest('.tab-panel');
@@ -1206,625 +1179,6 @@
       });
     });
   });
-
-  // ── DEALER DATA (from Dealer_License.xlsx) ──
-  const dealerData = [
-    {rbi:'38561',floor:'21st',name:'A2HC LLC',dba:'',city:'Amarillo',state:'TX',gm:'Arick Wray',gmEmail:'eric@amarillorentals.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'37882',floor:'Affiliates',name:'AAA HOMES CONROE, LLC',dba:'A-1 HOMES',city:'Conroe',state:'TX',gm:'Rob Bagwell',gmEmail:'a1homesconroe@gmail.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'35805',floor:'Affiliates',name:'AAA HOMES-SAN ANTONIO, LLC',dba:'A-1 HOMES - SAN ANTONIO',city:'San Antonio',state:'TX',gm:'Craige Bryant',gmEmail:'cbryant@a1homes.com',mgr:'Claudia Ayala',phone:'',mgrEmail:'cayala@a1homes.com'},
-    {rbi:'38338',floor:'21st/Triad',name:'ABILENE HOME CENTER LLC',dba:'',city:'Abilene',state:'TX',gm:'Adam Hammett',gmEmail:'ahammett@abilenehc.com',mgr:'Gigi Arnold',phone:'',mgrEmail:'garnold@abilenehc.com'},
-    {rbi:'37443',floor:'Triad/Northpoint',name:'AMARILLO HOME CENTER, LLC',dba:'',city:'Amarillo',state:'TX',gm:'Hayden Dillard',gmEmail:'hdillard@amarillohomecenter.com',mgr:'Michael Sanchez',phone:'806-637-3879',mgrEmail:'msanchez@amarillohomecenter.com'},
-    {rbi:'37885',floor:'CASH/21st/Triad',name:'AMERICAN HOMES TYLER LLC',dba:'',city:'Tyler',state:'TX',gm:'Matt Murphy',gmEmail:'mmurphy@americanhomestyler.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'36476',floor:'AutoMHatic',name:'APPLE MOBILE HOME EXPRESS, INC',dba:'',city:'Seagoville',state:'TX',gm:'Nick Stewart',gmEmail:'applehomegm@gmail.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'3223',floor:'21st',name:'AUS-TEX PARTS & SERVICES LTD',dba:'VILLAGE HOMES',city:'Dale',state:'TX',gm:'David / Tyler Buchannon',gmEmail:'tylercbuchanan@gmail.com',mgr:'Elisha Tenorio',phone:'',mgrEmail:'elisha@villagehomesaustin.com'},
-    {rbi:'37578',floor:'',name:'BASTROP HOME SOURCE, LLC',dba:'',city:'Cedar Creek',state:'TX',gm:'Gary Adamek',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'',floor:'',name:'BPK HOUSING LLC',dba:'',city:'',state:'TX',gm:'',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'37455',floor:'CASH/21st',name:'BRAZOS HOME CENTER, LLC',dba:'',city:'Bryan/College Station',state:'TX',gm:'Keith McCormick',gmEmail:'',mgr:'Connie Harrell',phone:'',mgrEmail:'charrell@brazoshomecenter.com'},
-    {rbi:'35495',floor:'',name:'CAROUSEL HOMES INC.',dba:'',city:'Damon',state:'TX',gm:'Jerry Jaquet',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'38401',floor:'',name:'CENTRAL TEXAS HOME CENTER LLC',dba:'',city:'Waco',state:'TX',gm:'Kavan Simon',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'38130',floor:'CASH/21st/Triad',name:'CIVITAS SALES MANAGER, LLC',dba:'',city:'Houston',state:'TX',gm:'Kayvon Tabrizi',gmEmail:'jtabrizi@scipioventures.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'38181',floor:'CASH',name:'CONROE HOME CENTER, LLC',dba:'',city:'Conroe',state:'TX',gm:'Alejandro Ponzio',gmEmail:'aponzio@conroehc.com',mgr:'Efraim Lopez',phone:'',mgrEmail:'elopez@conroehc.com'},
-    {rbi:'38453',floor:'',name:'CORPUS CHRISTI HOME CENTER LLC',dba:'',city:'Robstown',state:'TX',gm:'Casey Peacock',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'38018',floor:'',name:'COUNTRY LIVING MODULAR HOMES & HOUSING MADE EASY',dba:'',city:'Alice',state:'TX',gm:'Paul Rose',gmEmail:'Paul@countrylivingmodularhomes.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'37579',floor:'',name:'COWTOWN HOME CENTER LLC',dba:'',city:'Fort Worth',state:'TX',gm:'Rafael Cisneros',gmEmail:'rcisneros@cowtownhomecenter.com',mgr:'Denise Boschetti',phone:'',mgrEmail:'dboschetti@cowtownhomecenter.com'},
-    {rbi:'N/A',floor:'',name:'CREW SUPPORT SERVICES',dba:'',city:'Midland',state:'TX',gm:'John Volke',gmEmail:'johnvolke@crewsupportservices.com',mgr:'John Odette',phone:'',mgrEmail:'jodette@crewsupportservices.com'},
-    {rbi:'',floor:'',name:'DISCOUNT MANUFACTURED HOMES',dba:'',city:'',state:'TX',gm:'',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'37652',floor:'CASH',name:'ESTRELLA RF, LLC',dba:'',city:'Katy',state:'TX',gm:'Todd Lamb',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'37936',floor:'Triad',name:'FAIRFIELD HOME CENTER, LLC',dba:'',city:'Fairfield',state:'TX',gm:'Robert Chambers',gmEmail:'rchambers@fairfieldhomecenter.com',mgr:'Lily Chambers / Chloe Earnhardt',phone:'',mgrEmail:'lchambers@Palestinehc.com'},
-    {rbi:'37569',floor:'',name:'FIRST STEP HOMES, LLC',dba:'',city:'Rowlett',state:'TX',gm:'John Gainer',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'38162',floor:'CASH',name:'FLORES VALLEY HOMES, LLC',dba:'',city:'San Antonio',state:'TX',gm:'Max Key',gmEmail:'mk@stonetowncapital.com',mgr:'Lisa Mendoza',phone:'210-802-4075',mgrEmail:'lmendoza@reservecommunities.com'},
-    {rbi:'MH36501',floor:'First Bank',name:'GRANGER MOBILE HOMES',dba:'',city:'Kiowa',state:'OK',gm:'Kyle Granger',gmEmail:'yle@grangermobilehomes.com',mgr:'Ben Arellano',phone:'',mgrEmail:'ben@grangermobilehomes.com'},
-    {rbi:'1585',floor:'First United Bank',name:"HENCH'S COUNTRY LIV'N HOMES LTD",dba:'',city:'Sherman',state:'TX',gm:'Austin Rupp',gmEmail:'austin.rupp@henchs.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'35268',floor:'',name:'HENLY LAND & HOMES, INC.',dba:'',city:'Sulpher Springs',state:'TX',gm:'Roy Henly II',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'37269',floor:'',name:'HOBBS MANUFACTURED HOMES, LLC',dba:'',city:'Texarkana',state:'TX',gm:'Patt Hobbs',gmEmail:'phobbs@hobbsmanufacturedhomes.com',mgr:'Damon Rowe',phone:'',mgrEmail:''},
-    {rbi:'36185',floor:'',name:'HUNT COUNTY INVESTMENTS LLC',dba:'THOMAS OUTLET HOMES',city:'Greenville',state:'TX',gm:'Jackie Thomas',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'36821',floor:'',name:'INVESTA CAPITAL LLC',dba:'TEJAS HOMES',city:'Conroe',state:'TX',gm:'Jason Jennings',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'37830',floor:'',name:'JD REEVES INC',dba:'SOUTH CENTRAL HOMES',city:'Halletsville',state:'TX',gm:'Justin Reeves',gmEmail:'justin@jdreevesinc.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'37359',floor:'',name:'KORTE HOMES LLC',dba:'',city:'Taylor',state:'TX',gm:'Cole Korte',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'38076',floor:'CASH',name:'LMP DEER CREEK HOMES LLC',dba:'',city:'Burleson',state:'TX',gm:'Ryan Pugh',gmEmail:'ryan.pugh@peakenterprises.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'38477',floor:'CASH/21st/Triad',name:'LV SALES MANAGER WALLER, LLC',dba:'',city:'Waller',state:'TX',gm:'Kayvon Tabrizi',gmEmail:'jtabrizi@scipioventures.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'38476',floor:'CASH/21st/Triad',name:'LV SALES MANAGER, LLC',dba:'',city:'Princeton',state:'TX',gm:'Kayvon Tabrizi',gmEmail:'jtabrizi@scipioventures.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'D01217',floor:'21st/Triad',name:'MAGPIE, LLC',dba:'VALLEY HOMES',city:'Las Cruces',state:'NM',gm:'Craig Bullock',gmEmail:'craig@valleyhomeslc.com',mgr:'Laura Salgado',phone:'',mgrEmail:'laura@valleyhomeslc.com'},
-    {rbi:'38506',floor:'21st',name:'MARATHON HOMES DEALER SAN ANTONIO, LLC',dba:'',city:'Breckenridge',state:'TX',gm:'Jose Morales',gmEmail:'jose.morales@marathonhomes.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'8340',floor:'CASH',name:'MARATHON HOMES, LLC',dba:'',city:'Breckenridge',state:'TX',gm:'Steven Elder',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'MH00639',floor:'CASH',name:'MAXEY HOMES AND LAND, LLC',dba:'',city:'Norman',state:'OK',gm:'Kenny Maxey',gmEmail:'kenny.maxey@yahoo.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'36162',floor:'First State Bank - CASH',name:'MCDONALD MOBILE HOME, LLC',dba:'',city:'Jasper',state:'TX',gm:'Todd McDonald',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'37990',floor:'CASH',name:'MHCDV1 Homes, LLC',dba:'',city:'Conroe',state:'TX',gm:'Max Key',gmEmail:'mk@stonetowncapital.com',mgr:'Lorie Rabago',phone:'936-202-2501',mgrEmail:'lrabago@reservecommunities.com'},
-    {rbi:'38157',floor:'CASH',name:'MHCDV1 Homes, LLC',dba:'',city:'Denton',state:'TX',gm:'Max Key',gmEmail:'mk@stonetowncapital.com',mgr:'Claudia Garcia',phone:'940-239-9027',mgrEmail:'claudia.garcia@reservecommunities.com'},
-    {rbi:'38159',floor:'CASH',name:'MHCDV1 Homes, LLC',dba:'',city:'Rockport',state:'TX',gm:'Max Key',gmEmail:'mk@stonetowncapital.com',mgr:'Lynn Anderson',phone:'361-792-2732',mgrEmail:'landerson@reservecommunities.com'},
-    {rbi:'36353',floor:'',name:'MHS MY PLACE, LLC',dba:'',city:'San Juan',state:'TX',gm:'Gibran Morales',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'5704',floor:'CASH',name:'MI CASA HOUSING LTD',dba:'',city:'Atascosa',state:'TX',gm:'James Huckleberry',gmEmail:'imhuckleberry@msn.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'37088',floor:'',name:'MOBILE HOME CONCEPTS, LLC',dba:'',city:'Odessa',state:'TX',gm:'Matis Pena-Gonzalez',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'36906',floor:'',name:'MOBILE HOME MASTERS INC',dba:'',city:'Tyler',state:'TX',gm:'Matis Pena-Gonzalez',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'38309',floor:'CASH',name:'OW COLINAS AFFORDABLE HOUSING LLC',dba:'',city:'Fort Worth',state:'TX',gm:'Eduardo Hodges',gmEmail:'ehodges@owproperties.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'38152',floor:'CASH/21st',name:'PALESTINE HOME CENTER, LLC',dba:'',city:'Palestine',state:'TX',gm:'Robert Chambers',gmEmail:'rchambers@fairfieldhomecenter.com',mgr:'Lily Chambers / Kyle Kansala',phone:'',mgrEmail:'lchambers@Palestinehc.com'},
-    {rbi:'33478',floor:'',name:'PALM HARBOR VILLAGES, INC',dba:'PALM HARBOR VILLAGE',city:'Waco',state:'TX',gm:'Jorge Garcia',gmEmail:'jorge.garcia@cavco.com',mgr:'Tiffany Pomplun',phone:'',mgrEmail:'om026@palmharbor.com'},
-    {rbi:'33747',floor:'',name:'PALM HARBOR VILLAGES, INC',dba:'PALM HARBOR VILLAGE',city:'Caddo Mills',state:'TX',gm:'Eric Burgos',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'2767',floor:'CASH',name:'PALM HARBOR VILLAGES, INC',dba:'',city:'Tyler',state:'TX',gm:'Aaron Purvis',gmEmail:'aaron.purvis@palmharbor.com',mgr:'Mel Roman',phone:'',mgrEmail:'mel.roman@palmharbor.com'},
-    {rbi:'37823',floor:'21st/Triad',name:'PERMIAN HOME CENTER LLC',dba:'',city:'Odessa',state:'TX',gm:'Jack Clary',gmEmail:'jclary@permianhc.com',mgr:'Mo Clary',phone:'',mgrEmail:'mclary@permianhc.com'},
-    {rbi:'37167',floor:'21st',name:'PLAYA ENTERPRISES, LLC',dba:'HOMES 2 GO',city:'San Antonio',state:'TX',gm:'',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'35135',floor:'Triad/21st',name:'QUALITY HOMES AND LAND LTD',dba:'MUSTANG HOMES AND LAND',city:'Lubbock',state:'TX',gm:'Gus Diver',gmEmail:'gusdiver11@mustanghomes.com',mgr:'Sierra Paschall',phone:'',mgrEmail:'spaschall@mustanghomes.com'},
-    {rbi:'',floor:'',name:'REPUBLIC HOMES',dba:'',city:'',state:'TX',gm:'',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'37040',floor:'21st/CASH',name:"RODNEY'S MOBILE HOME SERVICE, INC",dba:'',city:'Splendora',state:'TX',gm:'Rodney Whitley',gmEmail:'rodneysmhs@gmail.com',mgr:'Ashley',phone:'',mgrEmail:'rodneysmhs@gmail.com'},
-    {rbi:'38362',floor:'CASH',name:'SKYTEX HOMES LLC',dba:'',city:'New Braunfels',state:'TX',gm:'Ryan Earnst',gmEmail:'ryan@skytexhomes.com',mgr:'Jerry Muntz',phone:'210-903-6870',mgrEmail:'jerry@skytexashomes.com'},
-    {rbi:'37340',floor:'',name:'SMART CHOICE MANUFACTURED HOMES, LLC',dba:'',city:'Atascosa',state:'TX',gm:'Landry Blackburn',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'38499',floor:'21st/Triad',name:'SOUTH TEXAS HOME CENTER LLC',dba:'',city:'Seguin',state:'TX',gm:'Landry Blackburn',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'38503',floor:'21st/Triad',name:'SOUTHSIDE HOME CENTER LLC',dba:'',city:'Atascosa',state:'TX',gm:'Landry Blackburn',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'36691',floor:'CASH',name:'TITAN FACTORY DIRECT HOMES, INC.',dba:'',city:'Midland',state:'TX',gm:'Brandon Harris',gmEmail:'brharris@titanfactorydirect.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'A173664',floor:'CASH',name:'TOPPERWIEIN CITY VIEW, LLC',dba:'',city:'San Antonio',state:'TX',gm:'Tim Feliz',gmEmail:'tim@sundownrvparks.com',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'34909',floor:'',name:'TRINITY RETAIL & DEVELOPMENT L.P.',dba:'TRINITY HOMES',city:'Abilene',state:'TX',gm:'Jackie Paul Dunn',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'38234',floor:'',name:'TRUE STAR GP IV LLC',dba:'',city:'Midland',state:'TX',gm:'Bran Greathouse',gmEmail:'',mgr:'',phone:'',mgrEmail:''},
-    {rbi:'MH60031',floor:'Triad/CASH',name:'TULSA HOME CENTER',dba:'',city:'Tulsa',state:'OK',gm:'Cade Roller',gmEmail:'croller@tulsahomecenter.com',mgr:'Aidan Cannon',phone:'214-326-2203',mgrEmail:'acannon@tulsahomecenter.com'},
-    {rbi:'',floor:'Triad',name:'UNIVERSAL HOMES',dba:'',city:'Oklahoma City',state:'OK',gm:'John Paul Sumo',gmEmail:'johnpaul.e.sumo@gmail.com',mgr:'Erica Sumo',phone:'',mgrEmail:'esumo@universalmh.com'},
-  ];
-
-  function renderDealers(data) {
-    const tbody = document.getElementById('dealer-tbody');
-    if (data.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="11" style="text-align:center; padding:2rem; color:var(--white-30);">No dealers match your filters.</td></tr>';
-      document.getElementById('dealer-count-label').textContent = '';
-      return;
-    }
-    tbody.innerHTML = data.map(d => `
-      <tr>
-        <td style="font-family:monospace;font-size:12px;white-space:nowrap;">${d.rbi || '<span style="color:var(--white-30)">—</span>'}</td>
-        <td style="font-weight:500;">${d.name}${d.dba ? `<div style="font-size:11px;color:var(--green);margin-top:2px;">${d.dba}</div>` : ''}</td>
-        <td style="font-size:12px;color:var(--white-60);">${d.dba || '—'}</td>
-        <td style="white-space:nowrap;">${d.city || '—'}</td>
-        <td><span class="badge ${d.state==='TX'?'badge-blue':d.state==='OK'?'badge-amber':'badge-green'}">${d.state||'—'}</span></td>
-        <td style="font-size:12px;">${d.floor ? `<span class="badge badge-gray">${d.floor}</span>` : '<span style="color:var(--white-30)">—</span>'}</td>
-        <td style="font-size:12.5px;">${d.gm || '<span style="color:var(--white-30)">—</span>'}</td>
-        <td style="font-size:12px;">${d.gmEmail ? `<a href="mailto:${d.gmEmail}" style="color:var(--green);text-decoration:none;">${d.gmEmail}</a>` : '<span style="color:var(--white-30)">—</span>'}</td>
-        <td style="font-size:12px;">${d.mgr || '<span style="color:var(--white-30)">—</span>'}</td>
-        <td style="font-size:12px;white-space:nowrap;">${d.phone || '<span style="color:var(--white-30)">—</span>'}</td>
-        <td style="font-size:12px;">${d.mgrEmail ? `<a href="mailto:${d.mgrEmail}" style="color:var(--green);text-decoration:none;">${d.mgrEmail}</a>` : '<span style="color:var(--white-30)">—</span>'}</td>
-      </tr>`).join('');
-    document.getElementById('dealer-count-label').textContent = `Showing ${data.length} of ${dealerData.length} dealers`;
-  }
-
-  function filterDealers() {
-    const search = document.getElementById('dealer-search').value.toLowerCase();
-    const state = document.getElementById('dealer-state-filter').value;
-    const floor = document.getElementById('dealer-floor-filter').value.toLowerCase();
-    const filtered = dealerData.filter(d => {
-      const matchSearch = !search || [d.rbi,d.name,d.dba,d.city,d.gm,d.gmEmail,d.mgr,d.mgrEmail,d.phone].join(' ').toLowerCase().includes(search);
-      const matchState = !state || d.state === state;
-      const matchFloor = !floor || d.floor.toLowerCase().includes(floor);
-      return matchSearch && matchState && matchFloor;
-    });
-    renderDealers(filtered);
-  }
-
-  // Init dealer tab
-  const txCount = dealerData.filter(d => d.state === 'TX').length;
-  const okCount = dealerData.filter(d => d.state === 'OK').length;
-  const nmCount = dealerData.filter(d => d.state === 'NM').length;
-  document.getElementById('dealer-total').textContent = dealerData.length;
-  document.getElementById('dealer-tx').textContent = txCount;
-  document.getElementById('dealer-ok').textContent = okCount;
-  document.getElementById('dealer-nm').textContent = nmCount;
-  renderDealers(dealerData);
-
-  document.getElementById('dealer-search').addEventListener('input', filterDealers);
-  document.getElementById('dealer-state-filter').addEventListener('change', filterDealers);
-  document.getElementById('dealer-floor-filter').addEventListener('change', filterDealers);
-
-  // ── SERIAL NUMBER DATA (from Serial_Number_Log.xlsx) ──
-  const serialData = [
-    {soid:'3623',dealer:'Palm Harbor Villages Inc.',serial:'01-BRK0166A-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'',notes:''},
-    {soid:'3623',dealer:'Palm Harbor Villages Inc.',serial:'01-BRK0166B-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'',notes:''},
-    {soid:'3611',dealer:'Ken Collier',serial:'01-BRK0169-26',model:'Temple',width:'17',length:'76',sf:'1292',customer:'',notes:''},
-    {soid:'3575',dealer:'Amarillo Home Center',serial:'01-BRK0175A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'',notes:''},
-    {soid:'3575',dealer:'Amarillo Home Center',serial:'01-BRK0175B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'',notes:''},
-    {soid:'3685',dealer:'Cowtown Homes',serial:'01-BRK0176-26',model:'Pearland',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3576',dealer:'Amarillo Home Center',serial:'01-BRK0177A-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3576',dealer:'Amarillo Home Center',serial:'01-BRK0177B-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3614',dealer:'A-1 Homes- San Antonio',serial:'01-BRK0186A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3614',dealer:'A-1 Homes- San Antonio',serial:'01-BRK0186B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3664',dealer:'Apple Mobile Home Express',serial:'01-BRK0179A-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'',notes:''},
-    {soid:'3664',dealer:'Apple Mobile Home Express',serial:'01-BRK0179B-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'',notes:''},
-    {soid:'3649',dealer:'Oak Wood Properties',serial:'BRK0180',model:'Chapman',width:'15',length:'33',sf:'495',customer:'',notes:''},
-    {soid:'3475',dealer:'Skytex Homes, LLC',serial:'01-BRK0181A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3475',dealer:'Skytex Homes, LLC',serial:'01-BRK0181B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3681',dealer:'Fairfield Home Center',serial:'01-BRK0182A-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'',notes:''},
-    {soid:'3681',dealer:'Fairfield Home Center',serial:'01-BRK0182B-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'',notes:''},
-    {soid:'3574',dealer:'Amarillo Home Center',serial:'01-BRK0183A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'',notes:''},
-    {soid:'3574',dealer:'Amarillo Home Center',serial:'01-BRK0183B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'',notes:''},
-    {soid:'3497',dealer:'Mark Strand',serial:'01-BRK0184A-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3497',dealer:'Mark Stand',serial:'01-BRK0184B-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3617',dealer:'Valley View Homes',serial:'01-BRK0173A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3617',dealer:'Valley View Homes',serial:'01-BRK0173B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3676',dealer:'Amarillo Home Center',serial:'01-BRK0185A-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3676',dealer:'Amarillo Home Center',serial:'01-BRK0185B-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3627',dealer:'Titan Factory Direct',serial:'BRK0191',model:'Glover',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3721',dealer:'American Homes of Tyler',serial:'01-BRK0187A-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3721',dealer:'American Homes of Tyler',serial:'01-BRK0187B-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3577',dealer:'Amarillo Home Center',serial:'01-BRK0188A-26',model:'Dawson',width:"13'8\"",length:'64',sf:'',customer:'',notes:''},
-    {soid:'3577',dealer:'Amarillo Home Center',serial:'01-BRK0188B-26',model:'Dawson',width:"13'8\"",length:'64',sf:'',customer:'',notes:''},
-    {soid:'3600',dealer:'Universal Manufactured Homes',serial:'01-BRK0178A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3600',dealer:'Universal Manufactured Homes',serial:'01-BRK0178B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3536',dealer:'LMP Deer Creek Homes., LLC',serial:'01-BRK0174A-26',model:'Red River (rotate)',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3536',dealer:'LMP Deer Creek Homes., LLC',serial:'01-BRK0174B-26',model:'Red River (rotate)',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3634',dealer:'Titan Factory Direct',serial:'BRK0189',model:'Slusher',width:'17',length:'76',sf:'1292',customer:'',notes:''},
-    {soid:'3708',dealer:'Smart Choice',serial:'01-BRK0190A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3708',dealer:'Smart Choice',serial:'01-BRK0190B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3499',dealer:'JD Reeves INC dba South Central Homes',serial:'01-BRK0092A-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3499',dealer:'JD Reeves INC dba South Central Homes',serial:'01-BRK0092B-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3629',dealer:'Titan Factory Direct',serial:'BRK0093',model:'Glover',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3727',dealer:'Conroe Home Center',serial:'01-BRK0194A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3727',dealer:'Conroe Home Center',serial:'01-BRK0194B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3680',dealer:'Palm Harbor Villages, Inc. Tyler, TX',serial:'01-BRK0195A-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'',notes:''},
-    {soid:'3680',dealer:'Palm Harbor Villages, Inc. Tyler, TX',serial:'01-BRK0195B-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'',notes:''},
-    {soid:'3747',dealer:'Village Homes',serial:'01-BRK0196A-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3747',dealer:'Village Homes',serial:'01-BRK0196B-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'',notes:''},
-    {soid:'3632',dealer:'Titan Factory Direct',serial:'BRK0197',model:'Glover',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3558',dealer:'TCV LLC',serial:'01-BRK0198-26',model:'Jackson',width:"11'8\"",length:'39',sf:'',customer:'',notes:''},
-    {soid:'3764',dealer:'Abilene Home Center',serial:'01-BRK0199-26',model:'Temple',width:'17',length:'76',sf:'1292',customer:'Parker',notes:''},
-    {soid:'3761',dealer:'CRE-MPC Princeton Homes, LLC',serial:'01-BRK0200-26',model:'Pearland',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'3760',dealer:'CRE-MPC Princeton Homes, LLC',serial:'01-BRK0201-26',model:'Pearland',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'3464',dealer:'Quality Homes and Land',serial:'01-BRK0202A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Baeza',notes:''},
-    {soid:'3464',dealer:'Quality Homes and Land',serial:'01-BRK0202B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Baeza',notes:''},
-    {soid:'3755',dealer:'Amarillo Home Center',serial:'01-BRK0203A-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'Guenther',notes:'DID NOT USE SERIAL #'},
-    {soid:'3755',dealer:'Amarillo Home Center',serial:'01-BRK0203B-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'Guenther',notes:'DID NOT USE SERIAL #'},
-    {soid:'3769',dealer:'Tulsa Home Center',serial:'01-BRK0204A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'McCullar',notes:'DID NOT USE SERIAL #'},
-    {soid:'3769',dealer:'Tulsa Home Center',serial:'01-BRK0204B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'McCullar',notes:'DID NOT USE SERIAL #'},
-    {soid:'3698',dealer:'Topperwein City View',serial:'BRK0205',model:'Chapman',width:'15',length:'33',sf:'495',customer:'',notes:'DID NOT USE SERIAL #'},
-    {soid:'3744',dealer:'Breckenridge Homes',serial:'01-BRK0206A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Nichols',notes:'DID NOT USE SERIAL #'},
-    {soid:'3744',dealer:'Breckenridge Homes',serial:'01-BRK0206B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Nichols',notes:'DID NOT USE SERIAL #'},
-    {soid:'3752',dealer:'LV Sales Manager',serial:'01-BRK0207-26',model:'Pearland',width:'15',length:'76',sf:'1140',customer:'Stock',notes:'DID NOT USE SERIAL #'},
-    {soid:'3631',dealer:'Titan Factory Direct',serial:'BRK0208',model:'Glover',width:'15',length:'76',sf:'1140',customer:'',notes:'DID NOT USE SERIAL #'},
-    {soid:'3451',dealer:'Hobbs Manufactured Homes',serial:'01-BRK0209A-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'Stock',notes:'DID NOT USE SERIAL #'},
-    {soid:'3451',dealer:'Hobbs Manufactured Homes',serial:'01-BRK0209B-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'Stock',notes:'DID NOT USE SERIAL #'},
-    {soid:'3762',dealer:'Abilene Home Center',serial:'01-BRK0210A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3762',dealer:'Abilene Home Center',serial:'01-BRK0210B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3775',dealer:'Brazos Home Center',serial:'01-BRK0211A-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'3775',dealer:'Brazos Home Center',serial:'01-BRK0211B-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'3754',dealer:'Civitas Sales Manager',serial:'01-BRK0212-26',model:'Pearland',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'3635',dealer:'Titan Factory Direct',serial:'BRK0213',model:'Slusher',width:'17',length:'76',sf:'1292',customer:'',notes:''},
-    {soid:'3530',dealer:'Titan Factory Direct',serial:'BRK0214',model:'Slusher',width:'17',length:'76',sf:'1292',customer:'',notes:''},
-    {soid:'3628',dealer:'Titan Factory Direct',serial:'BRK0215',model:'Glover',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3690',dealer:'Titan Factory Direct',serial:'BRK0216',model:'Glover',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3630',dealer:'Titan Factory Direct',serial:'BRK0217',model:'Glover',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3691',dealer:'American Homes of Tyler',serial:'01-BRK0218A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'3691',dealer:'American Homes of Tyler',serial:'01-BRK0218B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'3729',dealer:'Conroe Home Center',serial:'01-BRK0219A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Ponzio',notes:''},
-    {soid:'3729',dealer:'Conroe Home Center',serial:'01-BRK0219B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Ponzio',notes:''},
-    {soid:'3751',dealer:'Civitas Sales Manager',serial:'01-BRK0220-26',model:'Pearland',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'3749',dealer:'LV Sales Manager',serial:'01-BRK0221-26',model:'Shane B',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'3766',dealer:'Palestine Home Center',serial:'01-BRK0222A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'Trasher',notes:''},
-    {soid:'3766',dealer:'Palestine Home Center',serial:'01-BRK0222B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'Trasher',notes:''},
-    {soid:'3743',dealer:'LV Sales Manager',serial:'01-BRK0223-26',model:'Shane A',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'3581',dealer:'South Central Homes',serial:'01-BRK0224A-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'RSO',notes:''},
-    {soid:'3581',dealer:'South Central Homes',serial:'01-BRK0224B-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'RSO',notes:''},
-    {soid:'3674',dealer:'McDonald Mobile Homes',serial:'01-BRK0225A-26',model:'Loving',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'3674',dealer:'McDonald Mobile Homes',serial:'01-BRK0225B-26',model:'Loving',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'3802',dealer:'Apple Mobile Homes Express',serial:'01-BRK0226-26',model:'Midland',width:'15',length:'76',sf:'1140',customer:'Stock',notes:'DID NOT USE SERIAL #'},
-    {soid:'',dealer:'',serial:'01-BRK0227-26',model:'',width:'',length:'',sf:'',customer:'',notes:'DID NOT USE SERIAL #'},
-    {soid:'3741',dealer:'Skytex Homes, LLC',serial:'01-BRK0228-26',model:'Midland',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'3771',dealer:'Apple Mobile Homes Express',serial:'01-BRK0229A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Brescher',notes:''},
-    {soid:'3771',dealer:'Apple Mobile Homes Express',serial:'01-BRK0229B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Brescher',notes:''},
-    {soid:'3736',dealer:'Tulsa Home Center',serial:'01-BRK0230A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Honn',notes:''},
-    {soid:'3736',dealer:'Tulsa Home Center',serial:'01-BRK0230B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Honn',notes:''},
-    {soid:'3818',dealer:'Permian Home Center',serial:'01-BRK0231A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO Carlos',notes:''},
-    {soid:'3818',dealer:'Permian Home Center',serial:'01-BRK0231B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO Carlos',notes:''},
-    {soid:'3762',dealer:'Abilene Home Center',serial:'01-BRK0232A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO',notes:'DID NOT USE SERIAL #'},
-    {soid:'3762',dealer:'Abilene Home Center',serial:'01-BRK0232B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO',notes:'DID NOT USE SERIAL #'},
-    {soid:'3782',dealer:'Permian Home Center',serial:'01-BRK0233A-26',model:'Sterling',width:'15',length:'76',sf:'1140',customer:'RSO',notes:''},
-    {soid:'3782',dealer:'Permian Home Center',serial:'01-BRK0233B-26',model:'Sterling',width:'15',length:'76',sf:'1140',customer:'RSO',notes:''},
-    {soid:'3791',dealer:'Apple Homes',serial:'01-BRK0234A-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'RSO',notes:''},
-    {soid:'3791',dealer:'Apple Homes',serial:'01-BRK0234B-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'RSO',notes:''},
-    {soid:'3817',dealer:'Village Homes',serial:'01-BRK0235A-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'Stock',notes:'INSERT'},
-    {soid:'3817',dealer:'Village Homes',serial:'01-BRK0235B-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'Stock',notes:'INSERT'},
-    {soid:'3801',dealer:'Civitas Sales Manager',serial:'01-BRK0236-26',model:'Longview',width:'15',length:'72',sf:'1080',customer:'Stock',notes:''},
-    {soid:'3805',dealer:'Palestine Home Center',serial:'01-BRK0237A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Perkins',notes:''},
-    {soid:'3805',dealer:'Palestine Home Center',serial:'01-BRK0237B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Perkins',notes:''},
-    {soid:'3795',dealer:'Rodneys Mobile Homes',serial:'01-BRK0238A-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'RSO - Robert',notes:''},
-    {soid:'3795',dealer:'Rodneys Mobile Homes',serial:'01-BRK0238B-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'RSO - Robert',notes:''},
-    {soid:'3794',dealer:'Rodneys Mobile Homes',serial:'01-BRK0239A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3794',dealer:'Rodneys Mobile Homes',serial:'01-BRK0239B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:''},
-    {soid:'3464',dealer:'Mustang Homes',serial:'01-BRK0240A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Baeza',notes:'DID NOT USE SERIAL #'},
-    {soid:'3464',dealer:'Mustang Homes',serial:'01-BRK0240B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Baeza',notes:'DID NOT USE SERIAL #'},
-    {soid:'3804',dealer:'Apple Mobile Homes Express',serial:'01-BRK0241A-26',model:'Brewster',width:"13'8\"",length:'56',sf:'',customer:'Stock',notes:''},
-    {soid:'3804',dealer:'Apple Mobile Homes Express',serial:'01-BRK0241B-26',model:'Brewster',width:"13'8\"",length:'56',sf:'',customer:'Stock',notes:''},
-    {soid:'3803',dealer:'Apple Mobile Homes Express',serial:'01-BRK0242A-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'Stock',notes:'DID NOT USE SERIAL #'},
-    {soid:'3803',dealer:'Apple Mobile Homes Express',serial:'01-BRK0242B-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'Stock',notes:'DID NOT USE SERIAL #'},
-    {soid:'3813',dealer:'Abilene Home Center',serial:'01-BRK0243A-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'RSO - Bostick',notes:''},
-    {soid:'3813',dealer:'Abilene Home Center',serial:'01-BRK0243B-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'RSO - Bostick',notes:''},
-    {soid:'3793',dealer:'Valley Homes',serial:'01-BRK0244A-26',model:'Brewster',width:"13'8\"",length:'56',sf:'',customer:'RSO - Lucero',notes:''},
-    {soid:'3793',dealer:'Valley Homes',serial:'01-BRK0244B-26',model:'Brewster',width:"13'8\"",length:'56',sf:'',customer:'RSO - Lucero',notes:''},
-    {soid:'985',dealer:'South Central Homes - JD Reeves',serial:'01-BRK0245A-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'Stock',notes:'stealthsync'},
-    {soid:'985',dealer:'South Central Homes - JD Reeves',serial:'01-BRK0245B-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'Stock',notes:'stealthsync'},
-    {soid:'986',dealer:'South Central Homes - JD Reeves',serial:'01-BRK0246A-26',model:'Caldwell',width:"13'8\"",length:'56',sf:'',customer:'Stock',notes:'stealthsync'},
-    {soid:'986',dealer:'South Central Homes - JD Reeves',serial:'01-BRK0246B-26',model:'Caldwell',width:"13'8\"",length:'56',sf:'',customer:'Stock',notes:'stealthsync'},
-    {soid:'987',dealer:'South Central Homes - JD Reeves',serial:'01-BRK0247A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'Stock',notes:'stealthsync'},
-    {soid:'987',dealer:'South Central Homes - JD Reeves',serial:'01-BRK0247B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'Stock',notes:'stealthsync'},
-    {soid:'1015',dealer:'Rodneys Mobile Homes',serial:'01-BRK0248A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Bazany',notes:'stealthsync'},
-    {soid:'1015',dealer:'Rodneys Mobile Homes',serial:'01-BRK0248B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Bazany',notes:'stealthsync'},
-    {soid:'1029',dealer:'Valley Homes',serial:'01-BRK0249A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Delgado',notes:'stealthsync'},
-    {soid:'1029',dealer:'Valley Homes',serial:'01-BRK0249B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Delgado',notes:'stealthsync'},
-    {soid:'3800',dealer:'Abilene Home Center',serial:'01-BRK0250A-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'RSO - Riffle',notes:''},
-    {soid:'3800',dealer:'Abilene Home Center',serial:'01-BRK0250B-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'RSO - Riffle',notes:''},
-    {soid:'1028',dealer:'Rodneys Mobile Homes',serial:'01-BRK0251A-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'Stock',notes:'stealthsync'},
-    {soid:'1028',dealer:'Rodneys Mobile Homes',serial:'01-BRK0251B-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'Stock',notes:'stealthsync'},
-    {soid:'3773',dealer:'Amarillo Homes',serial:'01-BRK0252A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO - Benito',notes:''},
-    {soid:'3773',dealer:'Amarillo Homes',serial:'01-BRK0252B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO - Benito',notes:''},
-    {soid:'1080',dealer:'Village Homes',serial:'01-BRK0253A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - McCloud',notes:'stealthsync'},
-    {soid:'1080',dealer:'Village Homes',serial:'01-BRK0253B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - McCloud',notes:'stealthsync'},
-    {soid:'3834',dealer:'Permian Home Center',serial:'01-BRK0254-26',model:'Pearland',width:'15',length:'76',sf:'1140',customer:'RSO - Horton',notes:''},
-    {soid:'1093',dealer:'Abilene Home Center',serial:'01-BRK0255A-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'Stock',notes:'stealthsync'},
-    {soid:'1093',dealer:'Abilene Home Center',serial:'01-BRK0255B-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'Stock',notes:'stealthsync'},
-    {soid:'1094',dealer:'Apple',serial:'01-BRK0256-26',model:'Midland',width:'15',length:'76',sf:'1140',customer:'Stock',notes:'stealthsync'},
-    {soid:'1095',dealer:'Apple',serial:'01-BRK0257A-26',model:'Loving',width:'15',length:'56',sf:'840',customer:'Stock',notes:'stealthsync'},
-    {soid:'1095',dealer:'Apple',serial:'01-BRK0257B-27',model:'Loving',width:'15',length:'56',sf:'840',customer:'Stock',notes:'stealthsync'},
-    {soid:'1119',dealer:'Abilene Home Center',serial:'01-BRK0258A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Jowers',notes:'stealthsync'},
-    {soid:'1119',dealer:'Abilene Home Center',serial:'01-BRK0258B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Jowers',notes:'stealthsync'},
-    {soid:'1152',dealer:'Abilene Home Center',serial:'01-BRK0259A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Stroope',notes:'stealthsync'},
-    {soid:'1152',dealer:'Abilene Home Center',serial:'01-BRK0259B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Stroope',notes:'stealthsync'},
-    {soid:'1135',dealer:'Brazos Home Center',serial:'01-BRK0260-26',model:'Midland',width:'15',length:'76',sf:'1140',customer:'Stock',notes:'stealthsync'},
-    {soid:'3833',dealer:'Permian Home Center',serial:'01-BRK0261A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO-Bennett',notes:''},
-    {soid:'3833',dealer:'Permian Home Center',serial:'01-BRK0261B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO-Bennett',notes:'stealthsync'},
-    {soid:'1154',dealer:'Palestine Home Center',serial:'01-BRK0262A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Melendez',notes:'stealthsync'},
-    {soid:'1154',dealer:'Palestine Home Center',serial:'01-BRK0262B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Melendez',notes:'stealthsync'},
-    {soid:'1121',dealer:'Abilene Home Center',serial:'01-BRK0263-26',model:'Temple',width:'17',length:'76',sf:'1292',customer:'RSO-Tebbetts',notes:'stealthsync'},
-    {soid:'1026',dealer:'Palm Harbor - Tyler',serial:'01-BRK0264A-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'RSO-Zaleski',notes:'stealthsync'},
-    {soid:'1026',dealer:'Palm Harbor - Tyler',serial:'01-BRK0264B-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'RSO-Zaleski',notes:'stealthsync'},
-    {soid:'1114',dealer:'Brazos Home Center',serial:'01-BRK0265A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Howard - RSO',notes:'stealthsync'},
-    {soid:'1114',dealer:'Brazos Home Center',serial:'01-BRK0265B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Howard - RSO',notes:'stealthsync'},
-    {soid:'1179',dealer:'Todd Lamb - Estrella RF, LLC',serial:'01-BRK0266-26',model:'Pearland',width:'15',length:'76',sf:'1140',customer:'Stock',notes:'stealthsync'},
-    {soid:'1178',dealer:'Todd Lamb - Estrella RF, LLC',serial:'01-BRK0267-26',model:'Midland',width:'15',length:'76',sf:'1140',customer:'Stock',notes:'stealthsync'},
-    {soid:'1200',dealer:'Maxey Homes and Land, LLC',serial:'01-BRK0268A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1200',dealer:'Maxey Homes and Land, LLC',serial:'01-BRK0268B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1182',dealer:'Maxey Homes and Land, LLC',serial:'01-BRK0269A-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1182',dealer:'Maxey Homes and Land, LLC',serial:'01-BRK0269B-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'3840',dealer:'Smart Choice - Von Ormy',serial:'01-BRK0270-26',model:'Alamo',width:'15',length:'40',sf:'600',customer:'Stock',notes:''},
-    {soid:'1103',dealer:'American Homes - Tyler',serial:'01-BRK0271A-26',model:'Coleman',width:"13'8\"",length:'60',sf:'',customer:'RSO - Phillips',notes:''},
-    {soid:'1103',dealer:'American Homes - Tyler',serial:'01-BRK0271B-26',model:'Coleman',width:"13'8\"",length:'60',sf:'',customer:'RSO - Phillips',notes:''},
-    {soid:'1217',dealer:'Southside Home Center',serial:'01-BRK0272A-26',model:'Archer',width:"13'8\"",length:'44',sf:'',customer:'Stock',notes:''},
-    {soid:'1217',dealer:'Southside Home Center',serial:'01-BRK0272B-26',model:'Archer',width:"13'8\"",length:'44',sf:'',customer:'Stock',notes:''},
-    {soid:'1155',dealer:'Henchs Calera',serial:'01-BRK0273-26',model:'Pearland',width:'15',length:'76',sf:'1140',customer:'Dobson - RSO',notes:''},
-    {soid:'1122',dealer:'Palestine Home Center',serial:'01-BRK0274A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO Brigner',notes:''},
-    {soid:'1122',dealer:'Palestine Home Center',serial:'01-BRK0274B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO Brigner',notes:''},
-    {soid:'1249',dealer:'Homes To Go',serial:'01-BRK0275A-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'Stock',notes:''},
-    {soid:'1249',dealer:'Homes To Go',serial:'01-BRK0275B-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'Stock',notes:''},
-    {soid:'1247',dealer:'South Texas Home Center',serial:'01-BRK0276A-26',model:'Archer',width:"13'8\"",length:'44',sf:'',customer:'Stock',notes:''},
-    {soid:'1247',dealer:'South Texas Home Center',serial:'01-BRK0276B-26',model:'Archer',width:"13'8\"",length:'44',sf:'',customer:'Stock',notes:''},
-    {soid:'1168',dealer:'Mustang Homes',serial:'01-BRK0277A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Jose',notes:''},
-    {soid:'1168',dealer:'Mustang Homes',serial:'01-BRK0277B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Jose',notes:''},
-    {soid:'1278',dealer:'Southside Home Center',serial:'01-BRK0278A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1211',dealer:'Smart Choice - Von Ormy',serial:'01-BRK0279A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Gosnell',notes:'South Texas Home Center'},
-    {soid:'1211',dealer:'Smart Choice - Von Ormy',serial:'01-BRK0279B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Gosnell',notes:'South Texas Home Center'},
-    {soid:'1150',dealer:'Amarillo HC',serial:'01-BRK0280A-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'RSO - Collier',notes:''},
-    {soid:'1150',dealer:'Amarillo HC',serial:'01-BRK0280B-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'RSO - Collier',notes:''},
-    {soid:'1234',dealer:'Abilene Home Center',serial:'01-BRK0281-26',model:'Temple',width:'17',length:'76',sf:'1292',customer:'RSO - Rosa',notes:''},
-    {soid:'1286',dealer:'Tulsa Home center',serial:'01-BRK0282A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Lile',notes:''},
-    {soid:'1286',dealer:'Tulsa Home center',serial:'01-BRK0282B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Lile',notes:''},
-    {soid:'1323',dealer:'Village Homes',serial:'01-BRK0283A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO',notes:'DID NOT USE SERIAL #'},
-    {soid:'1323',dealer:'Village Homes',serial:'01-BRK0283B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'',notes:'DID NOT USE SERIAL #'},
-    {soid:'1304',dealer:'Amarillo HC',serial:'01-BRK0284A-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1304',dealer:'Amarillo HC',serial:'01-BRK0284B-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1296',dealer:'Civitas Sales Manager',serial:'01-BRK0285-26',model:'Pearland',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1289',dealer:'A-1 San Antonio',serial:'01-BRK0286A-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'RSO - Almeida',notes:''},
-    {soid:'1289',dealer:'A-1 San Antonio',serial:'01-BRK0286B-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'RSO - Almeida',notes:''},
-    {soid:'1326',dealer:'Fairfield Home Center',serial:'01-BRK0287A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Moore',notes:''},
-    {soid:'1326',dealer:'Fairfield Home Center',serial:'01-BRK0287B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Moore',notes:''},
-    {soid:'1231',dealer:'Thomas Home Center',serial:'01-BRK0288A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1231',dealer:'Thomas Home Center',serial:'01-BRK0288B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1324',dealer:'Thomas Home Center',serial:'01-BRK0289A-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1324',dealer:'Thomas Home Center',serial:'01-BRK0289B-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1349',dealer:'Thomas Home Center',serial:'01-BRK0290-26',model:'Mesquite',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1336',dealer:'Valley Homes',serial:'01-BRK0291A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1336',dealer:'Valley Homes',serial:'01-BRK0291B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1421',dealer:'Tulsa Home Center',serial:'01-BRK0292A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO - Dotson',notes:''},
-    {soid:'1421',dealer:'Tulsa Home Center',serial:'01-BRK0292B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO - Dotson',notes:''},
-    {soid:'1288',dealer:'A-1 San Antonio',serial:'01-BRK0293A-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1288',dealer:'A-1 San Antonio',serial:'01-BRK0293B-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1412',dealer:'Amarillo Home Center',serial:'01-BRK0294A-26',model:'Loving',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1412',dealer:'Amarillo Home Center',serial:'01-BRK0294B-26',model:'Loving',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1400',dealer:'Amarillo Home Center',serial:'01-BRK0295A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1400',dealer:'Amarillo Home Center',serial:'01-BRK0295B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1431',dealer:'Granger Mobile Homes',serial:'01-BRK0296A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'Stock',notes:''},
-    {soid:'1431',dealer:'Granger Mobile Homes',serial:'01-BRK0296B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'Stock',notes:''},
-    {soid:'1433',dealer:'Abilene Home Center',serial:'01-BRK0297A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Brown',notes:''},
-    {soid:'1433',dealer:'Abilene Home Center',serial:'01-BRK0297B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Brown',notes:''},
-    {soid:'1406',dealer:'Permian Home Center',serial:'01-BRK0298A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO - Loa',notes:''},
-    {soid:'1415',dealer:'Titan Factory Direct-Midland',serial:'01-BRK0299-26',model:'Slusher',width:'17',length:'76',sf:'1292',customer:'#1',notes:''},
-    {soid:'1329',dealer:'Village Homes',serial:'01-BRK0300A-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1329',dealer:'Village Homes',serial:'01-BRK0300B-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1279',dealer:'Tulsa Home Center',serial:'01-BRK0301-26',model:'Pearland',width:'15',length:'76',sf:'1140',customer:'RSO - Hurt',notes:''},
-    {soid:'1367',dealer:'Apple',serial:'01-BRK0302A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Zamora',notes:''},
-    {soid:'1367',dealer:'Apple',serial:'01-BRK0302B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Zamora',notes:''},
-    {soid:'1416',dealer:'Titan Factory Direct-Midland',serial:'01-BRK0303-26',model:'Slusher',width:'17',length:'76',sf:'1292',customer:'#2',notes:''},
-    {soid:'1417',dealer:'Titan Factory Direct-Midland',serial:'01-BRK0304-26',model:'Slusher',width:'17',length:'76',sf:'1292',customer:'#3',notes:''},
-    {soid:'1420',dealer:'Titan Factory Direct-Midland',serial:'01-BRK0305-26',model:'Glover',width:'15',length:'76',sf:'1140',customer:'#4',notes:''},
-    {soid:'1443',dealer:'Civitas Sales Manager',serial:'01-BRK0306-26',model:'Shane B',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1442',dealer:'Civitas Sales Manager',serial:'01-BRK0307-26',model:'Shane A',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1414',dealer:'American Homes Tyler LLC',serial:'01-BRK0308A-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'RSO - Bastida',notes:''},
-    {soid:'1414',dealer:'American Homes Tyler LLC',serial:'01-BRK0308B-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'RSO - Bastida',notes:''},
-    {soid:'1487',dealer:'MHCDV1 Homes, LLC - Costa Palms',serial:'01-BRK0309-26',model:'Temple',width:'17',length:'76',sf:'1292',customer:'223 CD',notes:''},
-    {soid:'1488',dealer:'MHCDV1 Homes, LLC - Sleepy Hollow',serial:'01-BRK0310-26',model:'Temple',width:'17',length:'76',sf:'1292',customer:'19607 LL',notes:''},
-    {soid:'1489',dealer:'MHCDV1 Homes, LLC - Oak Ridge',serial:'01-BRK0311-26',model:'Temple',width:'17',length:'76',sf:'1292',customer:'31',notes:''},
-    {soid:'1490',dealer:'Flores Valley Homes, LLC',serial:'01-BRK0312-26',model:'Temple',width:'17',length:'76',sf:'1292',customer:'16015 FCR',notes:''},
-    {soid:'1491',dealer:'Flores Valley Homes, LLC',serial:'01-BRK0313-26',model:'Temple',width:'17',length:'76',sf:'1292',customer:'16007 FCR',notes:''},
-    {soid:'1483',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0314A-26',model:'Brewster',width:"13'8\"",length:'56',sf:'',customer:'RSO-Campos',notes:''},
-    {soid:'1483',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0314B-26',model:'Brewster',width:"13'8\"",length:'56',sf:'',customer:'RSO-Campos',notes:''},
-    {soid:'1372',dealer:'Palestine Home Center',serial:'01-BRK0315A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-White',notes:''},
-    {soid:'1372',dealer:'Palestine Home Center',serial:'01-BRK0315B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-White',notes:''},
-    {soid:'1472',dealer:'Permian Home Center',serial:'01-BRK0316A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Silvia/Zuniga',notes:''},
-    {soid:'1472',dealer:'Permian Home Center',serial:'01-BRK0316B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Silvia/Zuniga',notes:''},
-    {soid:'1526',dealer:'Topperwien City View',serial:'01-BRK0317-26',model:'Chapman',width:'15',length:'33',sf:'495',customer:'Oak Wood 1',notes:'4M9BP3238TB284011'},
-    {soid:'1527',dealer:'Topperwien City View',serial:'01-BRK0318-26',model:'Chapman',width:'15',length:'33',sf:'495',customer:'Oak Wood 2',notes:'4M9BP323XTB284012'},
-    {soid:'1528',dealer:'Topperwien City View',serial:'01-BRK0319-26',model:'Chapman',width:'15',length:'33',sf:'495',customer:'Oak Wood 3',notes:'4M9BP3231TB284013'},
-    {soid:'1494',dealer:'Apple Mobile Homes Express',serial:'01-BRK0320A-26',model:'Loving',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1494',dealer:'Apple Mobile Homes Express',serial:'01-BRK0320B-26',model:'Loving',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1493',dealer:'Universal Manufactured Homes',serial:'01-BRK0321A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Ellis',notes:''},
-    {soid:'1493',dealer:'Universal Manufactured Homes',serial:'01-BRK0321B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1566',dealer:'Crew Support Services',serial:'01-BRK0322-26',model:'Slusher',width:'17',length:'76',sf:'1292',customer:'Stock',notes:''},
-    {soid:'1568',dealer:'BPK Housing',serial:'01-BRK0323-26',model:'Wheeler',width:'15',length:'60',sf:'900',customer:'Stock',notes:'DID NOT USE SERIAL #'},
-    {soid:'1477',dealer:'Republic Homes - Oklahoma City',serial:'01-BRK0324A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Walker',notes:''},
-    {soid:'1477',dealer:'Republic Homes - Oklahoma City',serial:'01-BRK0324B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Walker',notes:''},
-    {soid:'1545',dealer:'Tulsa Home Center',serial:'01-BRK0325A-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'RSO - King',notes:''},
-    {soid:'1545',dealer:'Tulsa Home Center',serial:'01-BRK0325B-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'RSO - King',notes:''},
-    {soid:'1502',dealer:'Republic Homes - Oklahoma City',serial:'01-BRK0326A-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'Stock',notes:''},
-    {soid:'1502',dealer:'Republic Homes - Oklahoma City',serial:'01-BRK0326B-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'Stock',notes:''},
-    {soid:'1517',dealer:'Republic Homes - Oklahoma City',serial:'01-BRK0327A-26',model:'Coleman',width:"13'8\"",length:'60',sf:'',customer:'Stock',notes:''},
-    {soid:'1517',dealer:'Republic Homes - Oklahoma City',serial:'01-BRK0327B-26',model:'Coleman',width:"13'8\"",length:'60',sf:'',customer:'Stock',notes:''},
-    {soid:'1599',dealer:'Crew Support Services',serial:'01-BRK0328-26',model:'Slusher',width:'17',length:'76',sf:'1292',customer:'Stock',notes:''},
-    {soid:'1614',dealer:'Tulsa Home Center',serial:'01-BRK0329-26',model:'Ranger',width:'17',length:'50',sf:'850',customer:'RSO - Ruth',notes:''},
-    {soid:'1389',dealer:'Tulsa Home Center',serial:'01-BRK0330A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO - Ellis',notes:''},
-    {soid:'1389',dealer:'Tulsa Home Center',serial:'01-BRK0330B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO - Ellis',notes:''},
-    {soid:'1542',dealer:'South Texas Home Center',serial:'01-BRK0331A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Petrolanitz',notes:'2842194'},
-    {soid:'1542',dealer:'South Texas Home Center',serial:'01-BRK0331B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO - Petrolanitz',notes:'2842194'},
-    {soid:'1529',dealer:'South Texas Home Center',serial:'01-BRK0332A-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'RSO - Asevedo',notes:''},
-    {soid:'1529',dealer:'South Texas Home Center',serial:'01-BRK0332B-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'RSO - Asevedo',notes:''},
-    {soid:'1617',dealer:'Tulsa Home Center',serial:'01-BRK0333A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO-Copeland',notes:''},
-    {soid:'1617',dealer:'Tulsa Home Center',serial:'01-BRK0333B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO-Copeland',notes:''},
-    {soid:'1627',dealer:'South Texas Home Center',serial:'01-BRK0334A-26',model:'Archer',width:"13'8\"",length:'44',sf:'',customer:'RSO Estrada',notes:''},
-    {soid:'1627',dealer:'South Texas Home Center',serial:'01-BRK0334B-26',model:'Archer',width:"13'8\"",length:'44',sf:'',customer:'RSO Estrada',notes:''},
-    {soid:'1638',dealer:'Marathon Homes, LLC',serial:'01-BRK0335A-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1638',dealer:'Marathon Homes, LLC',serial:'01-BRK0335B-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1639',dealer:'Marathon Homes, LLC',serial:'01-BRK0336-26',model:'Alamo',width:'15',length:'40',sf:'600',customer:'Stock',notes:''},
-    {soid:'1640',dealer:'Marathon Homes, LLC',serial:'01-BRK0337A-26',model:'Archer',width:"13'8\"",length:'44',sf:'',customer:'Stock',notes:''},
-    {soid:'1640',dealer:'Marathon Homes, LLC',serial:'01-BRK0337B-26',model:'Archer',width:"13'8\"",length:'44',sf:'',customer:'Stock',notes:''},
-    {soid:'1641',dealer:'Marathon Homes, LLC',serial:'01-BRK0338-26',model:'Katy',width:'15',length:'68',sf:'1020',customer:'Stock',notes:''},
-    {soid:'1642',dealer:'Marathon Homes, LLC',serial:'01-BRK0339-26',model:'Katy',width:'15',length:'68',sf:'1020',customer:'Stock',notes:''},
-    {soid:'1589',dealer:'Republic Homes OKC',serial:'01-BRK0340A-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'RSO-Woodard, Case',notes:''},
-    {soid:'1589',dealer:'Republic Homes OKC',serial:'01-BRK0340B-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'RSO-Woodard, Case',notes:''},
-    {soid:'1555',dealer:'Topperwien City View, LLC',serial:'01-BRK0341-26',model:'Lanny',width:"11'8\"",length:'42',sf:'',customer:'Stock',notes:'4M9BP4138TB284016'},
-    {soid:'1625',dealer:'Topperwien City View, LLC',serial:'01-BRK0342-26',model:'Alamo',width:'15',length:'44',sf:'660',customer:'Stock',notes:''},
-    {soid:'1626',dealer:'Topperwien City View, LLC',serial:'01-BRK0343-26',model:'Chapman',width:'15',length:'39',sf:'585',customer:'Stock',notes:'4M9BP3233TB284014'},
-    {soid:'1643',dealer:'Topperwien City View, LLC',serial:'01-BRK0344-26',model:'Daniel',width:"11'8\"",length:'39',sf:'',customer:'Stock',notes:'4M9BP3632TB284015'},
-    {soid:'1359',dealer:'Brazos Home Center Bryan/CS',serial:'01-BRK0345A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1359',dealer:'Brazos Home Center Bryan/CS',serial:'01-BRK0345B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1659',dealer:'Civitas Sales Manager',serial:'01-BRK0346-26',model:'Azalae A',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1661',dealer:'Civitas Sales Manager',serial:'01-BRK0347-26',model:'Azalae B',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1660',dealer:'LV Sales Manager',serial:'01-BRK0348-26',model:'Azalae A',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1662',dealer:'LV Sales Manager',serial:'01-BRK0349-26',model:'Azalae B',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1644',dealer:'Carousel Homes',serial:'01-BRK0350-26',model:'Midland',width:'15',length:'76',sf:'1140',customer:'Stock',notes:''},
-    {soid:'1631',dealer:'Topperwien City View',serial:'01-BRK0351-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #1',notes:'4M9BP3432TB284017'},
-    {soid:'1672',dealer:'Topperwien City View',serial:'01-BRK0352-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #2',notes:'4M9BP3434TB284018'},
-    {soid:'1668',dealer:'South Texas Home Center',serial:'01-BRK0353A-26',model:'Brewster',width:"13'8\"",length:'56',sf:'',customer:'RSO-Williamson',notes:''},
-    {soid:'1668',dealer:'South Texas Home Center',serial:'01-BRK0353B-26',model:'Brewster',width:"13'8\"",length:'56',sf:'',customer:'RSO-Williamson',notes:''},
-    {soid:'1680',dealer:'Topperwien City View',serial:'01-BRK0354-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #3',notes:'4M9BP3436TB284019'},
-    {soid:'1638',dealer:'Marathon Homes, LLC',serial:'01-BRK0335A-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1681',dealer:'Topperwien City View',serial:'01-BRK0355-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #4',notes:'4M9BP3432TB284020'},
-    {soid:'1682',dealer:'Topperwien City View',serial:'01-BRK0356-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #5',notes:'4M9BP3434TB284021'},
-    {soid:'1683',dealer:'Topperwien City View',serial:'01-BRK0357-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #6',notes:'4M9BP3436TB284022'},
-    {soid:'1684',dealer:'Topperwien City View',serial:'01-BRK0358-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #7',notes:'4M9BP3438TB284023'},
-    {soid:'1685',dealer:'Topperwien City View',serial:'01-BRK0359-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #8',notes:'4M9BP343XTB284024'},
-    {soid:'1686',dealer:'Topperwien City View',serial:'01-BRK0360-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #9',notes:'4M9BP3431TB284025'},
-    {soid:'1687',dealer:'Topperwien City View',serial:'01-BRK0361-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #10',notes:'4M9BP3433TB284026'},
-    {soid:'1688',dealer:'Topperwien City View',serial:'01-BRK0362-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #11',notes:'4M9BP3435TB284027'},
-    {soid:'1689',dealer:'Topperwien City View',serial:'01-BRK0363-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #12',notes:'4M9BP3437TB284028'},
-    {soid:'1690',dealer:'Topperwien City View',serial:'01-BRK0364-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #13',notes:'4M9BP3439TB284029'},
-    {soid:'1691',dealer:'Topperwien City View',serial:'01-BRK0365-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #14',notes:'4M9BP3435TB284030'},
-    {soid:'1692',dealer:'Topperwien City View',serial:'01-BRK0366-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #15',notes:'4M9BP3437TB284031'},
-    {soid:'1693',dealer:'Topperwien City View',serial:'01-BRK0367-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #16',notes:'4M9BP3439TB284032'},
-    {soid:'1694',dealer:'Topperwien City View',serial:'01-BRK0368-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #17',notes:'4M9BP3430TB284033'},
-    {soid:'1695',dealer:'Topperwien City View',serial:'01-BRK0369-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #18',notes:'4M9BP3432TB284034'},
-    {soid:'1696',dealer:'Topperwien City View',serial:'01-BRK0370-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #19',notes:'4M9BP3434TB284035'},
-    {soid:'1697',dealer:'Topperwien City View',serial:'01-BRK0371-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #20',notes:'4M9BP3436TB284036'},
-    {soid:'1698',dealer:'Topperwien City View',serial:'01-BRK0372-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #21',notes:'4M9BP3438TB284037'},
-    {soid:'1699',dealer:'Topperwien City View',serial:'01-BRK0373-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #22',notes:'4M9BP343XTB284038'},
-    {soid:'1700',dealer:'Topperwien City View',serial:'01-BRK0374-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #23',notes:'4M9BP3431TB284039'},
-    {soid:'1701',dealer:'Topperwien City View',serial:'01-BRK0375-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #24',notes:'4M9BP3438TB284040'},
-    {soid:'1702',dealer:'Topperwien City View',serial:'01-BRK0376-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #25',notes:'4M9BP343XTB284041'},
-    {soid:'1703',dealer:'Topperwien City View',serial:'01-BRK0377-26',model:'Terra',width:"11'8\"",length:'34',sf:'',customer:'Stock #26',notes:'4M9BP3431TB284042'},
-    {soid:'1652',dealer:'Valley Homes',serial:'01-BRK0378A-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'RSO-Uribe',notes:''},
-    {soid:'1652',dealer:'Valley Homes',serial:'01-BRK0378B-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'RSO-Uribe',notes:''},
-    {soid:'1705',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0379A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO-Whitworth',notes:''},
-    {soid:'1705',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0379B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO-Whitworth',notes:''},
-    {soid:'1534',dealer:'Discount Manufactured Homes',serial:'01-BRK0380A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Roney',notes:''},
-    {soid:'1534',dealer:'Discount Manufactured Homes',serial:'01-BRK0380B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Roney',notes:''},
-    {soid:'1673',dealer:'Marathon Homes Dealer SA',serial:'01-BRK0381A-26',model:'Brewster',width:'15',length:'56',sf:'840',customer:'RSO-Parsons',notes:'DID NOT USE SERIAL # / NEED NEW SERIAL # 2027 MODEL'},
-    {soid:'1673',dealer:'Marathon Homes Dealer SA',serial:'01-BRK0381B-26',model:'Brewster',width:'15',length:'56',sf:'840',customer:'RSO-Parsons',notes:'DID NOT USE SERIAL # / NEED NEW SERIAL # 2027 MODEL'},
-    {soid:'1733',dealer:'Crew Support Services',serial:'01-BRK0382-26',model:'Slusher',width:'17',length:'76',sf:'1292',customer:'Stock #1',notes:''},
-    {soid:'1790',dealer:'Crew Support Services',serial:'01-BRK0383-26',model:'Slusher',width:'17',length:'76',sf:'1292',customer:'Stock #2',notes:''},
-    {soid:'1791',dealer:'Crew Support Services',serial:'01-BRK0384-26',model:'Slusher',width:'17',length:'76',sf:'1292',customer:'Stock #3',notes:''},
-    {soid:'1754',dealer:'Apple Mobile Home Express',serial:'01-BRK0385A-26',model:'Loving',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1754',dealer:'Apple Mobile Home Express',serial:'01-BRK0385B-26',model:'Loving',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1798',dealer:'Thomas Outlet Homes',serial:'01-BRK0386A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Derese',notes:'21st 2842506'},
-    {soid:'1798',dealer:'Thomas Outlet Homes',serial:'01-BRK0386B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Derese',notes:'21st 2842506'},
-    {soid:'1755',dealer:'BPK Housing LLC',serial:'01-BRK0387-26',model:'Glover',width:'15',length:'76',sf:'1140',customer:'Stock #1',notes:''},
-    {soid:'1784',dealer:'BPK Housing LLC',serial:'01-BRK0388-26',model:'Glover',width:'15',length:'76',sf:'1140',customer:'Stock #2',notes:''},
-    {soid:'1785',dealer:'BPK Housing LLC',serial:'01-BRK0389-26',model:'Glover',width:'15',length:'76',sf:'1140',customer:'Stock #3',notes:''},
-    {soid:'1786',dealer:'BPK Housing LLC',serial:'01-BRK0390-26',model:'Glover',width:'15',length:'76',sf:'1140',customer:'Stock #4',notes:''},
-    {soid:'1812',dealer:'Marathon Homes LLC',serial:'01-BRK0391-26',model:'Shane A',width:'15',length:'76',sf:'1140',customer:'21203 Sand Springs Way',notes:''},
-    {soid:'1813',dealer:'Marathon Homes LLC',serial:'01-BRK0392-26',model:'Shane B',width:'15',length:'76',sf:'1140',customer:'21203 Sand Springs Way',notes:''},
-    {soid:'1817',dealer:'Marathon Homes LLC',serial:'01-BRK0393-26',model:'Shane A',width:'15',length:'76',sf:'1140',customer:'21135 Sand Springs Way',notes:''},
-    {soid:'1818',dealer:'Marathon Homes LLC',serial:'01-BRK0394-26',model:'Shane B',width:'15',length:'76',sf:'1140',customer:'21135 Sand Springs Way',notes:''},
-    {soid:'1819',dealer:'Marathon Homes LLC',serial:'01-BRK0395-26',model:'Shane A',width:'15',length:'76',sf:'1140',customer:'21127 Sand Springs Way',notes:''},
-    {soid:'1820',dealer:'Marathon Homes LLC',serial:'01-BRK0396-27',model:'Shane B',width:'15',length:'76',sf:'1140',customer:'21127 Sand Springs Way',notes:'2027 MODEL CHANGE'},
-    {soid:'1821',dealer:'Marathon Homes LLC',serial:'01-BRK0397-26',model:'Midland',width:'15',length:'76',sf:'1140',customer:'21211 Sand Springs Way',notes:''},
-    {soid:'1822',dealer:'Marathon Homes LLC',serial:'01-BRK0398-26',model:'Katy',width:'15',length:'68',sf:'1020',customer:'21219 Sand Springs Way',notes:''},
-    {soid:'1834',dealer:'Marathon Homes LLC',serial:'01-BRK0399-26',model:'Bluebonnet A',width:'15',length:'72',sf:'1080',customer:'21223 Sand Springs Way',notes:'2027 MODEL CHANGE'},
-    {soid:'1801',dealer:'South Texas Home Center',serial:'01-BRK0400A-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'RSO-Garcia',notes:''},
-    {soid:'1801',dealer:'South Texas Home Center',serial:'01-BRK0400B-26',model:'Liberty',width:'15',length:'56',sf:'840',customer:'RSO-Garcia',notes:''},
-    {soid:'1837',dealer:'Marathon Homes LLC',serial:'01-BRK0401-27',model:'Bluebonnet A',width:'15',length:'72',sf:'1080',customer:'21215 Sand Springs Way',notes:'2027 MODEL CHANGE'},
-    {soid:'1836',dealer:'Marathon Homes LLC',serial:'01-BRK0402-27',model:'Bluebonnet B',width:'15',length:'72',sf:'1080',customer:'21223 Sand Springs Way',notes:'2027 MODEL CHANGE'},
-    {soid:'1838',dealer:'Marathon Homes LLC',serial:'01-BRK0403-27',model:'Bluebonnet B',width:'15',length:'72',sf:'1080',customer:'21215 Sand Springs Way',notes:'2027 MODEL CHANGE'},
-    {soid:'1839',dealer:'Marathon Homes LLC',serial:'01-BRK0404-26',model:'Midland',width:'15',length:'76',sf:'1140',customer:'21131 Sand Springs Way',notes:''},
-    {soid:'1840',dealer:'Marathon Homes LLC',serial:'01-BRK0405-26',model:'Katy',width:'15',length:'68',sf:'1020',customer:'21139 Sand Springs Way',notes:''},
-    {soid:'1709',dealer:'Granger Mobile Homes',serial:'01-BRK0406A-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'RSO-Amiott',notes:''},
-    {soid:'1709',dealer:'Granger Mobile Homes',serial:'01-BRK0406B-26',model:'Red River',width:'15',length:'56',sf:'840',customer:'RSO-Amiott',notes:''},
-    {soid:'1841',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0407A-26',model:'Brewster',width:"13'8\"",length:'56',sf:'',customer:'RSO-Zamora',notes:''},
-    {soid:'1841',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0407B-26',model:'Brewster',width:"13'8\"",length:'56',sf:'',customer:'RSO-Zamora',notes:''},
-    {soid:'1756',dealer:'Apple Mobile Home Express',serial:'01-BRK0408A-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'RSO-Barber',notes:''},
-    {soid:'1756',dealer:'Apple Mobile Home Express',serial:'01-BRK0408B-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'RSO-Barber',notes:''},
-    {soid:'',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0409A-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'RSO-Parker',notes:'DID NOT USE SERIAL # / NEED NEW SERIAL # 2027 MODEL'},
-    {soid:'',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0409B-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'RSO-Parker',notes:'DID NOT USE SERIAL # / NEED NEW SERIAL # 2027 MODEL'},
-    {soid:'1843',dealer:'South Texas HC',serial:'01-BRK0410A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO-Mayes',notes:'21st-2843393'},
-    {soid:'1843',dealer:'South Texas HC',serial:'01-BRK0410B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO-Mayes',notes:'21st-2843393'},
-    {soid:'',dealer:'',serial:'01-BRK0411-26',model:'',width:'',length:'',sf:'',customer:'',notes:'DID NOT USE SERIAL #'},
-    {soid:'1734',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0412A-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'RSO-Foster',notes:'DID NOT USE SERIAL # / NEED NEW SERIAL # 2027 MODEL'},
-    {soid:'1734',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0412B-26',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'RSO-Foster',notes:''},
-    {soid:'1849',dealer:'South Texas Home Center',serial:'01-BRK0413A-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1849',dealer:'South Texas Home Center',serial:'01-BRK0413B-26',model:'Maverick',width:'15',length:'56',sf:'840',customer:'Stock',notes:''},
-    {soid:'1628',dealer:'Skytex Homes LLC',serial:'01-BRK0414A-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Jackson',notes:''},
-    {soid:'1628',dealer:'Skytex Homes LLC',serial:'01-BRK0414B-26',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Jackson',notes:''},
-    {soid:'1980',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0415A-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'RSO-Laquey',notes:''},
-    {soid:'1980',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0415B-26',model:'Stonewall',width:'15',length:'68',sf:'1020',customer:'RSO-Laquey',notes:''},
-    {soid:'1988',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0416A-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO-Reed',notes:''},
-    {soid:'1988',dealer:'Marathon Homes Dealer San Antonio',serial:'01-BRK0416B-26',model:'Sterling',width:'15',length:'64',sf:'960',customer:'RSO-Reed',notes:''},
-    {soid:'1998',dealer:'Marathon Homes LLC',serial:'01-BRK0417A-27',model:'Brewster',width:'15',length:'56',sf:'840',customer:'Lot #70',notes:''},
-    {soid:'1998',dealer:'Marathon Homes LLC',serial:'01-BRK0417B-27',model:'Brewster',width:'15',length:'56',sf:'840',customer:'Lot #70',notes:''},
-    {soid:'2001',dealer:'Marathon Homes LLC',serial:'01-BRK0418A-27',model:'Red River',width:'15',length:'56',sf:'840',customer:'Lot #46',notes:''},
-    {soid:'2001',dealer:'Marathon Homes LLC',serial:'01-BRK0418B-27',model:'Red River',width:'15',length:'56',sf:'840',customer:'Lot #46',notes:''},
-    {soid:'2002',dealer:'Marathon Homes LLC',serial:'01-BRK0419A-27',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Lot #18',notes:''},
-    {soid:'2002',dealer:'Marathon Homes LLC',serial:'01-BRK0419B-27',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Lot #18',notes:''},
-    {soid:'2003',dealer:'Marathon Homes LLC',serial:'01-BRK0420-27',model:'Temple',width:'17',length:'76',sf:'1292',customer:'Lot #19',notes:''},
-    {soid:'2004',dealer:'Marathon Homes LLC',serial:'01-BRK0421-27',model:'Katy',width:'15',length:'68',sf:'1020',customer:'Lot #20',notes:''},
-    {soid:'2005',dealer:'Marathon Homes LLC',serial:'01-BRK0422-27',model:'Midland',width:'15',length:'76',sf:'1140',customer:'Lot #21',notes:''},
-    {soid:'2006',dealer:'Marathon Homes LLC',serial:'01-BRK0423A-27',model:'Archer',width:"13'8\"",length:'44',sf:'',customer:'Lot #22',notes:''},
-    {soid:'2006',dealer:'Marathon Homes LLC',serial:'01-BRK0423B-27',model:'Archer',width:"13'8\"",length:'44',sf:'',customer:'Lot #22',notes:''},
-    {soid:'2007',dealer:'Marathon Homes LLC',serial:'01-BRK0424-27',model:'Ranger',width:'17',length:'50',sf:'850',customer:'Lot #23',notes:''},
-    {soid:'1744',dealer:'Hunt County Investments',serial:'01-BRK0425A-27',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Kent',notes:'21st-2843695'},
-    {soid:'1744',dealer:'Hunt County Investments',serial:'01-BRK0425B-27',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'RSO-Kent',notes:'21st-2843695'},
-    {soid:'1989',dealer:'A2HC LLC',serial:'01-BRK0426A-27',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'',notes:'21st- 44470656'},
-    {soid:'1989',dealer:'A2HC LLC',serial:'01-BRK0426B-27',model:'Grayson',width:"13'8\"",length:'76',sf:'',customer:'',notes:'21st- 44470656'},
-    {soid:'1954',dealer:'Village Homes',serial:'01-BRK0427A-27',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:'21st-2843858'},
-    {soid:'1954',dealer:'Village Homes',serial:'01-BRK0427B-27',model:'Swisher',width:'15',length:'76',sf:'1140',customer:'Stock',notes:'21st-2843858'},
-    {soid:'1707',dealer:'Marathon Homes Dealer',serial:'01-BRK0428AB-27',model:'Swisher',width:'',length:'',sf:'',customer:'',notes:''},
-    {soid:'',dealer:'',serial:'01-BRK0429AB-27',model:'Grayson',width:'',length:'',sf:'',customer:'',notes:'Holding for Eric via Will'},
-    {soid:'',dealer:'',serial:'01-BRK0430-27',model:'',width:'',length:'',sf:'',customer:'',notes:''},
-    {soid:'',dealer:'',serial:'01-BRK0431-27',model:'',width:'',length:'',sf:'',customer:'',notes:''},
-    {soid:'',dealer:'',serial:'01-BRK0432-27',model:'',width:'',length:'',sf:'',customer:'',notes:''},
-    {soid:'',dealer:'',serial:'01-BRK0433-27',model:'',width:'',length:'',sf:'',customer:'',notes:''},
-    {soid:'',dealer:'',serial:'01-BRK0434-27',model:'',width:'',length:'',sf:'',customer:'',notes:''},
-    {soid:'',dealer:'',serial:'01-BRK0435-27',model:'',width:'',length:'',sf:'',customer:'',notes:''},
-    {soid:'',dealer:'',serial:'01-BRK0436-27',model:'',width:'',length:'',sf:'',customer:'',notes:''},
-    {soid:'',dealer:'',serial:'01-BRK0437-27',model:'',width:'',length:'',sf:'',customer:'',notes:''},
-    {soid:'',dealer:'',serial:'01-BRK0438-27',model:'',width:'',length:'',sf:'',customer:'',notes:''},
-    {soid:'',dealer:'',serial:'01-BRK0439-27',model:'',width:'',length:'',sf:'',customer:'',notes:''},
-    {soid:'',dealer:'',serial:'01-BRK0440-27',model:'',width:'',length:'',sf:'',customer:'',notes:''},
-  ];
-
-  function getSerialFlag(row) {
-    const n = row.notes.toLowerCase();
-    const s = row.serial;
-    if (n.includes('did not use')) return 'unused';
-    if (n.includes('2027 model') || s.endsWith('-27')) return '2027';
-    if (row.customer.toLowerCase().startsWith('rso')) return 'rso';
-    if (row.customer.toLowerCase().startsWith('stock')) return 'stock';
-    return '';
-  }
-
-  function renderSerials(data) {
-    const tbody = document.getElementById('serial-tbody');
-    if (data.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:2rem;color:var(--white-30);">No records match your filters.</td></tr>';
-      document.getElementById('serial-count-label').textContent = '';
-      return;
-    }
-    tbody.innerHTML = data.map(d => {
-      const flag = getSerialFlag(d);
-      let flagBadge = '';
-      if (flag === 'unused') flagBadge = '<span class="badge badge-red">Did Not Use</span>';
-      else if (flag === '2027') flagBadge = '<span class="badge badge-blue">2027 Model</span>';
-      else if (flag === 'rso') flagBadge = '<span class="badge badge-green">RSO</span>';
-      else if (flag === 'stock') flagBadge = '<span class="badge badge-gray">Stock</span>';
-      const is27 = d.serial.includes('-27');
-      return `<tr>
-        <td style="font-size:12px;color:var(--white-60);">${d.soid||'—'}</td>
-        <td style="font-family:monospace;font-size:12px;white-space:nowrap;color:${is27?'#60A5FA':'var(--white-90)'};">${d.serial}</td>
-        <td style="font-weight:500;">${d.model||'<span style="color:var(--white-30)">—</span>'}</td>
-        <td style="font-size:12px;">${d.width||'—'}</td>
-        <td style="font-size:12px;">${d.length||'—'}</td>
-        <td style="font-size:12px;">${d.sf||'—'}</td>
-        <td style="font-size:12.5px;max-width:180px;">${d.dealer||'<span style="color:var(--white-30)">—</span>'}</td>
-        <td style="font-size:12px;color:var(--white-60);max-width:160px;">${[d.customer,d.notes].filter(Boolean).join(' · ')||'—'}</td>
-        <td>${flagBadge}</td>
-      </tr>`;
-    }).join('');
-    document.getElementById('serial-count-label').textContent = `Showing ${data.length} of ${serialData.length} records`;
-  }
-
-  function filterSerials() {
-    const search = document.getElementById('serial-search').value.toLowerCase();
-    const model = document.getElementById('serial-model-filter').value.toLowerCase();
-    const dealer = document.getElementById('serial-dealer-filter').value.toLowerCase();
-    const flag = document.getElementById('serial-flag-filter').value.toLowerCase();
-    const filtered = serialData.filter(d => {
-      const matchSearch = !search || [d.soid,d.serial,d.model,d.dealer,d.customer,d.notes].join(' ').toLowerCase().includes(search);
-      const matchModel = !model || d.model.toLowerCase() === model;
-      const matchDealer = !dealer || d.dealer.toLowerCase() === dealer;
-      const matchFlag = !flag || (() => {
-        const f = getSerialFlag(d);
-        if (flag === 'did not use') return f === 'unused';
-        if (flag === '2027') return f === '2027';
-        if (flag === 'rso') return f === 'rso';
-        if (flag === 'stock') return f === 'stock';
-        return true;
-      })();
-      return matchSearch && matchModel && matchDealer && matchFlag;
-    });
-    renderSerials(filtered);
-  }
-
-  // Populate model + dealer dropdowns
-  const uniqueModels = [...new Set(serialData.map(d => d.model).filter(Boolean))].sort();
-  const modelSel = document.getElementById('serial-model-filter');
-  uniqueModels.forEach(m => { const o = document.createElement('option'); o.value = m.toLowerCase(); o.textContent = m; modelSel.appendChild(o); });
-
-  const uniqueDealers = [...new Set(serialData.map(d => d.dealer).filter(Boolean))].sort();
-  const dealerSel = document.getElementById('serial-dealer-filter');
-  uniqueDealers.forEach(d => { const o = document.createElement('option'); o.value = d.toLowerCase(); o.textContent = d; dealerSel.appendChild(o); });
-
-  // Metric counts
-  const flagged = serialData.filter(d => getSerialFlag(d) === 'unused').length;
-  const model27 = serialData.filter(d => getSerialFlag(d) === '2027').length;
-  const rsoCount = serialData.filter(d => getSerialFlag(d) === 'rso').length;
-  const stockCount = serialData.filter(d => getSerialFlag(d) === 'stock').length;
-  document.getElementById('serial-total').textContent = serialData.length;
-  document.getElementById('serial-flagged').textContent = flagged;
-  document.getElementById('serial-2027').textContent = model27;
-  document.getElementById('serial-rso').textContent = rsoCount;
-  document.getElementById('serial-stock').textContent = stockCount;
-  renderSerials(serialData);
-
-  document.getElementById('serial-search').addEventListener('input', filterSerials);
-  document.getElementById('serial-model-filter').addEventListener('change', filterSerials);
-  document.getElementById('serial-dealer-filter').addEventListener('change', filterSerials);
-  document.getElementById('serial-flag-filter').addEventListener('change', filterSerials);
 </script>
 </body>
 </html>
