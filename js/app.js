@@ -1490,86 +1490,82 @@
 
   function renderModelTable() {
     const tbody = document.getElementById('model-tbody');
+    if (!tbody) return;
     tbody.innerHTML = '';
     let visible = 0;
-    let lastType = '';
+    let lastGroup = '';
 
-    const sorted = modelData.map((row,i) => ({...row, _i:i})).sort((a,b) => {
-      if(a.type !== b.type) return a.type === 'Single-Section' ? -1 : 1;
-      return (a.sf||0) - (b.sf||0);
+    // Sort by type (Single first), then by sf ascending — no spread to avoid length property clash
+    const idxs = [];
+    for (let i = 0; i < modelData.length; i++) idxs.push(i);
+    idxs.sort(function(a, b) {
+      var ra = modelData[a], rb = modelData[b];
+      if (ra.type !== rb.type) return ra.type === 'Single-Section' ? -1 : 1;
+      return (ra.sf || 0) - (rb.sf || 0);
     });
 
-    sorted.forEach(item => {
-      const i = item._i;
-      const row = modelData[i];
+    idxs.forEach(function(i) {
+      var row = modelData[i];
 
-      if(modelSearchFilter && !(row.name||'').toLowerCase().includes(modelSearchFilter)) return;
-      if(modelSectionFilter && row.type !== modelSectionFilter) return;
-      if(modelWidthFilter && row.width !== modelWidthFilter) return;
+      if (modelSearchFilter && (row.name || '').toLowerCase().indexOf(modelSearchFilter) === -1) return;
+      if (modelSectionFilter && row.type !== modelSectionFilter) return;
+      if (modelWidthFilter && row.width !== modelWidthFilter) return;
 
       visible++;
 
-      if(row.type !== lastType) {
-        lastType = row.type;
-        const color = row.type === 'Single-Section' ? 'var(--green)' : '#60A5FA';
-        const label = row.type === 'Single-Section' ? '🏠 Single-Section' : '🏡 Double-Section';
-        tbody.insertAdjacentHTML('beforeend', `
-          <tr style="background:var(--darker);pointer-events:none;">
-            <td colspan="9" style="padding:10px 16px 6px;font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:${color};border-bottom:1px solid var(--border);">
-              ${label}
-            </td>
-          </tr>`);
+      var group = row.type === 'Single-Section' ? 'Residential — Single Section' : 'Residential — Double Section';
+      if (group !== lastGroup) {
+        lastGroup = group;
+        var hdrColor = row.type === 'Single-Section' ? '#4ade80' : '#60A5FA';
+        tbody.insertAdjacentHTML('beforeend',
+          '<tr style="background:#12121e;pointer-events:none;">' +
+          '<td colspan="9" style="padding:10px 16px 6px;font-size:10px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:' + hdrColor + ';border-bottom:1px solid #2a2a3e;">' +
+          group + '</td></tr>');
       }
 
-      const bedNum = row.beds || 0;
-      const bedColor = bedNum <= 2 ? 'pill-gray' : bedNum === 3 ? 'pill-blue' : 'pill-green';
-      const maxSqft = 2280;
-      const pct = Math.round(((row.sf||0) / maxSqft) * 100);
-      const typeColor = row.type === 'Single-Section' ? 'pill-green' : 'pill-blue';
+      var bedNum = row.beds || 0;
+      var bedColor = bedNum <= 2 ? 'pill-gray' : bedNum === 3 ? 'pill-blue' : 'pill-green';
+      var maxSqft = 2280;
+      var pct = Math.round(((row.sf || 0) / maxSqft) * 100);
+      var typeColor = row.type === 'Single-Section' ? 'pill-green' : 'pill-blue';
+      var notesText = row.notes || '—';
+      var notesStyle = row.notes ? 'normal' : 'italic';
+      var rowLen = row.length || '';
 
-      if(modelEditingIndex === i) {
-        tbody.insertAdjacentHTML('beforeend', `
-          <tr id="ml-row-${i}" class="sn-editing">
-            <td><input class="sn-inline-input" id="mle-name"  value="${esc(row.name||'')}"  placeholder="Model" style="font-weight:700;min-width:100px;"></td>
-            <td style="font-size:11px;color:var(--subtext);font-family:monospace;">${row.box}</td>
-            <td style="font-size:11px;">${row.width}</td>
-            <td style="font-size:11px;">${row.length}</td>
-            <td style="white-space:nowrap;">
-              <input class="sn-inline-input" id="mle-beds"  value="${esc(row.beds)}"  placeholder="Bed"  style="width:36px;display:inline-block;">
-              <span style="color:var(--subtext);margin:0 2px;font-size:11px;">bd /</span>
-              <input class="sn-inline-input" id="mle-baths" value="${esc(row.baths)}" placeholder="Ba"   style="width:36px;display:inline-block;">
-              <span style="color:var(--subtext);margin-left:2px;font-size:11px;">ba</span>
-            </td>
-            <td><input class="sn-inline-input" id="mle-sf"    value="${esc(row.sf)}"    placeholder="Sq Ft" style="width:70px;"></td>
-            <td><span class="pill ${typeColor}" style="font-size:9px;">${row.type}</span></td>
-            <td><input class="sn-inline-input" id="mle-notes" value="${esc(row.notes||'')}" placeholder="Notes" style="min-width:150px;"></td>
-            <td class="fc-action-cell" style="white-space:nowrap;">
-              <button class="btn-save-inline" onclick="saveInlineModel(${i})">✓ Save</button>
-              <button class="btn-cancel-inline" onclick="cancelInlineModel()">✕</button>
-            </td>
-          </tr>`);
+      if (modelEditingIndex === i) {
+        tbody.insertAdjacentHTML('beforeend',
+          '<tr id="ml-row-' + i + '" class="sn-editing">' +
+          '<td><input class="sn-inline-input" id="mle-name" value="' + esc(row.name || '') + '" placeholder="Model" style="font-weight:700;min-width:100px;"></td>' +
+          '<td style="font-size:11px;color:var(--subtext);font-family:monospace;">' + (row.box || '') + '</td>' +
+          '<td style="font-size:11px;">' + (row.width || '') + '</td>' +
+          '<td style="font-size:11px;">' + rowLen + '</td>' +
+          '<td style="white-space:nowrap;">' +
+          '<input class="sn-inline-input" id="mle-beds" value="' + esc(String(row.beds || '')) + '" placeholder="Bed" style="width:36px;display:inline-block;">' +
+          '<span style="color:var(--subtext);margin:0 2px;font-size:11px;">bd /</span>' +
+          '<input class="sn-inline-input" id="mle-baths" value="' + esc(String(row.baths || '')) + '" placeholder="Ba" style="width:36px;display:inline-block;">' +
+          '<span style="color:var(--subtext);margin-left:2px;font-size:11px;">ba</span></td>' +
+          '<td><input class="sn-inline-input" id="mle-sf" value="' + esc(String(row.sf || '')) + '" placeholder="Sq Ft" style="width:70px;"></td>' +
+          '<td><span class="pill ' + typeColor + '" style="font-size:9px;">' + (row.type || '') + '</span></td>' +
+          '<td><input class="sn-inline-input" id="mle-notes" value="' + esc(row.notes || '') + '" placeholder="Notes" style="min-width:150px;"></td>' +
+          '<td class="fc-action-cell" style="white-space:nowrap;">' +
+          '<button class="btn-save-inline" onclick="saveInlineModel(' + i + ')">&#10003; Save</button>' +
+          '<button class="btn-cancel-inline" onclick="cancelInlineModel()">&#10005;</button></td></tr>');
       } else {
-        tbody.insertAdjacentHTML('beforeend', `
-          <tr id="ml-row-${i}">
-            <td><span style="font-weight:800;font-size:13px;color:var(--white);letter-spacing:0.02em;">${row.name}</span></td>
-            <td style="font-size:11px;color:var(--subtext);font-family:monospace;">${row.box}</td>
-            <td style="font-weight:600;color:var(--text);white-space:nowrap;">${row.width}</td>
-            <td style="font-size:11px;color:var(--text);white-space:nowrap;">${row.length}</td>
-            <td><span class="pill ${bedColor}" style="font-size:10px;">${row.beds} bd / ${row.baths} ba</span></td>
-            <td>
-              <div style="display:flex;align-items:center;gap:8px;">
-                <span style="font-size:12px;font-weight:600;color:var(--white);min-width:42px;">${(row.sf||0).toLocaleString()}</span>
-                <div style="flex:1;min-width:60px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;">
-                  <div style="width:${pct}%;height:100%;background:var(--green);border-radius:2px;"></div>
-                </div>
-              </div>
-            </td>
-            <td><span class="pill ${typeColor}" style="font-size:9px;">${row.type}</span></td>
-            <td style="font-size:11px;color:var(--subtext);font-style:${row.notes ? 'normal' : 'italic'};">${row.notes || '—'}</td>
-            <td class="fc-action-cell" style="white-space:nowrap;">
-              <button class="btn-edit" onclick="editModelRow(${i})">✏️ Edit</button>
-            </td>
-          </tr>`);
+        tbody.insertAdjacentHTML('beforeend',
+          '<tr id="ml-row-' + i + '">' +
+          '<td><span style="font-weight:800;font-size:13px;color:var(--white);letter-spacing:0.02em;">' + (row.name || '') + '</span></td>' +
+          '<td style="font-size:11px;color:var(--subtext);font-family:monospace;">' + (row.box || '') + '</td>' +
+          '<td style="font-weight:600;color:var(--text);white-space:nowrap;">' + (row.width || '') + '</td>' +
+          '<td style="font-size:11px;color:var(--text);white-space:nowrap;">' + rowLen + '</td>' +
+          '<td><span class="pill ' + bedColor + '" style="font-size:10px;">' + bedNum + ' bd / ' + (row.baths || 0) + ' ba</span></td>' +
+          '<td><div style="display:flex;align-items:center;gap:8px;">' +
+          '<span style="font-size:12px;font-weight:600;color:var(--white);min-width:42px;">' + (row.sf || 0).toLocaleString() + '</span>' +
+          '<div style="flex:1;min-width:60px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;">' +
+          '<div style="width:' + pct + '%;height:100%;background:var(--green);border-radius:2px;"></div></div></div></td>' +
+          '<td><span class="pill ' + typeColor + '" style="font-size:9px;">' + (row.type || '') + '</span></td>' +
+          '<td style="font-size:11px;color:var(--subtext);font-style:' + notesStyle + ';">' + notesText + '</td>' +
+          '<td class="fc-action-cell" style="white-space:nowrap;">' +
+          '<button class="btn-edit" onclick="editModelRow(' + i + ')">&#9998; Edit</button></td></tr>');
       }
     });
 
